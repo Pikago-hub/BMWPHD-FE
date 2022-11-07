@@ -11,11 +11,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-home-search</v-icon>
       </v-btn>
 
       <v-menu leftbottom>
@@ -129,7 +125,7 @@
             </v-container>
           </section>
         </v-sheet>
-      </v-main>
+      </v-main> 
 
       <v-footer class="bg-grey-lighten-1">
       <v-row justify="center" no-gutters>
@@ -159,7 +155,6 @@
       router.push({path: "result"})
     }
 
-  
   export default { name: 'App',
   data: () => ({
     items: [
