@@ -35,39 +35,21 @@
         v-model="drawer"
         absolute
         temporary
-      >
-        <v-list
-          nav
-          dense
-        >
-          <v-list-item-group
-            v-model="group"
-            active-class="deep-purple--text text--accent-4"
-          >
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-home</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Manage</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-file-document</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>History</v-list-item-title>
-            </v-list-item>
-
-          </v-list-item-group>
+      > 
+        <v-list dense nav>
+          <v-list-item v-for="item in items" :key="item.title" @click="onHistory" link>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+        
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
+      
+    
     </div>
 
     <v-main>
@@ -175,10 +157,25 @@
 </template>
 
 <script>
+  import {useRouter} from 'vue-router'
+  const router = useRouter()
+
+  const onHistory = () =>{
+      router.push({path: "history"})
+    }
+
+  
   export default { name: 'App',
   data: () => ({
-    drawer:false,
-    group:null,
+    items: [
+      { title: 'Home', icon: 'mdi-home' },
+      { title: 'Manage', icon: 'mdi-account' },
+      { title: 'History', icon: 'mdi-file-document' },
+    ],
+    right: null,
+
+    drawer: false,
+    group: null,
     links: [
       'Home',
       'About Us',
