@@ -22,6 +22,13 @@
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
   integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
 
+"@requarks/vuex-pathify@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@requarks/vuex-pathify/-/vuex-pathify-2.0.2.tgz#ec1c88f88a3e5da69f0f6745fa09f0c6cc6c4501"
+  integrity sha512-DrnouHQks7Ywt7qh7IYXQlYKuGmccg9SkqBQ5TfK4h40JA/b+AxfSPPsyUUIzTiBXd7Wlyd+8pGvRmwv9USvmA==
+  dependencies:
+    lodash.clonedeep "^4.5.0"
+
 "@vitejs/plugin-vue@^3.0.3":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-3.2.0.tgz#a1484089dd85d6528f435743f84cdd0d215bbb54"
@@ -68,6 +75,11 @@
   dependencies:
     "@vue/compiler-dom" "3.2.41"
     "@vue/shared" "3.2.41"
+
+"@vue/devtools-api@^6.0.0-beta.11":
+  version "6.4.5"
+  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz#d54e844c1adbb1e677c81c665ecef1a2b4bb8380"
+  integrity sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==
 
 "@vue/reactivity-transform@3.2.41":
   version "3.2.41"
@@ -323,6 +335,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
+
 magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
@@ -469,6 +486,11 @@ vite@^3.1.8:
   optionalDependencies:
     fsevents "~2.3.2"
 
+vue-class-component@^8.0.0-rc.1:
+  version "8.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-8.0.0-rc.1.tgz#db692cd97656eb9a08206c03d0b7398cdb1d9420"
+  integrity sha512-w1nMzsT/UdbDAXKqhwTmSoyuJzUXKrxLE77PCFVuC6syr8acdFDAq116xgvZh9UCuV0h+rlCtxXolr3Hi3HyPQ==
+
 vue@^3.2.38:
   version "3.2.41"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.41.tgz#ed452b8a0f7f2b962f055c8955139c28b1c06806"
@@ -484,6 +506,20 @@ vuetify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.0.tgz#372eed0663f0ffba53439cd99aa46031e560b0f4"
   integrity sha512-0olLmKWb+oTaebGTM02+1fWaAgnGDuIt86K3jDv2LnALQ2atSzhDS1SSASJsJCZ2PgFBdDAeJVLcNWWavRYAlQ==
+
+vuex-pathify@^3.0.0-beta:
+  version "3.0.0-beta"
+  resolved "https://registry.yarnpkg.com/vuex-pathify/-/vuex-pathify-3.0.0-beta.tgz#7bfb2b9c54ed3d1e9146c10abcf273103407c4b2"
+  integrity sha512-mnY87hPBXErWINFvTIdnEn2PmdGcJNyiuORR/k8L0AP55TSlRRWwsSwP0DVj5wdLd8IjZum+3Jq98z7kFIr3Tg==
+  dependencies:
+    vue-class-component "^8.0.0-rc.1"
+
+vuex@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-4.0.2.tgz#f896dbd5bf2a0e963f00c67e9b610de749ccacc9"
+  integrity sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
 
 webfontloader@^1.0.0:
   version "1.6.28"
