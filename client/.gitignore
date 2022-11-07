@@ -28,13 +28,13 @@ logback.out.xml
 
 backend/src/main/resources/public/
 backend/target
-frontend/dist/
-frontend/node/
-frontend/node_modules/
-frontend/npm-debug.log
-frontend/target
-frontend/yarn-error.log
-frontend/yarn.lock
+BMWPHD-FE/dist/
+BMWPHD-FE/node/
+BMWPHD-FE/node_modules/
+BMWPHD-FE/npm-debug.log
+BMWPHD-FE/target
+BMWPHD-FE/yarn-error.log
+BMWPHD-FE/yarn.lock
 security/target/
 selenium-debug.log
 
