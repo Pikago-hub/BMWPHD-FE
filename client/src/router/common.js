@@ -1,8 +1,8 @@
-import About from '../Views/About.vue'
-import History from '../Views/History.vue'
-import Info from '../Views/Info.vue'
-import Login from '../Views/Login.vue'
-import Result from '../Views/Result.vue'
+import About from '../FE/Views/About.vue'
+import History from '../FE/Views/History.vue'
+import Info from '../FE/Views/Info.vue'
+import Login from '../FE/Views/Login.vue'
+import Result from '../FE/Views/Result.vue'
 
 export default[
     {

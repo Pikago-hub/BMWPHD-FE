@@ -64,16 +64,11 @@
     >
       <v-text-field
         hide-details
-        prepend-icon="mdi-magnify"
         single-line
       ></v-text-field>
 
-      <v-btn icon>
-        <v-icon>mdi-microphone</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-format-list-checkbox</v-icon>
+      <v-btn icon @click="onSearch">
+        <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
   </v-card>
@@ -160,8 +155,8 @@
   import {useRouter} from 'vue-router'
   const router = useRouter()
 
-  const onHistory = () =>{
-      router.push({path: "history"})
+  const onSearch = () =>{
+      router.push({path: "result"})
     }
 
   
