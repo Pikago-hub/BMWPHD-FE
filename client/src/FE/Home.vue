@@ -33,15 +33,34 @@
         temporary
       > 
         <v-list dense nav>
-          <v-list-item v-for="item in items" :key="item.title" @click="onHistory" link>
+
+          <v-list-item link @click="onHome">
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-        
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>Home</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item link @click="onManage">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Manage</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link @click="onHistory">
+            <v-list-item-icon>
+              <v-icon>mdi-file-document</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>History</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          
         </v-list>
       </v-navigation-drawer>
     </div>
@@ -155,12 +174,6 @@
   export default { 
     name: 'App',
     data: () => ({
-      items: [
-        { title: 'Home', icon: 'mdi-home' },
-        { title: 'Manage', icon: 'mdi-account' },
-        { title: 'History', icon: 'mdi-file-document' },
-      ],
-      right: null,
 
       drawer: false,
       group: null,
@@ -222,10 +235,18 @@
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
     },
-
     onSearch(){
         this.$router.push('/result');
-    }
+    }, 
+    onHome(){
+        this.$router.push('/home');
+    }, 
+    onManage(){
+        this.$router.push('/home');
+    }, 
+    onHistory(){
+        this.$router.push('/history');
+    }, 
   }
 }
 </script>

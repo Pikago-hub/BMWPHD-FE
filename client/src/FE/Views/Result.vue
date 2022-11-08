@@ -11,11 +11,15 @@
         dense
         dark
       >
-      <v-btn icon>
+      <v-btn icon @click="onHome">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>Homepage</v-toolbar-title>
       <v-spacer></v-spacer>
+
+      <v-btn icon @click="onHome">
+        <v-icon>mdi-home-search</v-icon>
+      </v-btn>
 
       <v-menu leftbottom>
         <template v-slot:activator="{ on, attrs }">
@@ -146,6 +150,9 @@
       this.categories = this.categoriesCopy.filter((category) => {
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
+    }, 
+    onHome(){
+        this.$router.push('/home');
     }
   }
 }
