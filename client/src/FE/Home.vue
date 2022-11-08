@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div>
+    <!-- <div> -->
       <v-app-bar
         color="blue accent-4"
         dense
@@ -11,7 +11,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-home-search</v-icon>
+        <v-icon>mdi-home-outline</v-icon>
       </v-btn>
 
       <v-menu leftbottom>
@@ -27,43 +27,17 @@
       </v-menu>
       </v-app-bar>
 
-      <v-navigation-drawer
-        v-model="drawer"
-        absolute
-        temporary
-      > 
-        <v-list dense nav>
+      <v-navigation-drawer v-model="drawer" absolute temporary>
 
-          <v-list-item link @click="onHome">
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link @click="onManage">
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Manage</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link @click="onHistory">
-            <v-list-item-icon>
-              <v-icon>mdi-file-document</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>History</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          
-        </v-list>
+          <v-list nav>
+          <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
+          <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
+          </v-list>
+      
       </v-navigation-drawer>
-    </div>
+
+    <!-- </div> -->
 
     <v-main>
       <v-card
@@ -174,7 +148,6 @@
   export default { 
     name: 'App',
     data: () => ({
-
       drawer: false,
       group: null,
       links: [
