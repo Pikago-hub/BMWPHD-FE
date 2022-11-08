@@ -1,3 +1,4 @@
+import Home from '../FE/Home.vue'
 import About from '../FE/Views/About.vue'
 import History from '../FE/Views/History.vue'
 import Info from '../FE/Views/Info.vue'
@@ -8,6 +9,12 @@ export default[
     {
         path: '/',
         redirect: '/home'
+    },
+    {
+        path: '/home',
+        name: 'home',
+        meta: {title: "Home Page"},
+        component: Home
     },
     {
         path: '/result',
@@ -39,5 +46,5 @@ export default[
         meta: {title: "about"},
         component: About
     }
-
 ]
+

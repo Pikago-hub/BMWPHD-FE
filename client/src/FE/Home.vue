@@ -44,8 +44,6 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      
-    
     </div>
 
     <v-main>
@@ -127,22 +125,24 @@
         </v-sheet>
       </v-main> 
 
-      <v-footer class="bg-grey-lighten-1">
-      <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          color="white"
-          variant="text"
-          class="mx-2"
-          rounded="xl"
-        >
-          {{ link }}
-        </v-btn>
-        <v-col class="text-center mt-4" cols="12">
-          <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
-        </v-col>
-      </v-row>
+    <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
+      <v-container>
+        <v-row justify="center" no-gutters >
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            color="white"
+            variant="text"
+            class="mx-2"
+            rounded="xl"
+          >
+            {{ link }}
+          </v-btn>
+          <v-col class="text-center mt-4" cols="12">
+            <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-footer>
   </v-app>
 </template>
@@ -151,62 +151,60 @@
   import {useRouter} from 'vue-router'
   const router = useRouter()
 
-  const onSearch = () =>{
-      router.push({path: "result"})
-    }
 
-  export default { name: 'App',
-  data: () => ({
-    items: [
-      { title: 'Home', icon: 'mdi-home' },
-      { title: 'Manage', icon: 'mdi-account' },
-      { title: 'History', icon: 'mdi-file-document' },
-    ],
-    right: null,
+  export default { 
+    name: 'App',
+    data: () => ({
+      items: [
+        { title: 'Home', icon: 'mdi-home' },
+        { title: 'Manage', icon: 'mdi-account' },
+        { title: 'History', icon: 'mdi-file-document' },
+      ],
+      right: null,
 
-    drawer: false,
-    group: null,
-    links: [
-      'Home',
-      'About Us',
-      'Team',
-      'Services',
-      'Blog',
-      'Contact Us',
-    ],
+      drawer: false,
+      group: null,
+      links: [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ],
 
-    searchTerm: "",
-    categories: [
-      "Name",
-      "sire",
-      "dam",
-      "dam sire",
-      "2nd dam",
-      "lte",
-      "pe",
-      "show",
-      "class",
-      "level",
-      "open vs non pro",
-      "age",
-      "place",
-      "money",
-      "breeder",
-      "owner",
-      "rider",
-      "draw",
-      "back number",
-      "on dirt",
-      "finalist",
-      "maneuver scores",
-      "notes",
-      "nrha",
-      "date of show/class",
-      "schooling"
-    ],
-    categoriesCopy: [],
-    selectedCategories: []
-  }),
+      searchTerm: "",
+      categories: [
+        "Name",
+        "sire",
+        "dam",
+        "dam sire",
+        "2nd dam",
+        "lte",
+        "pe",
+        "show",
+        "class",
+        "level",
+        "open vs non pro",
+        "age",
+        "place",
+        "money",
+        "breeder",
+        "owner",
+        "rider",
+        "draw",
+        "back number",
+        "on dirt",
+        "finalist",
+        "maneuver scores",
+        "notes",
+        "nrha",
+        "date of show/class",
+        "schooling"
+      ],
+      categoriesCopy: [],
+      selectedCategories: []
+    }),
 
   mounted() {
     this.categoriesCopy = [...this.categories];
@@ -223,6 +221,10 @@
       this.categories = this.categoriesCopy.filter((category) => {
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
+    },
+
+    onSearch(){
+        this.$router.push('/result');
     }
   }
 }

@@ -9,6 +9,6 @@ const app = createApp(App)
 registerPlugins(app)
 
 app
+.use(router)
   .use(vuetify)
-  .use(router)
   .mount('#app')
