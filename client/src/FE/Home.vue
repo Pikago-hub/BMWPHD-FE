@@ -1,30 +1,35 @@
 <template>
   <v-app>
     <!-- <div> -->
-      <v-app-bar
-        color="blue accent-4"
-        dense
-        dark
-      >
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>BMWPHD</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-app-bar color="blue accent-4" dense dark>
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-toolbar-title>BMWPHD</v-toolbar-title>
+        <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-home-outline</v-icon>
-      </v-btn>
 
-      <v-menu leftbottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-          <v-icon>mdi-dots-vertical</v-icon>
+      <v-tooltip text="Go Home" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon @click="onHome" v-bind="props">
+            <v-icon>mdi-home-outline</v-icon>
           </v-btn>
         </template>
-      </v-menu>
+      </v-tooltip>
+      
+      <v-tooltip text="Login" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon @click="onLogin" v-bind="props">
+            <v-icon>mdi-login-variant</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
+      
+        <v-menu leftbottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+        </v-menu>
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -219,6 +224,9 @@
     }, 
     onHistory(){
         this.$router.push('/history');
+    }, 
+    onLogin(){
+        this.$router.push('/login');
     }, 
   }
 }
