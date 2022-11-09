@@ -4,8 +4,8 @@
          <v-container fluid fill-height>
                <v-flex xs12 sm8 md4>
                   <v-card class="elevation-12">
-                     <v-toolbar dark color="primary">
-                        <v-toolbar-title>Login form</v-toolbar-title>
+                     <v-toolbar color="blue accent-4">
+                        <v-toolbar-title>Login To BMHPHD</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
                      <form ref="form" @submit.prevent="login()">
@@ -26,7 +26,7 @@
                               placeholder="password"
                               required
                            ></v-text-field>
-                           <v-btn type="submit" class="mt-4" color="primary" value="log in">Login</v-btn>
+                           <v-btn type="submit" class="mt-4" color="blue accent-4" value="log in" @click="onSubmit">Login</v-btn>
                       </form>
                      </v-card-text>
                   </v-card>            
@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import {useRouter} from 'vue-router'
+const router = useRouter()
+
 export default {
   name: "Login",
   data() {
@@ -50,6 +53,9 @@ export default {
       const { username } = this;
       console.log(username + "logged in")
     },
+    onSubmit() {
+      this.$router.push('/home');
+    }
   },
 };
 </script>

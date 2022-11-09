@@ -37,6 +37,7 @@
           <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
           <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
           <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
+          <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
           </v-list>
       
       </v-navigation-drawer>
@@ -53,16 +54,6 @@
     <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
       <v-container>
         <v-row justify="center" no-gutters >
-          <v-btn
-            v-for="link in links"
-            :key="link"
-            color="white"
-            variant="text"
-            class="mx-2"
-            rounded="xl"
-          >
-            {{ link }}
-          </v-btn>
           <v-col class="text-center mt-4" cols="12">
             <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
           </v-col>
@@ -82,15 +73,6 @@
     data: () => ({
       drawer: false,
       group: null,
-      links: [
-        'Home',
-        'About Us',
-        'Team',
-        'Services',
-        'Blog',
-        'Contact Us',
-      ],
-
       searchTerm: "",
       categories: [
         "Name",
@@ -149,9 +131,12 @@
     onHistory(){
         this.$router.push('/history');
     }, 
-      onLogin() {
-          this.$router.push('/login');
-      }, 
+    onLogin() {
+      this.$router.push('/login');
+    }, 
+    onAbout() {
+          this.$router.push('/about');
+      },
   }
 }
 </script>
