@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div>
+    <!-- <div> -->
       <v-app-bar
         color="blue accent-4"
         dense
