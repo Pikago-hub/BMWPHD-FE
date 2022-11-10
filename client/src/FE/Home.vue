@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div>
+    <!-- <div> -->
       <v-app-bar
         color="blue accent-4"
         dense
@@ -11,46 +11,44 @@
       
       <v-spacer></v-spacer>
 
-      <v-tooltip left>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" icon >
-            <v-icon>mdi-home-search</v-icon>
-          </v-btn>
-        </template>
-        <span>Top tooltip</span>
-      </v-tooltip>
 
-      <v-menu leftbottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-          <v-icon>mdi-dots-vertical</v-icon>
+      <v-tooltip text="Go Home" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon @click="onHome" v-bind="props">
+            <v-icon>mdi-home-outline</v-icon>
           </v-btn>
         </template>
-      </v-menu>
+      </v-tooltip>
+      
+      <v-tooltip text="Login" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn icon @click="onLogin" v-bind="props">
+            <v-icon>mdi-login-variant</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
+      
+        <v-menu leftbottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+        </v-menu>
       </v-app-bar>
 
-      <v-navigation-drawer
-        v-model="drawer"
-        absolute
-        temporary
-      > 
-        <v-list dense nav>
-          <v-list-item v-for="item in items" :key="item.title" @click="onHistory" link>
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-        
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+      <v-navigation-drawer v-model="drawer" absolute temporary>
+
+          <v-list nav>
+          <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
+          <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
+          <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
+          <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
+          </v-list>
+      
       </v-navigation-drawer>
-    </div>
+
+    <!-- </div> -->
 
     <v-main>
       <v-card
@@ -134,16 +132,6 @@
     <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
       <v-container>
         <v-row justify="center" no-gutters >
-          <v-btn
-            v-for="link in links"
-            :key="link"
-            color="white"
-            variant="text"
-            class="mx-2"
-            rounded="xl"
-          >
-            {{ link }}
-          </v-btn>
           <v-col class="text-center mt-4" cols="12">
             <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
           </v-col>
@@ -161,24 +149,8 @@
   export default { 
     name: 'App',
     data: () => ({
-      items: [
-        { title: 'Home', icon: 'mdi-home' },
-        { title: 'Manage', icon: 'mdi-account' },
-        { title: 'History', icon: 'mdi-file-document' },
-      ],
-      right: null,
-
       drawer: false,
       group: null,
-      links: [
-        'Home',
-        'About Us',
-        'Team',
-        'Services',
-        'Blog',
-        'Contact Us',
-      ],
-
       searchTerm: "",
       categories: [
         "Name",
@@ -228,10 +200,24 @@
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
     },
-
     onSearch(){
         this.$router.push('/result');
-    }
+    }, 
+    onHome(){
+        this.$router.push('/home');
+    }, 
+    onManage(){
+        this.$router.push('/home');
+    }, 
+    onHistory(){
+        this.$router.push('/history');
+    }, 
+    onLogin(){
+        this.$router.push('/login');
+    }, 
+    onAbout(){
+        this.$router.push('/about');
+    }, 
   }
 }
 </script>
