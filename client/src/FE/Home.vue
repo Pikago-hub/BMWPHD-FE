@@ -1,10 +1,15 @@
 <template>
   <v-app>
-    <!-- <div> -->
-      <v-app-bar color="blue accent-4" dense dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <v-toolbar-title>BMWPHD</v-toolbar-title>
-        <v-spacer></v-spacer>
+    <div>
+      <v-app-bar
+        color="blue accent-4"
+        dense
+        dark
+      >
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-toolbar-title>BMWPHD</v-toolbar-title>
+      
+      <v-spacer></v-spacer>
 
 
       <v-tooltip text="Go Home" location="bottom">
@@ -216,3 +221,9 @@
   }
 }
 </script>
+
+<style setup>
+.v-tooltip__content {
+  pointer-events: initial;
+}
+</style>
