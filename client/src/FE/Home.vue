@@ -8,11 +8,17 @@
       >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>BMWPHD</v-toolbar-title>
+      
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-home-search</v-icon>
-      </v-btn>
+      <v-tooltip left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on" icon >
+            <v-icon>mdi-home-search</v-icon>
+          </v-btn>
+        </template>
+        <span>Top tooltip</span>
+      </v-tooltip>
 
       <v-menu leftbottom>
         <template v-slot:activator="{ on, attrs }">
@@ -229,3 +235,9 @@
   }
 }
 </script>
+
+<style setup>
+.v-tooltip__content {
+  pointer-events: initial;
+}
+</style>

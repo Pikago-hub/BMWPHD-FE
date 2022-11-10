@@ -11,7 +11,7 @@
         dense
         dark
       >
-      <v-btn icon>
+      <v-btn icon @click="onReturnHome">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>Homepage</v-toolbar-title>
@@ -52,11 +52,31 @@
       </v-btn>
     </v-toolbar>
   </v-card>
-    <v-container fluid>
 
-      <!-- If using vue-router -->
-      <router-view></router-view>
-    </v-container>
+  <v-container fluid style="height: 100vh;">
+    <v-table>
+    <thead>
+      <tr>
+        <th class="text-left">
+          Name
+        </th>
+        <th class="text-left">
+          Calories
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.name"
+      >
+        <td>{{ item.name }}</td>
+        <td>{{ item.calories }}</td>
+      </tr>
+    </tbody>
+  </v-table>
+  </v-container>
+
   </v-main>
 
   <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
@@ -84,6 +104,7 @@
 <script>
   import {useRouter} from 'vue-router'
   const router = useRouter()
+  import dataTablejerry from './components/datatable.vue'
 
   const onSearch = () =>{
       router.push({path: "result"})
@@ -91,13 +112,15 @@
 
   export default { name: 'App',
   data: () => ({
-    items: [
-      { title: 'Home', icon: 'mdi-home' },
-      { title: 'Manage', icon: 'mdi-account' },
-      { title: 'History', icon: 'mdi-file-document' },
-    ],
-    right: null,
-
+    group: null,
+      links: [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ],
     searchTerm: "",
     categories: [
       "Name",
@@ -128,7 +151,49 @@
       "schooling"
     ],
     categoriesCopy: [],
-    selectedCategories: []
+    selectedCategories: [],
+    desserts: [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+          },
+          {
+            name: 'Lollipop',
+            calories: 392,
+          },
+          {
+            name: 'Honeycomb',
+            calories: 408,
+          },
+          {
+            name: 'Donut',
+            calories: 452,
+          },
+          {
+            name: 'KitKat',
+            calories: 518,
+          },
+        ],
   }),
 
   mounted() {
@@ -146,6 +211,10 @@
       this.categories = this.categoriesCopy.filter((category) => {
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
+    },
+
+    onReturnHome(){
+        this.$router.push('/home');
     }
   }
 }

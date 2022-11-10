@@ -4,6 +4,7 @@ import History from '../FE/Views/History.vue'
 import Info from '../FE/Views/Info.vue'
 import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
+import dataTable from '../FE/Views/components/datatable.vue'
 
 export default[
     {
@@ -45,6 +46,12 @@ export default[
         name: 'about',
         meta: {title: "about"},
         component: About
-    }
+    },
+    {
+        path: '/datatable',
+        name: 'datatable',
+        meta: {title: "datatable"},
+        component: dataTable
+    },
 ]
 
