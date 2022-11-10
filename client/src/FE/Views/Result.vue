@@ -82,16 +82,6 @@
     <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
       <v-container>
         <v-row justify="center" no-gutters >
-          <v-btn
-            v-for="link in links"
-            :key="link"
-            color="white"
-            variant="text"
-            class="mx-2"
-            rounded="xl"
-          >
-            {{ link }}
-          </v-btn>
           <v-col class="text-center mt-4" cols="12">
             <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
           </v-col>
@@ -111,14 +101,6 @@
     export default { name: 'App',
     data: () => ({
       group: null,
-        links: [
-          'Home',
-          'About Us',
-          'Team',
-          'Services',
-          'Blog',
-          'Contact Us',
-        ],
       searchTerm: "",
       categories: [
         "Name",
