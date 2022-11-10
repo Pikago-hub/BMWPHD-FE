@@ -35,7 +35,8 @@
         subheader
         three-line
       >
-  
+      <v-subheader>Search Categories</v-subheader>
+      
         <v-list-item-group
           v-model="settings"
           multiple
