@@ -48,7 +48,7 @@
       
       </v-navigation-drawer>
 
-    <!-- </div> -->
+
 
     <v-main>
       <v-card

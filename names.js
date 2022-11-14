@@ -2,7 +2,7 @@ const { faker } = require('@faker-js/faker');
 
 function generateData() {
     const horses = [];
-    for (let id = 0; id < 10; id++) {
+    for (let id = 0; id < 100; id++) {
         let horseName = faker.name.fullName();
         let sire1 = faker.name.fullName();
         let dam1 = faker.name.fullName();
@@ -16,7 +16,7 @@ function generateData() {
             "Dam": dam1,
             "Sire2": sire2,
             "Dam2": dam2,
-            "Maneuver Scores": maneuver,
+            "Maneuver": maneuver,
         });
     }
 

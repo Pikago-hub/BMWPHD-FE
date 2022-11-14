@@ -47,7 +47,7 @@
 
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-action v-for="item in items">
+              <v-list-item-action v-for="item in listItems">
                 <v-checkbox :input-value="active" :label="(( item.category ))"></v-checkbox>
               </v-list-item-action>
             </template>
@@ -217,10 +217,16 @@
  </v-card>
   
  <v-container fluid style="height: 100vh;">
-   <v-table>
-   <thead>
-     <tr>
-       <th class="text-left" scope>
+  <v-table
+    fixed-header
+    height="800px"
+  >
+    <thead>
+      <tr>
+        <th class="text-left" scope>
+         ID
+       </th>
+        <th class="text-left" scope>
          Name
        </th>
        <th class="text-left" scope>
@@ -238,21 +244,22 @@
        <th class="text-left" scope>
          Maneuver Scores
        </th>
-     </tr>
-   </thead>
-   <tbody>
+      </tr>
+    </thead>
+    <tbody>
      <tr
-       v-for="item in horses"
-       :key="item.name"
-     >
-       <td>{{ item.horseName }}</td>
-       <td>{{ item.sire1 }}</td>
-       <td>{{ item.dam1 }}</td>
-       <td>{{ item.sire2  }}</td>
-       <td>{{ item.dam2}}</td>
+       v-for="item of horses"
+     >       
+       <td>{{ item.id}}</td>
+       <td>{{ item.Name}}</td>
+       <td>{{ item.Sire}}</td>
+       <td>{{ item.Dam}}</td>
+       <td>{{ item.Sire2}}</td>
+       <td>{{ item.Dam2}}</td>
+       <td>{{ item.Maneuver}}</td>
      </tr>
    </tbody>
- </v-table>
+  </v-table>
  </v-container>
   
  </v-main>
@@ -278,54 +285,60 @@
       router.push({path: "result"})
     }
   export default { name: 'App',
-  data: () => ({
-  
-    group: null,
-    searchTerm: "",
-    items: [
-      {category: "Name"},
-      {category: "Sire"},
-      {category: "Dam"},
-      {category: "Dam Sire"},
-      {category: "2nd Dam"},
-      {category: "LTE"},
-      {category: "PE"},
-      {category: "Show"},
-      {category: "Class"},
-      {category: "Level"},
-      {category: "Open vs Non Pro"},
-      {category: "Age"},
-      {category: "Place"},
-      {category: "Money"},
-      {category: "Breeder"},
-      {category: "Owner"},
-      {category: "Rider"},
-      {category: "Draw"},
-      {category: "Back Number"},
-      {category: "On Dirt"},
-      {category: "Finalist"},
-      {category: "Maneuver Scores"},
-      {category: "Notes"},
-      {category: "NRHA"},
-      {category: "Date of Show/Class"},
-      {category: "Schooling"}
-    ],
+  data(){
+    return {
+      horses:[],
+      searchTerm: "",
+      listItems: [
+        {category: "Name"},
+        {category: "Sire"},
+        {category: "Dam"},
+        {category: "Dam Sire"},
+        {category: "2nd Dam"},
+        {category: "LTE"},
+        {category: "PE"},
+        {category: "Show"},
+        {category: "Class"},
+        {category: "Level"},
+        {category: "Open vs Non Pro"},
+        {category: "Age"},
+        {category: "Place"},
+        {category: "Money"},
+        {category: "Breeder"},
+        {category: "Owner"},
+        {category: "Rider"},
+        {category: "Draw"},
+        {category: "Back Number"},
+        {category: "On Dirt"},
+        {category: "Finalist"},
+        {category: "Maneuver Scores"},
+        {category: "Notes"},
+        {category: "NRHA"},
+        {category: "Date of Show/Class"},
+        {category: "Schooling"}
+      ],
     categoriesCopy: [],
     selectedCategories: [],
-  }),
+    }
+},
+
+  async created(){
+    try{
+      const res = await axios.get('http://localhost:3000/horses')
+      this.horses = res.data;
+    } catch (error){
+      console.log(error);
+    }
+  },
+
   computed: {},
+
   methods: {
-    searchCategories(e) {
-      if (!this.searchTerm) {
-        this.categories = this.categoriesCopy;
-      }
-      this.categories = this.categoriesCopy.filter((category) => {
-        return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-      });
-    },
     onReturnHome(){
         this.$router.push('/home');
-    }
-  }
+    },
+  },
+
+
 }
 </script>
