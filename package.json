@@ -5,8 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "serve -s build",
-    "heroku-postbuild": "npm run build"
+    "start": "serve -s build"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
