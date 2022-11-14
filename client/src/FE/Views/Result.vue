@@ -48,7 +48,7 @@
           <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-action v-for="item in listItems">
-                <v-checkbox :input-value="active" :label="(( item.category ))"></v-checkbox>
+                <v-checkbox @click="bySire()" v-model="item.checked" :input-value="active" v-bind:id="item.id" :label="(( item.category )) "></v-checkbox>
               </v-list-item-action>
             </template>
           </v-list-item>
@@ -191,15 +191,12 @@
       </v-list>
  </v-navigation-drawer>
   
- 
-  
- <!-- Sizes your content based upon application components -->
  <v-main>
   
    <v-card
        class="mx-auto my-10"
        flat
-       width="400px"
+       width="700px"
        height="80px"
      >
    <v-toolbar
@@ -208,8 +205,17 @@
      <v-text-field
        hide-details
        single-line
+       label="Enter Horse Name"
      ></v-text-field>
-  
+
+     <v-text-field
+       hide-details
+       single-line
+       id="Sire"
+       label="Enter Sire Name"
+       style="display:none"
+     ></v-text-field>
+
      <v-btn icon @click="onSearch">
        <v-icon>mdi-magnify</v-icon>
      </v-btn>
@@ -280,42 +286,122 @@
   import {useRouter} from 'vue-router'
   const router = useRouter()
   import axios from "axios"; 
-
-  const onSearch = () =>{
-      router.push({path: "result"})
-    }
   export default { name: 'App',
   data(){
     return {
       horses:[],
       searchTerm: "",
       listItems: [
-        {category: "Name"},
-        {category: "Sire"},
-        {category: "Dam"},
-        {category: "Dam Sire"},
-        {category: "2nd Dam"},
-        {category: "LTE"},
-        {category: "PE"},
-        {category: "Show"},
-        {category: "Class"},
-        {category: "Level"},
-        {category: "Open vs Non Pro"},
-        {category: "Age"},
-        {category: "Place"},
-        {category: "Money"},
-        {category: "Breeder"},
-        {category: "Owner"},
-        {category: "Rider"},
-        {category: "Draw"},
-        {category: "Back Number"},
-        {category: "On Dirt"},
-        {category: "Finalist"},
-        {category: "Maneuver Scores"},
-        {category: "Notes"},
-        {category: "NRHA"},
-        {category: "Date of Show/Class"},
-        {category: "Schooling"}
+        {
+          id: 1,
+          category: "Name",
+          checked: true
+        },
+        {
+          id: 2,
+          category: "Sire",
+          checked: false
+        },
+        {
+          id: 3,
+          category: "Dam",
+          checked: false
+        },
+        {
+          id: 4,
+          category: "Dam Sire",
+          checked: false
+        },
+        {
+          id: 5,
+          category: "2nd Dam",
+          checked: false
+        },
+        {
+          id: 6,
+          category: "Maneuver Scores",
+          checked: false
+        },
+        // {
+        //   category: "LTE",
+        //   checked: false
+        // },
+        // {
+        //   category: "PE",
+        //   checked: false
+        // },
+        // {
+        //   category: "Show",
+        //   checked: false
+        // },
+        // {
+        //   category: "Class",
+        //   checked: false
+        // },
+        // {
+        //   category: "Level",
+        //   checked: false
+        // },
+        // {
+        //   category: "Open vs Non Pro",
+        //   checked: false
+        // },
+        // {
+        //   category: "Age",
+        //   checked: false
+        // },
+        // {
+        //   category: "Place",
+        //   checked: false
+        // },
+        // {
+        //   category: "Money",
+        //   checked: false
+        // },
+        // {
+        //   category: "Breeder",
+        //   checked: false
+        // },
+        // {
+        //   category: "Owner",
+        //   checked: false
+        // },
+        // {
+        //   category: "Rider",
+        //   checked: false
+        // },
+        // {
+        //   category: "Draw",
+        //   checked: false
+        // },
+        // {
+        //   category: "Back Number",
+        //   checked: false
+        // },
+        // {
+        //   category: "On Dirt",
+        //   checked: false
+        // },
+        // {
+        //   category: "Finalist",
+        //   checked: false
+        // },
+        // {
+        //   category: "Notes",
+        //   checked: false
+        // },
+        // {
+        //   category: "NRHA",
+        //   checked: false
+        // },
+        // {
+        //   category: "Date of Show/Class",
+        //   checked: false
+        // },
+        // {
+        //   category: "Schooling",
+        //   checked: false
+        // }
       ],
     categoriesCopy: [],
     selectedCategories: [],
@@ -337,6 +423,19 @@
     onReturnHome(){
         this.$router.push('/home');
     },
+
+    bySire() {
+      var checkBox = document.getElementById("2");
+      var text = document.getElementById("Sire");
+      if (checkBox.checked == true) {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+}
+
+
+
   },
 
 
