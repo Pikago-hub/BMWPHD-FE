@@ -31,4 +31,8 @@ export default defineConfig({
     ],
   },
 
-})
+  server: {
+    port: process.env.PORT || 80
+    }
+  }
+)
