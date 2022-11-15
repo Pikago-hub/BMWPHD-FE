@@ -32,7 +32,8 @@ export default defineConfig({
   },
 
   server: {
-    port: process.env.PORT || 80
+      port: process.env.PORT || 3666,
+      host: '0.0.0.0',
     }
   }
 )
