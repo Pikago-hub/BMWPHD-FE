@@ -8,14 +8,17 @@ import VueAxios from 'vue-axios'
 
 const app = createApp(App)
 
-registerPlugins(app)
+const PORT = process.env.PORT || 3666
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
+})
 
+registerPlugins(app)
 app
   .use(VueAxios, axios)
   .use(router)
   .use(vuetify)
   .mount('#app')
-  
-  app.listen(process.env.PORT || 3666, '0.0.0.0', () => {
-    console.log("Server is running.");
-  });
+
+
+
