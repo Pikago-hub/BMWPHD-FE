@@ -1,7 +1,6 @@
 // Plugins
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
-import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 // Utilities
 import { defineConfig } from 'vite'
