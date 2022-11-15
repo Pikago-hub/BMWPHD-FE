@@ -40,5 +40,6 @@ security/target/
 selenium-debug.log
 node_modules/
 yarn.lock
+dist/
 
 !.mvn/wrapper/maven-wrapper.jar
