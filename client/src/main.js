@@ -7,12 +7,10 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 const app = createApp(App)
-
-const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
-app.listen(port, host, function() {
-  console.log("Server started.......");
+app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
+  console.log("Server is running.");
 });
+
 
 registerPlugins(app)
 app
