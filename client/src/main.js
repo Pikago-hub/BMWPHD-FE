@@ -16,3 +16,6 @@ app
   .use(vuetify)
   .mount('#app')
   
+  app.listen(process.env.PORT || 3666, '0.0.0.0', () => {
+    console.log("Server is running.");
+  });
