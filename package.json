@@ -5,8 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "start": "vite"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
@@ -32,5 +31,6 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "vite": "^3.1.8",
     "vite-plugin-vuetify": "^1.0.0-alpha.12"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }
