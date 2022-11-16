@@ -41,16 +41,7 @@
           multiple
           active-class=""
         >
-        <!-- <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item> -->
 
-        <v-list-item>
-          <template v-slot:default="{ active }">
-            <v-list-item-action>
-              <v-checkbox v-model="selected" :input-value="active" label="Name" value="Name"></v-checkbox>
-            </v-list-item-action>
-          </template>
-        </v-list-item>
-        
         <v-list-item>
           <template v-slot:default="{ active }">
 
@@ -63,218 +54,6 @@
             
           </template>
         </v-list-item>
-
-          
-          
-          <!-- <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-              <v-checkbox v-model="selected" :input-value="active" label="Name" value="Name" ></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox v-model="selected" id="Sire" :input-value="active" label="Sire" value="Sire" @click="onSire"  ></v-checkbox>
-              </v-list-item-action>
-
-              <v-text-field label="Enter Sire Name" id="SireInput" style="display:none"></v-text-field>
-            </template>
-          </v-list-item> -->
-
-          <!-- <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Dam`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Dam Sire`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`2nd Dam`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Maneuver Scores`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`LTE`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`PE`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Show`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Class`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Level`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Open VS Non Pro`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Age`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Place`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Money`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Breeder`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Owner`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Rider`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Draw`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Back Number`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`On Dirt`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Finalist`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Notes`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`NRHA`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Date of Show/Class`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Schooling`"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item> -->
-
         </v-list-item-group>
       </v-list>
  </v-navigation-drawer>
@@ -293,7 +72,7 @@
      <v-text-field
        hide-details
        single-line
-       label="Enter Horse Name"
+       label="Enter Search Term"
      ></v-text-field>
 
      <v-btn icon @click="onSearch">
@@ -373,6 +152,11 @@
       newItem: [],
       selected: ['Name'],
       listItems: [
+        {
+          category: "Name",
+          checked: true,
+          hasInput: true
+        },
         {
           category: "Sire",
           checked: false,
