@@ -66,15 +66,15 @@
        width="700px"
        height="80px"
      >
-   <v-toolbar
-     dense
-   >
+   <v-toolbar dense>
      <v-text-field
        hide-details
        single-line
-       label="Enter Search Term"
+       placeholder="Enter Search Term"
+       class="search-bar"
+       type="text"
+       @input="handleInput"
      ></v-text-field>
-
      <v-btn icon @click="onSearch">
        <v-icon>mdi-magnify</v-icon>
      </v-btn>
@@ -113,7 +113,9 @@
     </thead>
     <tbody>
      <tr
-       v-for="item of horses"
+       class="table-row"
+       v-for="item in horseSearch"
+       :key="item.Name"
      >       
        <td>{{ item.id}}</td>
        <td>{{ item.Name}}</td>
@@ -144,7 +146,8 @@
 <script>
   import {useRouter} from 'vue-router'
   const router = useRouter()
-  import axios from "axios"; 
+  import axios from "axios";
+
   export default { name: 'App',
   props: ["itemDetails"],
   data(){
@@ -283,32 +286,56 @@
           hasInput: false
         }
       ],
-      horses:[],
+      horseSearch:[],
       searchTerm: "",
     categoriesCopy: [],
     selectedCategories: [],
     }
 },
 
-  async created(){
+/*   async created(){
     try{
       const res = await axios.get('http://localhost:3000/horses')
-      this.horses = res.data;
+      this.horseSearch = res.data;
     } catch (error){
       console.log(error);
     }
+  }, */
+
+  computed: {
+
   },
 
-  computed: {},
-
-  // mounted() {
-  //   this.newItem = this.itemDetails;
-  // },
+  mounted() {
+  },
 
   methods: {
+    async handleInput(e){
+      const Name = e.target.value;
+      const res = await this.searchForTimeout(Name);
+      this.horseSearch = res.data;
+    },
+
+    async searchForTimeout(Name){
+      return new Promise((resolve, reject) => {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          try{
+            const res = axios.get('http://localhost:3000/horses', {
+              params: {Name : Name},
+            });
+            resolve(res);
+          } catch(e){
+            reject(e);
+          }
+        })
+      })
+    },
+
     onReturnHome(){
         this.$router.push('/home');
     },
+
     onSire() {
       let checkBox = document.getElementById("Sire");
       console.log(checkBox);
@@ -319,12 +346,22 @@
       else {
         text.style.display = "none";
       }
-}
+    },
 
+    onSearch(){
 
+    }
 
+/*     onSearch: function () {
+      let searchTerm = (this.search || "").toLowerCase();
+      return this.horses.filter(function (item) {
+        let name = (item.Name || "").toLowerCase();
+        let sire = (item.Sire || "").toLowerCase();
+        return (
+          name.indexOf(searchTerm) > -1 || sire.indexOf(searchTerm) > -1
+        );
+      });
+    }, */
   },
-
-
 }
 </script>

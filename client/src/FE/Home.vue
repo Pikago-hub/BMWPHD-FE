@@ -60,10 +60,13 @@
     <v-toolbar
       dense
     >
-      <v-text-field
-        hide-details
-        single-line
-      ></v-text-field>
+    <v-text-field
+       hide-details
+       single-line
+       placeholder="Enter Search Term"
+       class="search-bar"
+       v-model="searchQuery"
+     ></v-text-field>
 
       <v-btn icon @click="onSearch">
         <v-icon>mdi-magnify</v-icon>
