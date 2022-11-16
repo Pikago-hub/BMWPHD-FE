@@ -38,30 +38,54 @@
       <v-subheader>Search Categories</v-subheader>
       
         <v-list-item-group
-          v-model="settings"
           multiple
           active-class=""
         >
-
         <!-- <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item> -->
 
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-action v-for="item in listItems">
-                <v-checkbox @click="bySire()" v-model="item.checked" :input-value="active" v-bind:id="item.id" :label="(( item.category )) "></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-  
+        <v-list-item>
+          <template v-slot:default="{ active }">
+            <v-list-item-action>
+              <v-checkbox v-model="selected" :input-value="active" label="Name" value="Name"></v-checkbox>
+            </v-list-item-action>
+          </template>
+        </v-list-item>
+        
+        <v-list-item>
+          <template v-slot:default="{ active }">
+
+            <v-list-item-content v-for="item in listItems">
+              <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
+            </v-list-item-content>
+            <v-list-item-action v-for="item in listItems">
+              <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
+            </v-list-item-action>
+            
+          </template>
+        </v-list-item>
+
+          
+          
           <!-- <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Sire`"></v-checkbox>
+              <v-checkbox v-model="selected" :input-value="active" label="Name" value="Name" ></v-checkbox>
               </v-list-item-action>
             </template>
           </v-list-item>
 
+
           <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox v-model="selected" id="Sire" :input-value="active" label="Sire" value="Sire" @click="onSire"  ></v-checkbox>
+              </v-list-item-action>
+
+              <v-text-field label="Enter Sire Name" id="SireInput" style="display:none"></v-text-field>
+            </template>
+          </v-list-item> -->
+
+          <!-- <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-action>
                 <v-checkbox :input-value="active" :label="`Dam`"></v-checkbox>
@@ -80,6 +104,14 @@
             <template v-slot:default="{ active }">
               <v-list-item-action>
                 <v-checkbox :input-value="active" :label="`2nd Dam`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Maneuver Scores`"></v-checkbox>
               </v-list-item-action>
             </template>
           </v-list-item>
@@ -182,7 +214,63 @@
           <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-action>
-                <v-checkbox :input-value="active" :label="`Dam`"></v-checkbox>
+                <v-checkbox :input-value="active" :label="`Draw`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Back Number`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`On Dirt`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Finalist`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Notes`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`NRHA`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Date of Show/Class`"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active" :label="`Schooling`"></v-checkbox>
               </v-list-item-action>
             </template>
           </v-list-item> -->
@@ -206,14 +294,6 @@
        hide-details
        single-line
        label="Enter Horse Name"
-     ></v-text-field>
-
-     <v-text-field
-       hide-details
-       single-line
-       id="Sire"
-       label="Enter Sire Name"
-       style="display:none"
      ></v-text-field>
 
      <v-btn icon @click="onSearch">
@@ -287,122 +367,140 @@
   const router = useRouter()
   import axios from "axios"; 
   export default { name: 'App',
+  props: ["itemDetails"],
   data(){
     return {
-      horses:[],
-      searchTerm: "",
+      newItem: [],
+      selected: ['Name'],
       listItems: [
         {
-          id: 1,
-          category: "Name",
-          checked: true
-        },
-        {
-          id: 2,
           category: "Sire",
-          checked: false
+          checked: false,
+          hasInput: false
         },
         {
-          id: 3,
           category: "Dam",
-          checked: false
+          checked: false,
+          hasInput: false
         },
         {
-          id: 4,
           category: "Dam Sire",
-          checked: false
+          checked: false,
+          hasInput: false
         },
         {
-          id: 5,
           category: "2nd Dam",
-          checked: false
+          checked: false,
+          hasInput: false
         },
         {
-          id: 6,
           category: "Maneuver Scores",
-          checked: false
+          checked: false,
+          hasInput: false
         },
-        // {
-        //   category: "LTE",
-        //   checked: false
-        // },
-        // {
-        //   category: "PE",
-        //   checked: false
-        // },
-        // {
-        //   category: "Show",
-        //   checked: false
-        // },
-        // {
-        //   category: "Class",
-        //   checked: false
-        // },
-        // {
-        //   category: "Level",
-        //   checked: false
-        // },
-        // {
-        //   category: "Open vs Non Pro",
-        //   checked: false
-        // },
-        // {
-        //   category: "Age",
-        //   checked: false
-        // },
-        // {
-        //   category: "Place",
-        //   checked: false
-        // },
-        // {
-        //   category: "Money",
-        //   checked: false
-        // },
-        // {
-        //   category: "Breeder",
-        //   checked: false
-        // },
-        // {
-        //   category: "Owner",
-        //   checked: false
-        // },
-        // {
-        //   category: "Rider",
-        //   checked: false
-        // },
-        // {
-        //   category: "Draw",
-        //   checked: false
-        // },
-        // {
-        //   category: "Back Number",
-        //   checked: false
-        // },
-        // {
-        //   category: "On Dirt",
-        //   checked: false
-        // },
-        // {
-        //   category: "Finalist",
-        //   checked: false
-        // },
-        // {
-        //   category: "Notes",
-        //   checked: false
-        // },
-        // {
-        //   category: "NRHA",
-        //   checked: false
-        // },
-        // {
-        //   category: "Date of Show/Class",
-        //   checked: false
-        // },
-        // {
-        //   category: "Schooling",
-        //   checked: false
-        // }
+        {
+          category: "LTE",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "PE",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Show",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Class",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Level",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Open vs Non Pro",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Age",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Place",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Money",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Breeder",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Owner",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Rider",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Draw",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Back Number",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "On Dirt",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Finalist",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Notes",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "NRHA",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Date of Show/Class",
+          checked: false,
+          hasInput: false
+        },
+        {
+          category: "Schooling",
+          checked: false,
+          hasInput: false
+        }
       ],
+      horses:[],
+      searchTerm: "",
     categoriesCopy: [],
     selectedCategories: [],
     }
@@ -419,17 +517,22 @@
 
   computed: {},
 
+  // mounted() {
+  //   this.newItem = this.itemDetails;
+  // },
+
   methods: {
     onReturnHome(){
         this.$router.push('/home');
     },
-
-    bySire() {
-      var checkBox = document.getElementById("2");
-      var text = document.getElementById("Sire");
-      if (checkBox.checked == true) {
+    onSire() {
+      let checkBox = document.getElementById("Sire");
+      console.log(checkBox);
+      let text = document.getElementById("SireInput");
+      if (checkBox.selected == true) {
         text.style.display = "block";
-      } else {
+      }
+      else {
         text.style.display = "none";
       }
 }
