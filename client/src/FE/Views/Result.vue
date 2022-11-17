@@ -1,145 +1,103 @@
 <template>
-  <!-- App.vue -->
-  
   <v-app>
 
- <v-app-bar
-       color="blue accent-4"
-       dense
-       dark
-       clipped-left
-     >
-     <v-btn icon @click="onReturnHome">
-       <v-icon>mdi-arrow-left</v-icon>
-     </v-btn>
-     <v-toolbar-title>Homepage</v-toolbar-title>
-     <v-spacer></v-spacer>
+    <v-app-bar color="blue accent-4" dense dark clipped-left >
+      <v-btn icon @click="onReturnHome">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-toolbar-title>Homepage</v-toolbar-title>
+      <v-spacer></v-spacer>
   
-     <v-menu leftbottom>
-       <template v-slot:activator="{ on, attrs }">
-         <v-btn
-           icon
-           v-bind="attrs"
-           v-on="on"
-         >
-         <v-icon>mdi-dots-vertical</v-icon>
-         </v-btn>
-       </template>
-     </v-menu>
-     </v-app-bar>
+      <v-menu leftbottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on">
+          <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+      </v-menu>
+    </v-app-bar>
 
- <v-navigation-drawer app clipped >
-   <!-- -->
-     <v-list
-        flat
-        subheader
-        three-line
-      >
+    <v-navigation-drawer app clipped >
+     <v-list flat subheader three-line>
       <v-subheader>Search Categories</v-subheader>
-      
-        <v-list-item-group
-          multiple
-          active-class=""
-        >
-
-        <v-list-item>
-          <template v-slot:default="{ active }">
-
-            <v-list-item-content v-for="item in listItems">
-              <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
-            </v-list-item-content>
-            <v-list-item-action v-for="item in listItems">
-              <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
-            </v-list-item-action>
-            
-          </template>
-        </v-list-item>
+        <v-list-item-group multiple active-class="">
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-content v-for="item in listItems">
+                <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
+              </v-list-item-content>
+              <v-list-item-action v-for="item in listItems">
+                <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
- </v-navigation-drawer>
+    </v-navigation-drawer>
   
- <v-main>
+    <v-main>
+      <v-card class="mx-auto my-10" flat width="700px" height="80px">
+        <v-toolbar dense>
+          <v-text-field hide-details single-line placeholder="Enter Search Term" class="search-bar" type="text" @input="handleInput">
+          </v-text-field>
+            <v-btn icon @click="onSearch">
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+        </v-toolbar>
+      </v-card>
   
-   <v-card
-       class="mx-auto my-10"
-       flat
-       width="700px"
-       height="80px"
-     >
-   <v-toolbar dense>
-     <v-text-field
-       hide-details
-       single-line
-       placeholder="Enter Search Term"
-       class="search-bar"
-       type="text"
-       @input="handleInput"
-     ></v-text-field>
-     <v-btn icon @click="onSearch">
-       <v-icon>mdi-magnify</v-icon>
-     </v-btn>
-   </v-toolbar>
- </v-card>
+      <v-container fluid style="height: 100vh;">
+        <v-table fixed-header height="800px">
+          <thead>
+            <tr>
+              <th class="text-left" scope>
+              ID
+            </th>
+              <th class="text-left" scope>
+              Name
+            </th>
+            <th class="text-left" scope>
+              Sire 1
+            </th>
+            <th class="text-left" scope>
+              Dam 1
+            </th>
+            <th class="text-left" scope>
+              Sire 2
+            </th>
+            <th class="text-left" scope>
+              Dam 2
+            </th>
+            <th class="text-left" scope>
+              Maneuver Scores
+            </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="table-row" v-for="item in horseSearch" :key="item.Name">       
+              <td>{{ item.id}}</td>
+              <td>{{ item.Name}}</td>
+              <td>{{ item.Sire}}</td>
+              <td>{{ item.Dam}}</td>
+              <td>{{ item.Sire2}}</td>
+              <td>{{ item.Dam2}}</td>
+              <td>{{ item.Maneuver}}</td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-container>
+    </v-main>
   
- <v-container fluid style="height: 100vh;">
-  <v-table
-    fixed-header
-    height="800px"
-  >
-    <thead>
-      <tr>
-        <th class="text-left" scope>
-         ID
-       </th>
-        <th class="text-left" scope>
-         Name
-       </th>
-       <th class="text-left" scope>
-         Sire 1
-       </th>
-       <th class="text-left" scope>
-         Dam 1
-       </th>
-       <th class="text-left" scope>
-         Sire 2
-       </th>
-       <th class="text-left" scope>
-         Dam 2
-       </th>
-       <th class="text-left" scope>
-         Maneuver Scores
-       </th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr
-       class="table-row"
-       v-for="item in horseSearch"
-       :key="item.Name"
-     >       
-       <td>{{ item.id}}</td>
-       <td>{{ item.Name}}</td>
-       <td>{{ item.Sire}}</td>
-       <td>{{ item.Dam}}</td>
-       <td>{{ item.Sire2}}</td>
-       <td>{{ item.Dam2}}</td>
-       <td>{{ item.Maneuver}}</td>
-     </tr>
-   </tbody>
-  </v-table>
- </v-container>
-  
- </v-main>
-  
- <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
-   <v-container>
-     <v-row justify="center" no-gutters >
-       <v-col class="text-center mt-4" cols="12">
-         <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
-       </v-col>
-     </v-row>
-   </v-container>
-   </v-footer>
+    <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
+      <v-container>
+        <v-row justify="center" no-gutters >
+          <v-col class="text-center mt-4" cols="12">
+            <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
   
