@@ -83,7 +83,7 @@
           <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-content v-for="item in listItems">
-                <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
+                <v-text-field  v-model="searchQuery" v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
               </v-list-item-content>
               <v-list-item-action v-for="item in listItems">
                 <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
@@ -93,8 +93,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
-
 
       <!-- <v-container>
         <v-select v-model="selectedCategories" :items="categories" attach label="Search by Categories" multiple>
@@ -122,18 +120,24 @@
 
                     <p class="mt-8">
                       BMW Quarter Horses breeds and raises prospects for the reining and reined cowhorse disciplines with a focus on pedigree, conformation, a good mind, and soundness. 
-                      For more information click on the button below and you will be directed to our About page. 
+                      For more information click on the button below and you will be directed to our About page. <v-btn
+                      @click="onAbout"
+                      variant="tonal"
+                    >
+                      About
+                    </v-btn>
                     </p>
 
                     <!-- <p class="mt-8">
                       For more information click on the button below and you will be directed to our About page. 
                     </p> -->
 
-                    <v-btn
+                    <!-- <v-btn
                       @click="onAbout"
+                      variant="outlined"
                     >
                       About
-                    </v-btn>
+                    </v-btn> -->
                   </v-responsive>
                 <!-- </v-col> -->
 
