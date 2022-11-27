@@ -51,30 +51,16 @@
 
 
     <v-main>
-      
-      <v-card
-        class="mx-auto my-16"
-        flat
-        width="800px"
-        height="80px"
-      >
-    <v-toolbar
-      dense
-    >
-    <v-text-field
-       hide-details
-       single-line
-       placeholder="Enter Horse Name"
-       class="search-bar"
-       v-model="searchQuery"
-     ></v-text-field>
-
-      <v-btn icon @click="onSearch">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-toolbar>
-  </v-card>
-
+      <v-card>
+        <v-banner color="info">
+          <v-banner-actions>
+            <v-banner-text class="font-weight-medium text-md-h5">
+              Looking for horse status, recent matches, performance, data, etc? Check out our search engine
+            </v-banner-text>
+            <v-btn @click="goToResult">Start Browsering</v-btn>
+          </v-banner-actions>
+        </v-banner>
+      </v-card>
   <div id="app">
     <v-navigation-drawer app clipped >
     <v-list >
@@ -348,7 +334,7 @@
         return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
     },
-    onSearch(){
+    goToResult(){
         this.$router.push('/result');
     }, 
     onHome(){

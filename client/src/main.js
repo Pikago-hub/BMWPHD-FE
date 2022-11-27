@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 const app = createApp(App)
 
 
+
 registerPlugins(app)
 app
   .use(VueAxios, axios)

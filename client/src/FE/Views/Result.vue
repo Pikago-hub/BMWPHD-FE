@@ -38,11 +38,19 @@
     <v-main>
       <v-card class="mx-auto my-10" flat width="700px" height="80px">
         <v-toolbar dense>
-          <v-text-field hide-details single-line placeholder="Enter Search Term" class="search-bar" type="text" @input="handleInput">
+          <v-text-field 
+          hide-details 
+          single-line 
+          label="Enter Search Term" 
+          class="search-bar" 
+          type="text"
+          v-model="searchInput"
+        >
           </v-text-field>
             <v-btn icon @click="onSearch">
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
+            <v-btn elevation="2" @click="onFindAll">Find All Horses</v-btn>
         </v-toolbar>
       </v-card>
   
@@ -108,10 +116,10 @@
 
   export default { name: 'App',
   props: ["itemDetails"],
-  data(){
+  data:() => {
     return {
-      horseSearch:[
-      ],
+      searchInput: "",
+      horseSearch:[],
       newItem: [],
       selected: ['Name'],
       listItems: [
@@ -246,9 +254,8 @@
           hasInput: false
         }
       ],
-      searchTerm: "",
-    categoriesCopy: [],
-    selectedCategories: [],
+      categoriesCopy: [],
+      selectedCategories: [],
     }
 },
 
@@ -258,6 +265,12 @@
 
   mounted() {
   },
+  
+  watch:{
+      searchInput(value){
+        this.onSearch(value);
+      }
+    },
 
   methods: {
 /*     async handleInput(e){
@@ -298,37 +311,36 @@
       }
     },
 
-    async onSearch(){
+  async onFindAll(){
+      this.$router.push('/result')
       try{
-        const res = await axios.get('https://bmwphd-be.herokuapp.com/horses',{
-          
+        const res = await axios.get('https://bmwphd-be.herokuapp.com/horses',{      
         }).then(res => (
           this.horseSearch = res.data.data
         ))
         console.log(res);
       } catch (error){
         console.error(error);
-    }
-  },
+      }
+    },
 
-
-/*     onSearch(){
+    onSearch(value){
       axios({
-        url: 'https://bmwphd-be.herokuapp.com/horses',
-        method: 'get',
+        url: 'https://bmwphd-be.herokuapp.com/horses/search/',
+        method: 'POST',
         headers: {
-         'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
-        para:{
-          id: 1,
+        data:{
+          name:value
         }
       }).then((res) => {
-        this.horseSearch = res.data;
+        this.horseSearch = res.data.data
         console.log(res);
       },(error) => {
         console.log(error);
       });
-    } */
+    }
   },
 }
 </script>
