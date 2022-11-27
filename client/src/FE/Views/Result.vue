@@ -42,9 +42,11 @@
           hide-details 
           single-line 
           label="Enter Search Term" 
-          class="search-bar" 
+          class="searchbar" 
           type="text"
+          ref="getValue"
           v-model="searchInput"
+          @keyup.enter="onSearch"
         >
           </v-text-field>
             <v-btn icon @click="onSearch">
@@ -260,41 +262,21 @@
 },
 
   computed: {
-
+    
   },
 
   mounted() {
+    
   },
   
-  watch:{
+/*   watch:{
       searchInput(value){
-        this.onSearch(value);
+        this.searchInput = this.searchInput.toUpperCase();
+        this.onSearch(value)
       }
-    },
+    }, */
 
   methods: {
-/*     async handleInput(e){
-      const Name = e.target.value;
-      const res = await this.searchForTimeout(Name);
-      this.horseSearch = res.data;
-    }, */
-
-/*     async searchForTimeout(Name){
-      return new Promise((resolve, reject) => {
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-          try{
-            const res = axios.get('https://git.heroku.com/bmwphd-be.git', {
-              params: {Name : Name},
-            });
-            resolve(res);
-          } catch(e){
-            reject(e);
-          }
-        })
-      })
-    }, */
-
     onReturnHome(){
         this.$router.push('/home');
     },
@@ -324,23 +306,29 @@
       }
     },
 
-    onSearch(value){
+
+
+    onSearch(){
+      let value = this.$refs.getValue.value;
+      console.log(this.$refs.getValue.value);
       axios({
-        url: 'https://bmwphd-be.herokuapp.com/horses/search/',
-        method: 'POST',
+        url: 'https://bmwphd-be.herokuapp.com/horses/search',
+        method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },
         data:{
-          name:value
+          name: value,
         }
       }).then((res) => {
         this.horseSearch = res.data.data
-        console.log(res);
+        console.log(res)
       },(error) => {
         console.log(error);
       });
-    }
+    },
+
   },
+
 }
 </script>
