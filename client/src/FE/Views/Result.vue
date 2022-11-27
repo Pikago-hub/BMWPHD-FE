@@ -75,14 +75,14 @@
           </thead>
 
           <tbody>
-            <tr class="table-row" v-for="item in horseSearch" :key="item.Name">       
-              <td>{{ item.id}}</td>
-              <td>{{ item.Name}}</td>
-              <td>{{ item.Sire}}</td>
-              <td>{{ item.Dam}}</td>
-              <td>{{ item.Sire2}}</td>
-              <td>{{ item.Dam2}}</td>
-              <td>{{ item.Maneuver}}</td>
+            <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">       
+              <td>{{ horse.id}}</td>
+              <td>{{ horse.name}}</td>
+              <td>{{ horse.sire}}</td>
+              <td>{{ horse.dam}}</td>
+              <td>{{ horse.Sire2}}</td>
+              <td>{{ horse.Dam2}}</td>
+              <td>{{ horse.Maneuver}}</td>
             </tr>
           </tbody>
         </v-table>
@@ -110,6 +110,8 @@
   props: ["itemDetails"],
   data(){
     return {
+      horseSearch:[
+      ],
       newItem: [],
       selected: ['Name'],
       listItems: [
@@ -244,21 +246,11 @@
           hasInput: false
         }
       ],
-      horseSearch:[],
       searchTerm: "",
     categoriesCopy: [],
     selectedCategories: [],
     }
 },
-
-/*   async created(){
-    try{
-      const res = await axios.get('http://localhost:3000/horses')
-      this.horseSearch = res.data;
-    } catch (error){
-      console.log(error);
-    }
-  }, */
 
   computed: {
 
@@ -268,18 +260,18 @@
   },
 
   methods: {
-    async handleInput(e){
+/*     async handleInput(e){
       const Name = e.target.value;
       const res = await this.searchForTimeout(Name);
       this.horseSearch = res.data;
-    },
+    }, */
 
-    async searchForTimeout(Name){
+/*     async searchForTimeout(Name){
       return new Promise((resolve, reject) => {
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
           try{
-            const res = axios.get('http://localhost:3000/horses', {
+            const res = axios.get('https://git.heroku.com/bmwphd-be.git', {
               params: {Name : Name},
             });
             resolve(res);
@@ -288,7 +280,7 @@
           }
         })
       })
-    },
+    }, */
 
     onReturnHome(){
         this.$router.push('/home');
@@ -306,20 +298,37 @@
       }
     },
 
-    onSearch(){
-
+    async onSearch(){
+      try{
+        const res = await axios.get('https://bmwphd-be.herokuapp.com/horses',{
+          
+        }).then(res => (
+          this.horseSearch = res.data.data
+        ))
+        console.log(res);
+      } catch (error){
+        console.error(error);
     }
+  },
 
-/*     onSearch: function () {
-      let searchTerm = (this.search || "").toLowerCase();
-      return this.horses.filter(function (item) {
-        let name = (item.Name || "").toLowerCase();
-        let sire = (item.Sire || "").toLowerCase();
-        return (
-          name.indexOf(searchTerm) > -1 || sire.indexOf(searchTerm) > -1
-        );
+
+/*     onSearch(){
+      axios({
+        url: 'https://bmwphd-be.herokuapp.com/horses',
+        method: 'get',
+        headers: {
+         'Content-Type': 'application/json'
+        },
+        para:{
+          id: 1,
+        }
+      }).then((res) => {
+        this.horseSearch = res.data;
+        console.log(res);
+      },(error) => {
+        console.log(error);
       });
-    }, */
+    } */
   },
 }
 </script>
