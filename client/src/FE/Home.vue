@@ -57,7 +57,7 @@
             <v-banner-text class="font-weight-medium text-md-h5">
               Looking for horse status, recent matches, performance, data, etc? Check out our search engine
             </v-banner-text>
-            <v-btn @click="goToResult">Start Browsering</v-btn>
+            <v-btn @click="goToResult">Start Browsing</v-btn>
           </v-banner-actions>
         </v-banner>
       </v-card>
