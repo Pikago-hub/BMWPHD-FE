@@ -62,36 +62,7 @@
         </v-banner>
       </v-card>
   <div id="app">
-    <v-navigation-drawer app clipped >
-    <v-list >
-      <v-subheader>Additional Search Categories</v-subheader>
-        <v-list-item-group multiple active-class="">
-          <v-list-item>
-            <template v-slot:default="{ active }">
-              <v-list-item-content v-for="item in listItems">
-                <v-text-field  v-model="searchQuery" v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
-              </v-list-item-content>
-              <v-list-item-action v-for="item in listItems">
-                <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-
-      <!-- <v-container>
-        <v-select v-model="selectedCategories" :items="categories" attach label="Search by Categories" multiple>
-          <template v-slot:prepend-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-text-field v-model="searchTerm" placeholder="Search" @input="searchCategories"></v-text-field>
-              </v-list-item-content>
-            </v-list-item>
-            <v-divider class="mt-2"></v-divider>
-          </template>
-        </v-select>
-      </v-container> -->
+   
   </div>
 
         <v-sheet class="py-16">
