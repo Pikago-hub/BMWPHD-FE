@@ -51,8 +51,8 @@
         <v-list-item-group multiple active-class="">
           <v-list-item>
             <template v-slot:default="{ active }">
-              <v-list-item-content v-for="item in listItems">
-                <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`"></v-text-field>
+              <v-list-item-content v-for="(item,index) in listItems" :key="index" :label="item.category">
+                <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`" v-model="inputValue[index]"  @keyup.enter="onCategSearch"></v-text-field>
               </v-list-item-content>
               <v-list-item-action v-for="item in listItems">
                 <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
@@ -73,7 +73,6 @@
           class="searchbar" 
           type="text"
           ref="getValue"
-          v-model="searchInput"
           @keyup.enter="onSearch"
         >
           </v-text-field>
@@ -116,10 +115,10 @@
             <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">       
               <td>{{ horse.id}}</td>
               <td>{{ horse.name}}</td>
-              <td>{{ horse.sire}}</td>
-              <td>{{ horse.dam}}</td>
-              <td>{{ horse.Sire2}}</td>
-              <td>{{ horse.Dam2}}</td>
+              <td>{{ horse.sire1}}</td>
+              <td>{{ horse.dam1}}</td>
+              <td>{{ horse.sire2}}</td>
+              <td>{{ horse.dam2}}</td>
               <td>{{ horse.Maneuver}}</td>
             </tr>
           </tbody>
@@ -150,144 +149,168 @@
     return {
       drawer: false,
       group: null,
-      searchInput: "",
       horseSearch:[],
       newItem: [],
       selected: ['Name'],
+      inputValue:[],
       listItems: [
         {
           category: "Name",
           checked: true,
-          hasInput: true
+          hasInput: true,
+          inputValue:'',
         },
         {
           category: "Sire",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Dam",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Dam Sire",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "2nd Dam",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Maneuver Scores",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "LTE",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "PE",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Show",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Class",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Level",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Open vs Non Pro",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Age",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Place",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Money",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Breeder",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Owner",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Rider",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Draw",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Back Number",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "On Dirt",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Finalist",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Notes",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "NRHA",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Date of Show/Class",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         },
         {
           category: "Schooling",
           checked: false,
-          hasInput: false
+          hasInput: false,
+          inputValue:'',
         }
       ],
-      categoriesCopy: [],
-      selectedCategories: [],
     }
 },
 
@@ -298,13 +321,6 @@
   mounted() {
     
   },
-  
-/*   watch:{
-      searchInput(value){
-        this.searchInput = this.searchInput.toUpperCase();
-        this.onSearch(value)
-      }
-    }, */
 
   methods: {
     onReturnHome(){
@@ -356,7 +372,7 @@
 
 
     onSearch(){
-      let value = this.$refs.getValue.value;
+      const value = this.$refs.getValue.value;
       console.log(this.$refs.getValue.value);
       axios({
         url: 'https://bmwphd-be.herokuapp.com/horses/search',
@@ -375,6 +391,31 @@
       });
     },
 
+    onCategSearch() {
+      for (let i in this.listItems){
+        console.log(this.inputValue[i])
+        const categValue = this.inputValue[i]
+        axios({
+        url: 'https://bmwphd-be.herokuapp.com/horses/search',
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params:{
+          name: categValue,
+          sire: categValue,
+          dam: categValue,
+          sire2: categValue,
+          dam2: categValue,
+        }
+      }).then((res) => {
+        this.horseSearch = res.data.data
+        console.log(res)
+      },(error) => {
+        console.log(error);
+      });
+      }
+    }
   },
 
 }
