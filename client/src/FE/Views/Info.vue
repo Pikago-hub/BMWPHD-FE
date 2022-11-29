@@ -36,6 +36,7 @@
   
             <v-list nav>
             <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
+            <v-list-item prepend-icon="mdi-magnify" title="Search" link @click="goToResult"></v-list-item>
             <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
             <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
             <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
@@ -175,9 +176,9 @@
             return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
           });
         },
-        onSearch(){
-            this.$router.push('/result');
-        }, 
+        goToResult(){
+        this.$router.push('/result');
+        },
         onHome(){
             this.$router.push('/home');
         }, 
