@@ -11,7 +11,6 @@
       
       <v-spacer></v-spacer>
 
-
       <v-tooltip text="Go Home" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn icon @click="onHome" v-bind="props">
@@ -38,26 +37,24 @@
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" absolute temporary>
-
           <v-list nav>
           <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
+          <v-list-item prepend-icon="mdi-magnify" title="Search" link @click="goToResult"></v-list-item>
           <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
           <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
           <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
           </v-list>
-      
       </v-navigation-drawer>
-
-
 
     <v-main>
       <v-card>
-        <v-banner color="info">
+        <v-banner lines="two" color="info" height="100">
           <v-banner-actions>
-            <v-banner-text class="font-weight-medium text-md-h5">
+            <v-banner-text class="text-h5">
               Looking for horse status, recent matches, performance, data, etc? Check out our search engine
+              <v-btn @click="goToResult"  variant="tonal">Start Your Search Here</v-btn>
             </v-banner-text>
-            <v-btn @click="goToResult">Start Browsing</v-btn>
+           
           </v-banner-actions>
         </v-banner>
       </v-card>
@@ -69,12 +66,10 @@
           <section id="filter">
             <v-container>
               <v-row justify="space-between">
-                <!-- <v-col cols="auto"> -->
                   <v-responsive width="350">
-                    <h2 class="text-h4">
+                    <h2 class="text-h2">
                       Welcome to BMW Performance Horse Database
                     </h2>
-
                     <p class="mt-8">
                       BMW Quarter Horses breeds and raises prospects for the reining and reined cowhorse disciplines with a focus on pedigree, conformation, a good mind, and soundness. 
                       For more information click on the button below and you will be directed to our About page. <v-btn
@@ -84,19 +79,7 @@
                       About
                     </v-btn>
                     </p>
-
-                    <!-- <p class="mt-8">
-                      For more information click on the button below and you will be directed to our About page. 
-                    </p> -->
-
-                    <!-- <v-btn
-                      @click="onAbout"
-                      variant="outlined"
-                    >
-                      About
-                    </v-btn> -->
                   </v-responsive>
-                <!-- </v-col> -->
 
                 <v-img
                   max-width="600"
@@ -130,181 +113,13 @@
     data: () => ({
       drawer: false,
       group: null,
-      searchTerm: "",
-      listItems: [
-        {
-          category: "Sire",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Dam",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Dam Sire",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "2nd Dam",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Maneuver Scores",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "LTE",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "PE",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Show",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Class",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Level",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Open vs Non Pro",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Age",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Place",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Money",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Breeder",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Owner",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Rider",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Draw",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Back Number",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "On Dirt",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Finalist",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Notes",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "NRHA",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Date of Show/Class",
-          checked: false,
-          hasInput: false
-        },
-        {
-          category: "Schooling",
-          checked: false,
-          hasInput: false
-        }
-      ],
-      // categories: [
-      //   "Sire",
-      //   "Dam",
-      //   "Dam Sire",
-      //   "2nd Dam",
-      //   "LTE",
-      //   "PE",
-      //   "Show",
-      //   "Class",
-      //   "Level",
-      //   "Open vs Non Pro",
-      //   "Age",
-      //   "Place",
-      //   "Money",
-      //   "Breeder",
-      //   "Owner",
-      //   "Rider",
-      //   "Draw",
-      //   "Back Number",
-      //   "On Dirt",
-      //   "Finalist",
-      //   "Maneuver Scores",
-      //   "Notes",
-      //   "NRHA",
-      //   "Date of Show/Class",
-      //   "Schooling"
-      // ],
       categoriesCopy: [],
       selectedCategories: []
     }),
 
-  // mounted() {
-  //   this.categoriesCopy = [...this.categories];
-  // },
-
   computed: {},
 
   methods: {
-    searchCategories(e) {
-      if (!this.searchTerm) {
-        this.categories = this.categoriesCopy;
-      }
-
-      this.categories = this.categoriesCopy.filter((category) => {
-        return category.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-      });
-    },
     goToResult(){
         this.$router.push('/result');
     }, 
