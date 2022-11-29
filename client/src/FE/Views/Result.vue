@@ -392,21 +392,23 @@
     },
 
     onCategSearch() {
-      for (let i in this.listItems){
-        console.log(this.inputValue[i])
-        const categValue = this.inputValue[i]
-        axios({
+      // for (let i in this.listItems){
+      //   console.log(this.inputValue[i])
+      //   let categValue[i] = this.inputValue[i]
+      //   // values {
+      //     name = this.inputValue[0]
+
+      // }
+      axios({
         url: 'https://bmwphd-be.herokuapp.com/horses/search',
-        method: 'PUT',
+        method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },
-        params:{
-          name: categValue,
-          sire: categValue,
-          dam: categValue,
-          sire2: categValue,
-          dam2: categValue,
+        data:{
+          name: this.inputValue[0],
+          sire1: this.inputValue[1],
+
         }
       }).then((res) => {
         this.horseSearch = res.data.data
@@ -414,7 +416,6 @@
       },(error) => {
         console.log(error);
       });
-      }
     }
   },
 
