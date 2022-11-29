@@ -7,17 +7,11 @@
         dark
       >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>BMWPHD</v-toolbar-title>
+      <v-toolbar-title>
+        <v-btn @click="onHome">BMWPHD</v-btn>
+      </v-toolbar-title>
       
       <v-spacer></v-spacer>
-
-      <v-tooltip text="Go Home" location="bottom">
-        <template v-slot:activator="{ props }">
-          <v-btn icon @click="onHome" v-bind="props">
-            <v-icon>mdi-home-outline</v-icon>
-          </v-btn>
-        </template>
-      </v-tooltip>
       
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
@@ -65,27 +59,19 @@
         <v-sheet class="py-16">
           <section id="filter">
             <v-container>
-              <v-row justify="space-between">
-                  <v-responsive width="350">
-                    <h2 class="text-h2">
+                  <v-responsive class="border pa-4">
+                    <h2 class="text-h2" style="text-align:center">
                       Welcome to BMW Performance Horse Database
                     </h2>
-                    <p class="mt-8">
+                    <p class="mt-8" style="text-align:center">
                       BMW Quarter Horses breeds and raises prospects for the reining and reined cowhorse disciplines with a focus on pedigree, conformation, a good mind, and soundness. 
-                      For more information click on the button below and you will be directed to our About page. <v-btn
-                      @click="onAbout"
-                      variant="tonal"
-                    >
-                      About
-                    </v-btn>
+                      Click <a href="about" style="color:black">here</a>
+                      for more information.
                     </p>
                   </v-responsive>
-
-                <v-img
-                  max-width="600"
-                  src="../client/src/assets/BMWPHD.png"
-                />
-              </v-row>
+                  <v-responsive class="border pa-4" >
+                    <v-img width="600" src="../client/src/assets/BMWPHD.png" class="center" />
+                  </v-responsive>
             </v-container>
           </section>
         </v-sheet>
@@ -106,7 +92,6 @@
 <script>
   import {useRouter} from 'vue-router'
   const router = useRouter()
-
 
   export default { 
     name: 'App',
@@ -145,5 +130,11 @@
 <style setup>
 .v-tooltip__content {
   pointer-events: initial;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 </style>
