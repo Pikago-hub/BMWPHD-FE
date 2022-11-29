@@ -6,18 +6,12 @@
         dark
       >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>BMWPHD</v-toolbar-title>
+      <v-toolbar-title>
+        <v-btn @click="onHome">BMWPHD</v-btn>
+      </v-toolbar-title>
       
       <v-spacer></v-spacer>
 
-      <v-tooltip text="Go Home" location="bottom">
-        <template v-slot:activator="{ props }">
-          <v-btn icon @click="onHome" v-bind="props">
-            <v-icon>mdi-home-outline</v-icon>
-          </v-btn>
-        </template>
-      </v-tooltip>
-      
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn icon @click="onLogin" v-bind="props">
