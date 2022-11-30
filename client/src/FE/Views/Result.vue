@@ -46,7 +46,7 @@
           <v-list-item>
             <template v-slot:default="{ active }">
               <v-list-item-content v-for="(item,index) in listItems" :key="index" :label="item.category">
-                <v-text-field v-if="item.hasInput" :label="`Enter ${item.category}`" v-model="inputValue[index]"  @keyup.enter="onCategSearch"></v-text-field>
+                <v-text-field class="upperCase" v-if="item.hasInput" :label="`Enter ${item.category}`" v-model="inputValue[index]" @keyup.enter="onCategSearch"></v-text-field>
               </v-list-item-content>
               <v-list-item-action v-for="item in listItems">
                 <v-checkbox v-model="item.hasInput" :input-value="active" :label="item.category"></v-checkbox>
@@ -145,26 +145,24 @@
       group: null,
       horseSearch:[],
       newItem: [],
-      selected: ['Name'],
       inputValue:[],
+      selected: ['Name'],
+      value: '',
       listItems: [
         {
           category: "Name",
           checked: true,
           hasInput: true,
-          inputValue:'',
         },
         {
           category: "Sire",
           checked: false,
           hasInput: false,
-          inputValue:'',
         },
         {
           category: "Dam",
           checked: false,
           hasInput: false,
-          inputValue:'',
         },
         {
           category: "Dam Sire",
@@ -307,9 +305,8 @@
       ],
     }
 },
-
-  computed: {
     
+  computed: {
   },
 
   mounted() {
@@ -364,9 +361,8 @@
     },
 
 
-
     onSearch(){
-      const value = this.$refs.getValue.value;
+      const value = this.$refs.getValue.value.toUpperCase();
       console.log(this.$refs.getValue.value);
       axios({
         url: 'https://bmwphd-be.herokuapp.com/horses/search',
@@ -386,13 +382,21 @@
     },
 
     onCategSearch() {
-      // for (let i in this.listItems){
-      //   console.log(this.inputValue[i])
-      //   let categValue[i] = this.inputValue[i]
-      //   // values {
-      //     name = this.inputValue[0]
-
-      // }
+      if (this.inputValue[0] != null){
+        this.inputValue[0] = this.inputValue[0].toUpperCase()
+      }
+      if(this.inputValue[1] != null){
+        this.inputValue[1] = this.inputValue[1].toUpperCase()
+      }
+      if(this.inputValue[2] != null){
+        this.inputValue[2] = this.inputValue[2].toUpperCase()
+      }
+      if(this.inputValue[3] != null){
+        this.inputValue[3] = this.inputValue[3].toUpperCase()
+      }
+      if(this.inputValue[4] != null){
+        this.inputValue[4] = this.inputValue[4].toUpperCase()
+      }
       axios({
         url: 'https://bmwphd-be.herokuapp.com/horses/search',
         method: 'post',
@@ -402,7 +406,9 @@
         data:{
           name: this.inputValue[0],
           sire1: this.inputValue[1],
-
+          dam1: this.inputValue[2],
+          sire2: this.inputValue[3],
+          dam2: this.inputValue[4],
         }
       }).then((res) => {
         this.horseSearch = res.data.data
@@ -420,4 +426,8 @@
 .v-tooltip__content {
   pointer-events: initial;
 }
+.upperCase{
+  text-transform: uppercase;
+}
+
 </style>
