@@ -382,20 +382,27 @@
     },
 
     onCategSearch() {
-      if (this.inputValue[0] != null){
-        this.inputValue[0] = this.inputValue[0].toUpperCase()
-      }
-      if(this.inputValue[1] != null){
-        this.inputValue[1] = this.inputValue[1].toUpperCase()
-      }
-      if(this.inputValue[2] != null){
-        this.inputValue[2] = this.inputValue[2].toUpperCase()
-      }
-      if(this.inputValue[3] != null){
-        this.inputValue[3] = this.inputValue[3].toUpperCase()
-      }
-      if(this.inputValue[4] != null){
-        this.inputValue[4] = this.inputValue[4].toUpperCase()
+      // if (this.inputValue[0] != null){
+      //   this.inputValue[0] = this.inputValue[0].toUpperCase()
+      // }
+      // if(this.inputValue[1] != null){
+      //   this.inputValue[1] = this.inputValue[1].toUpperCase()
+      // }
+      // if(this.inputValue[2] != null){
+      //   this.inputValue[2] = this.inputValue[2].toUpperCase()
+      // }
+      // if(this.inputValue[3] != null){
+      //   this.inputValue[3] = this.inputValue[3].toUpperCase()
+      // }
+      // if(this.inputValue[4] != null){
+      //   this.inputValue[4] = this.inputValue[4].toUpperCase()
+      // }
+      
+      let i = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,,22,23,24,25,26]
+      for(i = 0; i < this.inputValue.length; i++){
+        if(this.inputValue[i] != null) {
+          this.inputValue[i] = this.inputValue[i].toUpperCase()
+        }
       }
       axios({
         url: 'https://bmwphd-be.herokuapp.com/horses/search',
