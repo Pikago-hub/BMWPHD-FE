@@ -41,7 +41,13 @@
 
     <v-navigation-drawer app clipped >
      <v-list flat subheader three-line>
-      <v-subheader>Search Categories</v-subheader>
+
+      <v-banner color="info" height="50">
+            <v-banner-text class="text-h6">
+              Categories
+            </v-banner-text>
+        </v-banner>
+
         <v-list-item-group multiple active-class="">
           <v-list-item>
             <template v-slot:default="{ active }">
