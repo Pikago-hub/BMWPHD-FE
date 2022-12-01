@@ -88,22 +88,19 @@
           <thead>
             <tr>
               <th class="text-left" scope>
-              ID
-            </th>
-              <th class="text-left" scope>
               Name
             </th>
             <th class="text-left" scope>
-              Sire 1
+              Sire 
             </th>
             <th class="text-left" scope>
-              Dam 1
+              Dam 
             </th>
             <th class="text-left" scope>
-              Sire 2
+              Dam Sire 
             </th>
             <th class="text-left" scope>
-              Dam 2
+              2nd Dam 
             </th>
             <th class="text-left" scope>
               Maneuver Scores
@@ -113,7 +110,6 @@
 
           <tbody>
             <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">       
-              <td>{{ horse.id}}</td>
               <td>{{ horse.name}}</td>
               <td>{{ horse.sire1}}</td>
               <td>{{ horse.dam1}}</td>
