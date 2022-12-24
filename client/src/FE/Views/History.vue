@@ -65,7 +65,7 @@
 
 
   export default { 
-    name: 'App',
+    name: 'History',
     data: () => ({
       drawer: false,
       group: null,

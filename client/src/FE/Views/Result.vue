@@ -1,46 +1,10 @@
 <template>
   <v-app>
-    <v-app-bar app image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
-      <v-app-bar-nav-icon variant="icon" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <v-btn variant="text" @click="onHome">BMWPHD</v-btn>
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-tooltip text="Login" location="bottom">
-        <template v-slot:activator="{ props }">
-          <v-btn variant="icon" @click="onLogin" v-bind="props">
-            <v-icon>mdi-login-variant</v-icon>
-          </v-btn>
-        </template>
-      </v-tooltip>
-
-      <v-menu leftbottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn variant="icon" v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-      </v-menu>
-    </v-app-bar>
-
-
-    <v-navigation-drawer v-model="drawer" image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" permanent
-      theme="dark">
-      <v-list nav>
-        <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
-        <v-list-item prepend-icon="mdi-magnify" title="Search" link @click="goToResult"></v-list-item>
-        <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
-        <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
-        <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-navigation-drawer color="#c9e0ec" v-model="categoryDrawer" permanent>
+    <v-spacer></v-spacer>
+    <v-navigation-drawer location="right" color="#c9e0ec" v-model="categoryDrawer">
       <v-list flat subheader three-line>
 
-        <v-banner height="50" lines="one" style="background-color: #c9e0ec;">
+        <v-banner height="65" lines="one" style="background-color: #c9e0ec;">
           <v-banner-text class="text-h6">
             Categories
           </v-banner-text>
@@ -65,13 +29,14 @@
     <v-main>
       <v-card class="mx-auto my-10" max-width="744" varaint="outlined" style="border-radius: 10px;">
         <v-toolbar color="#c9e0ec">
-          <v-text-field label="Enter Search Term" placeholder="Horse Name" variant="regular" ref="getValue"
+          <v-text-field label="Enter Search Term" placeholder="Horse Name" variant="plain" ref="getValue"
             @keyup.enter="onSearch">
           </v-text-field>
           <v-btn variant="icon" @click="onSearch">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
-          <v-btn color="#c9e0ec" @click="onFindAll">Find All Horses</v-btn>
+          <v-btn cvariant="outlined" olor="#c9e0ec" @click="onFindAll">Find All Horses</v-btn>
+          <v-btn cvariant="outlined" olor="#c9e0ec" @click="categoryDrawer = !categoryDrawer">CategorySearch</v-btn>
         </v-toolbar>
       </v-card>
 
@@ -116,17 +81,6 @@
       </v-card>
 
     </v-main>
-    <v-container>
-    </v-container>
-    <v-footer absolute inset app height="60" width="auto" color="#c9e0ec">
-      <v-container>
-        <v-row justify="center" no-gutters>
-          <v-col class="text-center mt-4" cols="12">
-            <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-footer>
   </v-app>
 </template>
   
@@ -136,12 +90,12 @@ const router = useRouter()
 import axios from "axios";
 
 export default {
-  name: 'App',
+  name: 'Result',
   props: ["itemDetails"],
   data: () => {
     return {
       drawer: false,
-      categoryDrawer: true,
+      categoryDrawer: false,
       group: null,
       horseSearch: [],
       newItem: [],
@@ -398,7 +352,7 @@ export default {
       //   this.inputValue[4] = this.inputValue[4].toUpperCase()
       // }
 
-      let i = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, , 22, 23, 24, 25, 26]
+      let i = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
       for (i = 0; i < this.inputValue.length; i++) {
         if (this.inputValue[i] != null) {
           this.inputValue[i] = this.inputValue[i].toUpperCase()

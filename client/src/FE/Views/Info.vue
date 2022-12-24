@@ -116,7 +116,7 @@
     
     
       export default { 
-        name: 'App',
+        name: 'Info',
         data: () => ({
           drawer: false,
           group: null,

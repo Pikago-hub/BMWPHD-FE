@@ -116,7 +116,7 @@ const router = useRouter()
 
 
 export default {
-  name: 'App',
+  name: 'About',
   data: () => ({
     drawer: false,
     group: null,

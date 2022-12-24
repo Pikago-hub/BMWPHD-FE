@@ -1,12 +1,21 @@
 <template>
-    <v-app>
-      <v-main>
-        <router-view></router-view>
-      </v-main>
-    </v-app>
+  <v-app>
+    <NavBar location="top" fixed/>
+    <Footer location="bottom"/>
+</v-app>
   </template>
   
-  <script setup>
+  <script>
+  import NavBar from './FE/Views/components/NavBar.vue';
+  import Footer from './FE/Views/components/Footer.vue';
+
+  export default {
+  name: 'App',
+  components: {
+      NavBar,
+      Footer,
+  },
+}
   </script>
   
   
