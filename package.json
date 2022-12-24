@@ -33,7 +33,7 @@
     "vite-plugin-vuetify": "^1.0.0-alpha.12"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": "18.12.1",
+    "npm": "8.19.2"
   }
 }
