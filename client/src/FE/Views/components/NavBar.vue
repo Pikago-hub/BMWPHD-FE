@@ -1,12 +1,11 @@
 <template>
   <v-app>
+
     <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
       <v-app-bar-nav-icon variant="icon" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <v-btn size="large" variant="text" @click="onHome">BMWPHD</v-btn>
       </v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
@@ -25,6 +24,7 @@
       </v-menu>
     </v-app-bar>
 
+
     <v-navigation-drawer v-model="drawer" location="left" image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" permanent
       theme="dark">
       <v-list nav>
@@ -35,7 +35,6 @@
         <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <router-view></router-view>
   </v-app>
 </template>
@@ -84,7 +83,7 @@ export default {
 }
 </script>
 
-<style setup>
+<style>
 .v-tooltip__content {
   pointer-events: initial;
 }
@@ -94,5 +93,16 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
 }
 </style>

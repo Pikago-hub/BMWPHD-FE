@@ -6,7 +6,7 @@
           <!-- <v-btn @click="goToResult" variant="tonal">Start Your Search Here</v-btn> -->
         </v-banner-text>
         <template v-slot:actions>
-          <v-btn @click="goToResult"> Start Search </v-btn>
+          <v-btn variant="tonal" @click="goToResult"> Start Search </v-btn>
         </template>
       </v-banner>
 

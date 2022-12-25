@@ -1,6 +1,5 @@
 <template>
-  <v-app>
-    <v-spacer></v-spacer>
+
     <v-navigation-drawer location="right" color="#c9e0ec" v-model="categoryDrawer">
       <v-list flat subheader three-line>
 
@@ -13,7 +12,7 @@
           <v-list-item width="85%" margin-bottom="10px">
             <template v-slot:default="{ active }">
               <v-list-item-content v-for="(item, index) in listItems" :key="index" :label="item.category">
-                <v-text-field color="#12518e" variant="underlined" v-if="item.hasInput"
+                <v-text-field color="#12518e" variant="underlined" hint="key word search" prepend-icon="mdi-magnify" v-if="item.hasInput" 
                   :label="`Enter ${item.category}`" v-model="inputValue[index]"
                   @keyup.enter="onCategSearch"></v-text-field>
               </v-list-item-content>
@@ -29,14 +28,14 @@
     <v-main>
       <v-card class="mx-auto my-10" max-width="744" varaint="outlined" style="border-radius: 10px;">
         <v-toolbar color="#c9e0ec">
-          <v-text-field label="Enter Search Term" placeholder="Horse Name" variant="plain" ref="getValue"
+          <v-text-field placeholder="Enter Horse Name to Start Searching" variant="plain" ref="getValue"
             @keyup.enter="onSearch">
           </v-text-field>
-          <v-btn variant="icon" @click="onSearch">
+          <v-btn variant="tonal" rounded @click="onSearch">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
-          <v-btn cvariant="outlined" olor="#c9e0ec" @click="onFindAll">Find All Horses</v-btn>
-          <v-btn cvariant="outlined" olor="#c9e0ec" @click="categoryDrawer = !categoryDrawer">CategorySearch</v-btn>
+          <v-btn variant="tonal" color="#212121" @click="onFindAll">Find All Horses</v-btn>
+          <v-btn variant="tonal" prepend-icon="mdi-clipboard-text-search-outline" rounded color="#0D47A1" @click="categoryDrawer = !categoryDrawer">CategorySearch</v-btn>
         </v-toolbar>
       </v-card>
 
@@ -81,7 +80,7 @@
       </v-card>
 
     </v-main>
-  </v-app>
+
 </template>
   
 <script>
@@ -336,22 +335,6 @@ export default {
     },
 
     onCategSearch() {
-      // if (this.inputValue[0] != null){
-      //   this.inputValue[0] = this.inputValue[0].toUpperCase()
-      // }
-      // if(this.inputValue[1] != null){
-      //   this.inputValue[1] = this.inputValue[1].toUpperCase()
-      // }
-      // if(this.inputValue[2] != null){
-      //   this.inputValue[2] = this.inputValue[2].toUpperCase()
-      // }
-      // if(this.inputValue[3] != null){
-      //   this.inputValue[3] = this.inputValue[3].toUpperCase()
-      // }
-      // if(this.inputValue[4] != null){
-      //   this.inputValue[4] = this.inputValue[4].toUpperCase()
-      // }
-
       let i = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
       for (i = 0; i < this.inputValue.length; i++) {
         if (this.inputValue[i] != null) {
