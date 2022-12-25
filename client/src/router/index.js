@@ -1,11 +1,10 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from '../FE/Home.vue'
+import Home from '../FE/Views/Home.vue'
 import About from '../FE/Views/About.vue'
 import History from '../FE/Views/History.vue'
 import Info from '../FE/Views/Info.vue'
 import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
-import dataTable from '../FE/Views/components/datatable.vue'
 
 const routes = [
     {
@@ -43,12 +42,6 @@ const routes = [
         name: 'about',
         meta: {title: "about"},
         component: About
-    },
-    {
-        path: '/datatable',
-        name: 'datatable',
-        meta: {title: "datatable"},
-        component: dataTable
     },
     {
         path: '/:pathMatch(.*)*',

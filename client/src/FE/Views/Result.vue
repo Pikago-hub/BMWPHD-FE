@@ -41,7 +41,7 @@
 
       <v-card elevation="2" class="mx-auto" max-width="1000" max-height="650px" color="#c9e0ec">
         <v-container fluid style="height: 100vh;">
-          <v-table fixed-header height="600px" theme="dark">
+          <v-table fixed-header="true" height="600px" theme="dark" density="comfortable">
             <thead>
               <tr>
                 <th class="text-left" scope>
@@ -62,11 +62,26 @@
                 <th class="text-left" scope>
                   Maneuver Scores
                 </th>
+                <th class="text-left" scope>
+                  LTE
+                </th>
+                <th class="text-left" scope>
+                  PE
+                </th>
+                <th class="text-left" scope>
+                  Show
+                </th>
+                <th class="text-left" scope>
+                  Class
+                </th>
+                <th class="text-left" scope>
+                  Level
+                </th>  
               </tr>
             </thead>
 
             <tbody>
-              <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
+              <tr class="table-row" v-for="horse of horseSearch" :key="horse.id" >
                 <td>{{ horse.name }}</td>
                 <td>{{ horse.sire1 }}</td>
                 <td>{{ horse.dam1 }}</td>

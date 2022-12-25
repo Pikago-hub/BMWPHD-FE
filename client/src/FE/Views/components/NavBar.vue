@@ -2,25 +2,34 @@
   <v-app>
 
     <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
-      <v-app-bar-nav-icon variant="icon" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon variant="outlined" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <v-btn size="large" variant="text" @click="onHome">BMWPHD</v-btn>
       </v-toolbar-title>
 
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
-          <v-btn size="large" variant="icon" @click="onLogin" v-bind="props">
+          <v-btn size="large"  @click="onLogin" v-bind="props">
             <v-icon>mdi-login-variant</v-icon>
           </v-btn>
         </template>
-      </v-tooltip>
+      </v-tooltip> 
 
-      <v-menu leftbottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn variant="icon" v-bind="attrs" v-on="on">
+      <v-menu leffbottom>
+        <template v-slot:activator="{ props }">
+          <v-btn variant="outlined" v-bind="props" v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
+        <v-list bg-color="#1976D2">
+        <v-list-item
+          v-for="(dotItem, index) in dotItems"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title>{{ dotItem.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
       </v-menu>
     </v-app-bar>
 
@@ -48,6 +57,12 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
+    dotItems: [
+        { title: 'Implementing 1' },
+        { title: 'Implementing 2' },
+        { title: 'Implementing 3' },
+        { title: 'Implementing 4' },
+      ],
   }),
 
   watch: {
