@@ -2,7 +2,6 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from '../FE/Views/Home.vue'
 import About from '../FE/Views/About.vue'
 import History from '../FE/Views/History.vue'
-import Info from '../FE/Views/Info.vue'
 import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
 
@@ -24,12 +23,6 @@ const routes = [
         name: 'login',
         meta: {title: "Login Page"},
         component: Login
-    },
-    {
-        path: '/info',
-        name: 'info',
-        meta: {title: "Information"},
-        component: Info
     },
     {
         path: '/history',
