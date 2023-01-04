@@ -1,20 +1,10 @@
 <template>
-  <v-app>
     <v-main>
      
 
     </v-main> 
 
-    <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
-      <v-container>
-        <v-row justify="center" no-gutters >
-          <v-col class="text-center mt-4" cols="12">
-            <strong>{{ new Date().getFullYear() }} — BMWPHD</strong>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-footer>
-  </v-app>
+  
 </template>
   
 <script>
