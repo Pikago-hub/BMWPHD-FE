@@ -1,51 +1,9 @@
 <template>
   <v-app>
-    <!-- <div> -->
-      <v-app-bar color="blue accent-4" dense dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <v-toolbar-title>
-          <v-btn @click="onHome">BMWPHD</v-btn>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-      
-      
-      <v-tooltip text="Login" location="bottom">
-          <template v-slot:activator="{ props }">
-              <v-btn icon @click="onLogin" v-bind="props">
-                  <v-icon>mdi-login-variant</v-icon>
-              </v-btn>
-          </template>
-      </v-tooltip>
-      
-        <v-menu leftbottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-        </v-menu>
-      </v-app-bar>
-
-      <v-navigation-drawer v-model="drawer" absolute temporary>
-
-          <v-list nav>
-          <v-list-item prepend-icon="mdi-home" title="Home" link @click="onHome"></v-list-item>
-          <v-list-item prepend-icon="mdi-magnify" title="Search" link @click="goToResult"></v-list-item>
-          <v-list-item prepend-icon="mdi-account" title="Manage" link @click="onManage"></v-list-item>
-          <v-list-item prepend-icon="mdi-file-document" title="History" link @click="onHistory"></v-list-item>
-          <v-list-item prepend-icon="mdi-horseshoe" title="About Us" link @click="onAbout"></v-list-item>
-          </v-list>
-      
-      </v-navigation-drawer>
-
-    <!-- </div> -->
-
     <v-main>
      
 
-
-       
-      </v-main> 
+    </v-main> 
 
     <v-footer absolute inset app height="100" width="auto" class="bg-grey-lighten-1" >
       <v-container>

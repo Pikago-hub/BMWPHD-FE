@@ -1,10 +1,5 @@
 <template>
    <div class="py-10 mt-16">
-      <!-- <v-img
-        class="mx-auto mb-10"
-        max-width="228"
-        src="../client/src/assets/BMWPHD.png"
-      ></v-img> -->
   
       <v-card
         class="mx-auto pa-12 pb-8"
