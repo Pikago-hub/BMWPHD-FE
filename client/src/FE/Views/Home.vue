@@ -54,9 +54,6 @@ export default {
 </script>
 
 <style setup>
-.v-tooltip__content {
-  pointer-events: initial;
-}
 
 .center {
   display: block;

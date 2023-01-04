@@ -66,15 +66,19 @@
                   <p class="mt-8">
                     BMWPHD can be contacted through the following:
                   </p>
-                  <p class="text-success mt-3">
+                  <p>
                     Phone: 
-                  <a class="text-success mt-3" :href="`tel:9403571998`">
-                    (940) 357-1998
-                  </a>
+                    <v-tooltip text="Copy to Clipboard" >
+                      <template v-slot:activator="{ props }">
+                      <a v-bind="props" id="phone" @click="copyText()" :href="`tel:9403571998`">
+                        (940) 357-1998
+                      </a>
+                      </template>
+                    </v-tooltip> 
                 </p>
-                  <p class="text-success mt-3">
+                  <p>
                     Email:
-                    <a class="text-success mt-3" :href="`mailto:bmw@cedartopcapital.com`">
+                    <a :href="`mailto:bmw@cedartopcapital.com`">
                       bmw@cedartopcapital.com
                     </a>
                   </p>
@@ -113,7 +117,6 @@
 <script>
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
 
 export default {
   name: 'About',
@@ -160,6 +163,13 @@ export default {
   computed: {},
 
   methods: {
+
+    copyText() {
+      var copyText = document.getElementById("phone").textContent;
+      navigator.clipboard.writeText(copyText);
+      console.log(copyText);
+    },
+
     searchCategories(e) {
       if (!this.searchTerm) {
         this.categories = this.categoriesCopy;
@@ -190,3 +200,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-tooltip__content {
+  pointer-events: initial;
+} 
+</style>
