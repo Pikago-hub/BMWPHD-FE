@@ -40,43 +40,88 @@
       </v-card>
 
       <v-card elevation="2" class="mx-auto" max-width="1000" max-height="650px" color="#c9e0ec">
-        <v-container fluid style="height: 100vh;">
-          <v-table fixed-header="true" height="600px" theme="dark" density="comfortable">
+        <v-container fluid style="height: 60vh;">
+          <v-table fixed-header="true" height="400px" theme="dark" density="comfortable">
             <thead>
               <tr>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Name
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Sire
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Dam
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Dam Sire
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   2nd Dam
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Maneuver Scores
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   LTE
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   PE
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Show
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Class
                 </th>
-                <th class="text-left" scope>
+                <th class="text-left" width="2000px" scope>
                   Level
                 </th>  
+                <th class="text-left" width="2000px" scope>
+                  Open vs Non Pro
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Age
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Place
+                </th> 
+                <th class="text-left" width="2000px" scope>
+                  Money
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Breeder 
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Owner 
+                </th>   
+                <th class="text-left" width="2000px" scope>
+                  Rider
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Draw
+                </th> 
+                <th class="text-left" width="2000px" scope>
+                  Back Number
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  On Dirt 
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Finalist
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Notes
+                </th> 
+                <th class="text-left" width="2000px" scope>
+                  NRHA
+                </th> 
+                <th class="text-left" width="2000px" scope>
+                  Date of Show/Class
+                </th>  
+                <th class="text-left" width="2000px" scope>
+                  Schooling
+                </th>    
               </tr>
             </thead>
 
