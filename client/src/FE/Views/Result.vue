@@ -41,7 +41,7 @@
 
       <v-card elevation="2" class="mx-auto" max-width="1000" max-height="650px" color="#c9e0ec">
         <v-container fluid style="height: 60vh;">
-          <v-table fixed-header="true" height="400px" theme="dark" density="comfortable">
+          <v-table fixed-header="true" height="445px" theme="dark" density="comfortable">
             <thead>
               <tr>
                 <th class="text-left" width="2000px" scope>
