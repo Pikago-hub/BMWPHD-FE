@@ -81,7 +81,7 @@ export default {
       this.$router.push('/home');
     },
     onManage() {
-      this.$router.push('/home');
+      this.$router.push('/manageusers');
     },
     onLogin() {
       this.$router.push('/login');

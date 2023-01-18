@@ -3,6 +3,7 @@ import Home from '../FE/Views/Home.vue'
 import About from '../FE/Views/About.vue'
 import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
+import ManageUsers from '../FE/Views/ManageUsers.vue'
 
 const routes = [
     {
@@ -28,6 +29,12 @@ const routes = [
         name: 'about',
         meta: {title: "about"},
         component: About
+    },
+    {
+        path: '/manageusers',
+        name: 'manageusers',
+        meta: {title: "manageusers"},
+        component: ManageUsers
     },
     {
         path: '/:pathMatch(.*)*',
