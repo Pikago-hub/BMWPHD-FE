@@ -2,8 +2,8 @@
   <v-app>
     <NavBar location="top"/>
     <Footer location="bottom"/>
-</v-app>
-  </template>
+  </v-app>
+</template>
   
   <script>
   import NavBar from './FE/Views/components/NavBar.vue';

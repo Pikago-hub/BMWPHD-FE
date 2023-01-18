@@ -26,16 +26,17 @@
                   <p class="mt-8">
                     BMWPHD can be contacted through the following:
                   </p>
+                
                   <p>
                     Phone: 
                     <v-tooltip text="Copy to Clipboard" >
                       <template v-slot:activator="{ props }">
-                      <a v-bind="props" id="phone" @click="copyText()" :href="`tel:9403571998`">
-                        (940) 357-1998
-                      </a>
-                      </template>
+                      <a v-bind="props" id="phone" @click="copyText()" href="#">(940) 357-1998</a>
+                    </template>
                     </v-tooltip>
-                </p>
+                  </p>
+                 
+            
                   <p>
                     Email:
                     <a :href="`mailto:bmw@cedartopcapital.com`">
@@ -138,9 +139,6 @@ export default {
     onManage() {
       this.$router.push('/home');
     },
-    onHistory() {
-      this.$router.push('/history');
-    },
     onLogin() {
       this.$router.push('/login');
     },
@@ -155,4 +153,9 @@ export default {
 .v-tooltip__content {
   pointer-events: initial;
 } 
+
+a:link, a:visited {
+    color: blue;
+}
+
 </style>
