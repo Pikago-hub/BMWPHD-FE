@@ -3,7 +3,6 @@
       <v-banner lines="one" color="warning" icon="mdi-horse">
         <v-banner-text>
           Looking for horse status, recent matches, performance, data, etc? Check out our search engine
-          <!-- <v-btn @click="goToResult" variant="tonal">Start Your Search Here</v-btn> -->
         </v-banner-text>
         <template v-slot:actions>
           <v-btn variant="tonal" @click="goToResult"> Start Search </v-btn>
@@ -13,7 +12,7 @@
       <v-sheet class="py-16">
         <section id="filter">
           <v-card class="mx-auto"
-    width="75%" color="#c9e0ec" elevation="3" style="border-radius: 10px;">
+            width="75%" color="#c9e0ec" elevation="3" style="border-radius: 10px;">
            
               <h2 class="text-h3" style="text-align:center">
                 Welcome to BMW Performance Horse Database
