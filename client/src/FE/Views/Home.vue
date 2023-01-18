@@ -39,8 +39,6 @@
 export default {
   name: 'Home',
   data: () => ({
-    drawer: false,
-    group: null,
   }),
 
   computed: {},
@@ -54,7 +52,6 @@ export default {
 </script>
 
 <style setup>
-
 .center {
   display: block;
   margin-left: auto;

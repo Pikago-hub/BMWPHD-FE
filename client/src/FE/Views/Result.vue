@@ -144,8 +144,6 @@
 </template>
   
 <script>
-import { useRouter } from 'vue-router'
-const router = useRouter()
 import axios from "axios";
 
 export default {
@@ -327,27 +325,7 @@ export default {
   },
 
   methods: {
-    onReturnHome() {
-      this.$router.push('/home');
-    },
-    goToResult() {
-      this.$router.push('/result');
-    },
-    onHome() {
-      this.$router.push('/home');
-    },
-    onManage() {
-      this.$router.push('/home');
-    },
-    onHistory() {
-      this.$router.push('/history');
-    },
-    onLogin() {
-      this.$router.push('/login');
-    },
-    onAbout() {
-      this.$router.push('/about');
-    },
+    
     onSire() {
       let checkBox = document.getElementById("Sire");
       console.log(checkBox);
@@ -372,7 +350,6 @@ export default {
         console.error(error);
       }
     },
-
 
     onSearch() {
       const value = this.$refs.getValue.value.toUpperCase();
