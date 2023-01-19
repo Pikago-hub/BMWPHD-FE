@@ -47,7 +47,7 @@
     },
     methods: {
     onHome() {
-      this.$router.push('/home');
+      this.$router.push('/');
     },
   }, 
   }

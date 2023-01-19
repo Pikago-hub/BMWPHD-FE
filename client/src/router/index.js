@@ -8,16 +8,11 @@ import PageNotFound from '../FE/Views/PageNotFound.vue'
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
         name: 'Home',
         meta: {title: "Home"},
         component: Home
     },
-    {
-        path: '/',
-        name: 'Home2',
-        component: Home
-    }
     {
         path: '/result',
         name: 'result',

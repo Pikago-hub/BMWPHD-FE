@@ -72,13 +72,13 @@ export default {
 
   methods: {
     onReturnHome() {
-      this.$router.push('/home');
+      this.$router.push('/');
     },
     goToResult() {
       this.$router.push('/result');
     },
     onHome() {
-      this.$router.push('/home');
+      this.$router.push('/');
     },
     onManage() {
       this.$router.push('/manageusers');
