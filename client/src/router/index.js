@@ -4,10 +4,11 @@ import About from '../FE/Views/About.vue'
 import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
 import ManageUsers from '../FE/Views/ManageUsers.vue'
+import PageNotFound from '../FE/Views/PageNotFound.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/home',
         name: 'Home',
         meta: {title: "Home"},
         component: Home
@@ -36,15 +37,20 @@ const routes = [
         meta: {title: "manageusers"},
         component: ManageUsers
     },
-    {
-        path: '/:pathMatch(.*)*',
-        component: Home,
-      },
+    {   path: '/:pathMatch(.*)*', 
+        component: PageNotFound
+        // redirect:'/Page404'
+    }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes
+    // routes:[
+    //     ...common,
+    //     ...asnycRouters,
+    //     {path:'/:pathMatch(.*)*', redirect:'/404'}
+    // ]
   });
   
   export default router;
