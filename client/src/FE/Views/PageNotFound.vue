@@ -3,7 +3,7 @@
 
     <v-sheet class="py-16">
       <section id="filter">
-        <v-card class="mx-auto"
+        <v-card class="mx-auto my-16"
           width="60%" color="#c9e0ec" elevation="3" style="border-radius: 10px;">
             <h2 class="text-h3 mt-5" style="text-align:center">
               OOPS!
@@ -30,12 +30,10 @@
               </v-responsive>
             </v-col>
 
-
           <v-img class="mr-5 mb-5 mt-5"  src="../client/src/assets/404.png" />
           </v-row>
           </v-container>
-           
-
+          
         </v-card>
       </section>
     </v-sheet>
