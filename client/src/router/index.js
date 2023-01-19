@@ -14,6 +14,11 @@ const routes = [
         component: Home
     },
     {
+        path: '/',
+        name: 'Home2',
+        component: Home
+    }
+    {
         path: '/result',
         name: 'result',
         meta: {title: "Result"},
