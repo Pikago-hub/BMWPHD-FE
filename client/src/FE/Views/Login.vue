@@ -84,7 +84,7 @@ export default {
       console.log(username + "logged in")
     },
     onSubmit() {
-      this.$router.push('/home');
+      this.$router.push('/');
     }
   },
 };
