@@ -88,6 +88,7 @@
         >
           <thead>
             <tr>
+              <th class="text-left" scope>Flag</th>
               <th class="text-left" scope>Name</th>
               <th class="text-left" scope>Sire</th>
               <th class="text-left" scope>Dam</th>
@@ -119,6 +120,43 @@
 
           <tbody>
             <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
+              <td> 
+                <v-dialog
+                  v-model="dialog"
+                  contained=true
+                  >
+                  <template v-slot:activator="{ props }">
+                    <v-btn
+                    color="white"
+                    v-bind="props"
+                    >
+                      Flag Horse
+                    </v-btn>
+                  </template>
+                  <v-card class="mx-auto" width="75%" color="white" elevation="3" style="border-radius: 10px;">
+                    <v-form ref="form" lazy-validation color="#212121">
+
+                      <v-select
+                        v-model="select"
+                        :items="items"
+                        :rules="[v => !!v || 'Item is required']"
+                        label="Which field would you like to suggest a change for?"
+                        required
+                      ></v-select>
+
+                      <v-text-field
+                        v-model="change"
+                        :counter="10"
+                        :rules="changeRules"
+                        label="Suggested Change"
+                        required
+                      ></v-text-field>
+                
+                      <v-btn color="white" block @click="dialog=false">Submit Changes for Review</v-btn>
+                    </v-form>
+                  </v-card>
+                </v-dialog>
+              </td>
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
@@ -160,6 +198,41 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
+      change: '',
+      changeRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length > 0) || 'Name must be less than 10 characters',
+      ],
+      select: null,
+      items: [
+        "Name",
+        "Sire",
+        "Dam",
+        "Dam Sire",
+        "2nd Dam",
+        "Maneuver Scores",
+        "LTE",
+        "PE",
+        "Show",
+        "Class",
+        "Level",
+        "Open vs Non Pro",
+        "Age",
+        "Place",
+        "Money",
+        "Breeder",
+        "Owner",
+        "Rider",
+        "Draw",
+        "Back Number",
+        "On Dirt",
+        "Finalist",
+        "Notes",
+        "NRHA",
+        "Date of Show/Class",
+        "Schooling"
+      ],
+      dialog: false,
       drawer: false,
       categoryDrawer: false,
       group: null,
@@ -323,6 +396,7 @@ export default {
         },
       ],
     };
+    
   },
 
   computed: {},
@@ -330,151 +404,155 @@ export default {
   mounted() {},
 
   methods: {
+    async onFindAll() {
+      this.$router.push("/result");
+      try {
+        const res = await axios
+          .get("http://localhost:3004/data", {})
+          .then((res) => (this.horseSearch = res.data.data));
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    onSearch() {
+      const value = this.$refs.getValue.value.toUpperCase();
+      console.log(this.$refs.getValue.value);
+      axios({
+        url: "https://bmwphd-be.herokuapp.com/horses/search",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          name: value,
+        },
+      }).then(
+        (res) => {
+          this.horseSearch = res.data.data;
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
+    onCategSearch() {
+      let i = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24, 25, 26,
+      ];
+      for (i = 0; i < this.inputValue.length; i++) {
+        if (this.inputValue[i] != null) {
+          this.inputValue[i] = this.inputValue[i].toUpperCase();
+        }
+      }
+      axios({
+        url: "https://bmwphd-be.herokuapp.com/horses/search",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          name: this.inputValue[0],
+          sire1: this.inputValue[1],
+          dam1: this.inputValue[2],
+          sire2: this.inputValue[3],
+          dam2: this.inputValue[4],
+          maneuver_scores: this.inputValue[5],
+          lte: this.inputValue[6],
+          pe: this.inputValue[7],
+        },
+      }).then(
+        (res) => {
+          this.horseSearch = res.data.data;
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    // openDialog() {
+    //   console.log("this happends")
+    //   this.$refs.form.reset()
+    // },
+
+    //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
     //   this.$router.push("/result");
     //   try {
-    //     const res = await axios
-    //       .get("http://localhost:3004/data", {})
-    //       .then((res) => (this.horseSearch = res.data.data));
-    //     console.log(res);
+    //     const response = await axios.get("http://localhost:3004/data");
+    //     this.horseSearch = response.data;
+    //     console.log(response);
     //   } catch (error) {
     //     console.error(error);
     //   }
     // },
 
-    // onSearch() {
-    //   const value = this.$refs.getValue.value.toUpperCase();
+    // async onSearch() {
+    //   const value = this.$refs.getValue.value;
     //   console.log(this.$refs.getValue.value);
-    //   axios({
-    //     url: "https://bmwphd-be.herokuapp.com/horses/search",
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: {
-    //       name: value,
-    //     },
-    //   }).then(
-    //     (res) => {
-    //       this.horseSearch = res.data.data;
-    //       console.log(res);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
+    //   try {
+    //     const response = await axios.get(
+    //       "http://localhost:3004/data?name=" + value
+    //     );
+    //     this.horseSearch = response.data;
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
     // },
 
-    // onCategSearch() {
+    // async onCategSearch() {
     //   let i = [
     //     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-    //     20, 21, 22, 23, 24, 25, 26,
+    //     20, 21, 22, 23, 24, 25,
     //   ];
     //   for (i = 0; i < this.inputValue.length; i++) {
-    //     if (this.inputValue[i] != null) {
-    //       this.inputValue[i] = this.inputValue[i].toUpperCase();
+    //     if (this.listItems[i].checked == true) {
+    //       this.inputValue[i] = this.inputValue[i];
     //     }
     //   }
-    //   axios({
-    //     url: "https://bmwphd-be.herokuapp.com/horses/search",
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: {
-    //       name: this.inputValue[0],
-    //       sire1: this.inputValue[1],
-    //       dam1: this.inputValue[2],
-    //       sire2: this.inputValue[3],
-    //       dam2: this.inputValue[4],
-    //       maneuver_scores: this.inputValue[5],
-    //       lte: this.inputValue[6],
-    //       pe: this.inputValue[7],
-    //     },
-    //   }).then(
-    //     (res) => {
-    //       this.horseSearch = res.data.data;
-    //       console.log(res);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
+    //   try {
+    //     const response = await axios.get("http://localhost:3004/data", {
+    //       params: {
+    //         name: this.inputValue[0],
+    //         sire1: this.inputValue[1],
+    //         dam1: this.inputValue[2],
+    //         sire2: this.inputValue[3],
+    //         dam2: this.inputValue[4],
+    //         maneuver_scores: this.inputValue[5],
+    //         lte: this.inputValue[6],
+    //         pe: this.inputValue[7],
+    //         show: this.inputValue[8],
+    //         class: this.inputValue[9],
+    //         level: this.inputValue[10],
+    //         openvsnpro: this.inputValue[11],
+    //         age: this.inputValue[12],
+    //         place: this.inputValue[13],
+    //         money: this.inputValue[14],
+    //         breeder: this.inputValue[15],
+    //         owner: this.inputValue[16],
+    //         rider: this.inputValue[17],
+    //         draw: this.inputValue[18],
+    //         back_number: this.inputValue[19],
+    //         on_dirt: this.inputValue[20],
+    //         finalist: this.inputValue[21],
+    //         notes: this.inputValue[22],
+    //         nrha: this.inputValue[23],
+    //         date_of_show_class: this.inputValue[24],
+    //         schooling: this.inputValue[25],
+    //       },
+    //     });
+    //     this.horseSearch = response.data;
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
     // },
-
-    //axios fetch from json server for presentation only. above commentted out code is for production from BE.
-    async onFindAll() {
-      this.$router.push("/result");
-      try {
-        const response = await axios.get("http://localhost:3004/data");
-        this.horseSearch = response.data;
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-
-    async onSearch() {
-      const value = this.$refs.getValue.value;
-      console.log(this.$refs.getValue.value);
-      try {
-        const response = await axios.get(
-          "http://localhost:3004/data?name=" + value
-        );
-        this.horseSearch = response.data;
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-
-    async onCategSearch() {
-      let i = [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24, 25,
-      ];
-      for (i = 0; i < this.inputValue.length; i++) {
-        if (this.listItems[i].checked == true) {
-          this.inputValue[i] = this.inputValue[i];
-        }
-      }
-      try {
-        const response = await axios.get("http://localhost:3004/data", {
-          params: {
-            name: this.inputValue[0],
-            sire1: this.inputValue[1],
-            dam1: this.inputValue[2],
-            sire2: this.inputValue[3],
-            dam2: this.inputValue[4],
-            maneuver_scores: this.inputValue[5],
-            lte: this.inputValue[6],
-            pe: this.inputValue[7],
-            show: this.inputValue[8],
-            class: this.inputValue[9],
-            level: this.inputValue[10],
-            openvsnpro: this.inputValue[11],
-            age: this.inputValue[12],
-            place: this.inputValue[13],
-            money: this.inputValue[14],
-            breeder: this.inputValue[15],
-            owner: this.inputValue[16],
-            rider: this.inputValue[17],
-            draw: this.inputValue[18],
-            back_number: this.inputValue[19],
-            on_dirt: this.inputValue[20],
-            finalist: this.inputValue[21],
-            notes: this.inputValue[22],
-            nrha: this.inputValue[23],
-            date_of_show_class: this.inputValue[24],
-            schooling: this.inputValue[25],
-          },
-        });
-        this.horseSearch = response.data;
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    },
   },
 };
 </script>
