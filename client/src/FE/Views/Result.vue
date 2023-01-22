@@ -40,10 +40,42 @@
     </v-list>
   </v-navigation-drawer>
 
+  <v-navigation-drawer
+    location="right"
+    color="#c9e0ec"
+    v-model="attributesDrawer"
+  >
+    <v-list flat subheader three-line>
+      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
+        <v-banner-text class="text-h6"> Attributes </v-banner-text>
+      </v-banner>
+      <v-list-item-group multiple active-class="">
+        <v-list-item width="85%" margin-bottom="10px">
+          <template v-slot:default="{ active }">
+            <v-list-item-content
+              v-for="(item, index) in attributeItems"
+              :key="index"
+              :label="item.attribute"
+            >
+            </v-list-item-content>
+            <v-list-item-action v-for="item in attributeItems">
+              <v-checkbox
+                v-model="item.selected"
+                :input-value="active"
+                :label="item.attribute"
+              ></v-checkbox>
+            </v-list-item-action>
+          </template>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-navigation-drawer>
+
+
   <v-main>
     <v-card
       class="mx-auto my-10"
-      max-width="744"
+      max-width="1100"
       varaint="outlined"
       style="border-radius: 10px"
     >
@@ -52,23 +84,34 @@
           placeholder="Enter Horse Name to Start Searching"
           variant="plain"
           ref="getValue"
+          class="ml-3" 
           @keyup.enter="onSearch"
         >
         </v-text-field>
-        <v-btn variant="tonal" rounded @click="onSearch">
+        <v-btn variant="tonal"  @click="onSearch">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn variant="tonal" color="#212121" @click="onFindAll"
-          >Find All Horses</v-btn
-        >
+        <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-3" >
+          Find All Horses
+        </v-btn>
         <v-btn
+          class="ml-3" 
           variant="tonal"
           prepend-icon="mdi-clipboard-text-search-outline"
-          rounded
+          color="#0D47A1"
+          @click="attributesDrawer = !attributesDrawer"
+          >
+          Attributes Displayed
+        </v-btn>
+        <v-btn
+          class="mx-3 " 
+          variant="tonal"
+          prepend-icon="mdi-clipboard-text-search-outline"
           color="#0D47A1"
           @click="categoryDrawer = !categoryDrawer"
-          >CategorySearch</v-btn
-        >
+          >
+          Search By Category
+        </v-btn>
       </v-toolbar>
     </v-card>
 
@@ -198,6 +241,7 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
+      // for flagging a horse 
       change: '',
       changeRules: [
         v => !!v || 'Name is required',
@@ -233,8 +277,10 @@ export default {
         "Schooling"
       ],
       dialog: false,
+      // for selecting categories and attributes 
       drawer: false,
       categoryDrawer: false,
+      attributesDrawer: false,
       group: null,
       horseSearch: [],
       newItem: [],
@@ -393,6 +439,112 @@ export default {
           checked: false,
           hasInput: false,
           inputValue: "",
+        },
+      ],
+      attributeItems: [
+        {
+          attribute: "Name",
+          selected: false
+        },
+        {
+          attribute: "Sire",
+          selected: false
+        },
+        {
+          attribute: "Dam",
+          selected: false
+        },
+        {
+          attribute: "Dam Sire",
+          selected: false
+        },
+        {
+          attribute: "2nd Dam",
+          selected: false
+        },
+        {
+          attribute: "Maneuver Scores",
+          selected: false
+        },
+        {
+          attribute: "LTE",
+          selected: false
+        },
+        {
+          attribute: "PE",
+          selected: false
+        },
+        {
+          attribute: "Show",
+          selected: false
+        },
+        {
+          attribute: "Class",
+          selected: false
+        },
+        {
+          attribute: "Level",
+          selected: false
+        },
+        {
+          attribute: "Open vs Non Pro",
+          selected: false,
+        },
+        {
+          attribute: "Age",
+          selected: false
+        },
+        {
+          attribute: "Place",
+          selected: false
+        },
+        {
+          attribute: "Money",
+          selected: false
+        },
+        {
+          attribute: "Breeder",
+          selected: false
+        },
+        {
+          attribute: "Owner",
+          selected: false
+        },
+        {
+          attribute: "Rider",
+          selected: false
+        },
+        {
+          attribute: "Draw",
+          selected: false
+        },
+        {
+          attribute: "Back Number",
+          selected: false
+        },
+        {
+          attribute: "On Dirt",
+          selected: false
+        },
+        {
+          attribute: "Finalist",
+          selected: false
+        },
+        {
+          attribute: "Notes",
+          selected: false
+        },
+        {
+          attribute: "NRHA",
+          selected: false
+        },
+        {
+          attribute: "Date of Show/Class",
+          selected: false
+        },
+        {
+          attribute: "Schooling",
+          selected: false
         },
       ],
     };
