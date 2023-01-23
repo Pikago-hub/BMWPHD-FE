@@ -172,6 +172,7 @@
                     <v-btn
                     color="white"
                     v-bind="props"
+                    @click="openDialog"
                     >
                       Flag Horse
                     </v-btn>
@@ -182,7 +183,6 @@
                       <v-select
                         v-model="select"
                         :items="items"
-                        :rules="[v => !!v || 'Item is required']"
                         label="Which field would you like to suggest a change for?"
                         required
                       ></v-select>
@@ -194,8 +194,10 @@
                         label="Suggested Change"
                         required
                       ></v-text-field>
-                
-                      <v-btn color="white" block @click="dialog=false">Submit Changes for Review</v-btn>
+                      
+                      <v-btn color="white" block @click="submitChanges">Submit Changes for Review</v-btn>
+                      <v-btn color="white" block @click="dialog=false">Close</v-btn>
+                   
                     </v-form>
                   </v-card>
                 </v-dialog>
@@ -243,12 +245,9 @@ export default {
     return {
       // for flagging a horse 
       change: '',
-      changeRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length > 0) || 'Name must be less than 10 characters',
-      ],
-      select: null,
+      select: ["Select an Attribute"],
       items: [
+        "Select an Attribute",
         "Name",
         "Sire",
         "Dam",
@@ -627,10 +626,12 @@ export default {
         }
       );
     },
-    // openDialog() {
-    //   console.log("this happends")
-    //   this.$refs.form.reset()
-    // },
+    submitChanges() {
+      console.log("this happends")
+      this.select = this.items[0]
+      this.change = ''
+      // this.$refs.form.reset()
+    },
 
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
