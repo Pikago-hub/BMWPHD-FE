@@ -194,10 +194,10 @@
                         label="Suggested Change"
                         required
                       ></v-text-field>
-                      
-                      <v-btn color="white" block @click="submitChanges">Submit Changes for Review</v-btn>
-                      <v-btn color="white" block @click="dialog=false">Close</v-btn>
-                   
+                      <p style="text-align:center">
+                      <v-btn color="white" @click="submitChanges">Submit Changes for Review</v-btn>
+                      <v-btn color="white" @click="dialog=false">Close</v-btn>
+                    </p>
                     </v-form>
                   </v-card>
                 </v-dialog>
