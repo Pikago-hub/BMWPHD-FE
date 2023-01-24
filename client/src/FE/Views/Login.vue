@@ -9,7 +9,6 @@
       >
   
         <div class="text-subtitle-1 text-medium-emphasis">Username</div>
-  
         <v-text-field
           density="compact"
           placeholder="Email address"
@@ -19,7 +18,6 @@
   
         <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
           Password
-  
           <a
             class="text-caption text-decoration-none text-blue"
             href="#"
@@ -54,7 +52,7 @@
         <v-card-text class="text-center">
           <a
             class="text-blue text-decoration-none"
-            href="#"
+            href="/signup"
             rel="noopener noreferrer"
             target="_blank"
           >

@@ -62,7 +62,8 @@
               <v-checkbox
                 v-model="item.selected"
                 :input-value="active"
-                :label="item.attribute"  
+                :label="item.attribute" 
+                @change="addCol" 
               >
             </v-checkbox>
             </v-list-item-action>
@@ -131,16 +132,16 @@
         >
           <thead>
             <tr>
-             <!-- <th v-for="(header, index) in visibleHeaders"
+             <th v-for="(header, index) in visibleHeaders"
               :key="index"
               scope="col"
               >
               {{ header }}
-            </th> -->
-            <th v-for="(item, index) in attributeItems"
+            </th>
+            <!-- <th v-for="(item, index) in attributeItems"
               :key="index" scope="col">
               <template v-if="item.selected"> {{ item.attribute }} </template>
-            </th>
+            </th> -->
               <!-- <th class="text-left" scope>Flag</th>
               <th class="text-left" scope>Name</th>
               <th class="text-left" scope>Sire</th>
@@ -215,7 +216,7 @@
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
-              <td> {{ horse.foaldate }} </td>
+              <td>{{ horse.foaldate }} </td>
               <td>{{ horse.owner }}</td>
               <td>{{ horse.sire2 }}</td>
               <td>{{ horse.dam2 }}</td>
@@ -456,7 +457,7 @@ export default {
           inputValue: "",
         },
       ],
-      // visibleHeaders: ["Flag", "Name", "Sire", "Dam", "Foal Date", "Owner"],
+      visibleHeaders: ["Flag", "Name", "Sire", "Dam", "Foal Date", "Owner"],
       attributeItems: [
         {
           attribute: "Flagged",
@@ -585,6 +586,7 @@ export default {
   mounted() {},
 
   methods: {
+
     async onFindAll() {
       this.$router.push("/result");
       try {
@@ -663,7 +665,9 @@ export default {
       this.change = ''
       // this.$refs.form.reset()
     },
-
+    // addCol() {
+    //   visibleHeaders.push(item.attribute);
+    // }
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
     //   this.$router.push("/result");

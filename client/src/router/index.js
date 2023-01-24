@@ -5,6 +5,7 @@ import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
 import ManageUsers from '../FE/Views/ManageUsers.vue'
 import PageNotFound from '../FE/Views/PageNotFound.vue'
+import SignUp from '../FE/Views/SignUp.vue'
 
 const routes = [
     {
@@ -24,6 +25,12 @@ const routes = [
         name: 'login',
         meta: {title: "Login Page"},
         component: Login
+    },
+    {
+        path: '/signup',
+        name: 'signup',
+        meta: {title: "Signup Page"},
+        component: SignUp
     },
     {
         path: '/about',
@@ -46,10 +53,20 @@ const router = createRouter({
     history: createWebHistory(),
     routes
     // routes:[
-    //     ...common,
-    //     ...asnycRouters,
-    //     {path:'/:pathMatch(.*)*', redirect:'/404'}
+    //     ...basicRoutes,
     // ]
   });
+
+  export async function setupRouter(app) {
+    if (utils.cacheUtils.get('login_token')?.token) {
+      // get user info and save it to Pinia, then we can have access to user's permission list in different components
+      const userStore = useUserStore();
+      await userStore.getUserInfo();
+  
+      autoloadDynamicRoutes(router); // add more route records to the router, e.g., /users and /orders
+    }
+    setupGuard(router); // set up router guard
+    // app.use(router);
+  }
   
   export default router;
