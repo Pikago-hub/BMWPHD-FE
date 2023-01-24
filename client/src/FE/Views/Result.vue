@@ -62,8 +62,9 @@
               <v-checkbox
                 v-model="item.selected"
                 :input-value="active"
-                :label="item.attribute"
-              ></v-checkbox>
+                :label="item.attribute"  
+              >
+            </v-checkbox>
             </v-list-item-action>
           </template>
         </v-list-item>
@@ -124,14 +125,23 @@
     >
       <v-container fluid style="height: 60vh">
         <v-table
-          fixed-header="true"
           height="600px"
           theme="dark"
           density="comfortable"
         >
           <thead>
             <tr>
-              <th class="text-left" scope>Flag</th>
+             <!-- <th v-for="(header, index) in visibleHeaders"
+              :key="index"
+              scope="col"
+              >
+              {{ header }}
+            </th> -->
+            <th v-for="(item, index) in attributeItems"
+              :key="index" scope="col">
+              <template v-if="item.selected"> {{ item.attribute }} </template>
+            </th>
+              <!-- <th class="text-left" scope>Flag</th>
               <th class="text-left" scope>Name</th>
               <th class="text-left" scope>Sire</th>
               <th class="text-left" scope>Dam</th>
@@ -157,7 +167,7 @@
               <th class="text-left" scope>Notes</th>
               <th class="text-left" scope>NRHA</th>
               <th class="text-left" scope>Date of Show/Class</th>
-              <th class="text-left" scope>Schooling</th>
+              <th class="text-left" scope>Schooling</th> -->
             </tr>
           </thead>
 
@@ -205,6 +215,8 @@
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
+              <td> {{ horse.foaldate }} </td>
+              <td>{{ horse.owner }}</td>
               <td>{{ horse.sire2 }}</td>
               <td>{{ horse.dam2 }}</td>
               <td>{{ horse.maneuver_score }}</td>
@@ -284,7 +296,6 @@ export default {
       horseSearch: [],
       newItem: [],
       inputValue: [],
-      selected: ["Name"],
       listItems: [
         {
           category: "Name",
@@ -300,6 +311,17 @@ export default {
           category: "Dam",
           checked: false,
           hasInput: false,
+        },
+        {
+          category: "Foal Date",
+          checked: false,
+          hasInput: false,
+        },
+        {
+          category: "Owner",
+          checked: false,
+          hasInput: false,
+          inputValue: "",
         },
         {
           category: "Dam Sire",
@@ -380,12 +402,6 @@ export default {
           inputValue: "",
         },
         {
-          category: "Owner",
-          checked: false,
-          hasInput: false,
-          inputValue: "",
-        },
-        {
           category: "Rider",
           checked: false,
           hasInput: false,
@@ -440,18 +456,31 @@ export default {
           inputValue: "",
         },
       ],
+      // visibleHeaders: ["Flag", "Name", "Sire", "Dam", "Foal Date", "Owner"],
       attributeItems: [
         {
+          attribute: "Flagged",
+          selected: true
+        },
+        {
           attribute: "Name",
-          selected: false
+          selected: true
         },
         {
           attribute: "Sire",
-          selected: false
+          selected: true
         },
         {
           attribute: "Dam",
-          selected: false
+          selected: true
+        },
+        {
+          attribute: "Foul Date",
+          selected: true
+        },
+        {
+          attribute: "Owner",
+          selected: true
         },
         {
           attribute: "Dam Sire",
@@ -550,7 +579,8 @@ export default {
     
   },
 
-  computed: {},
+  computed: {
+  },
 
   mounted() {},
 
@@ -626,6 +656,7 @@ export default {
         }
       );
     },
+    
     submitChanges() {
       console.log("this happends")
       this.select = this.items[0]
