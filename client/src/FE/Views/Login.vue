@@ -20,7 +20,7 @@
           Password
           <a
             class="text-caption text-decoration-none text-blue"
-            href="#"
+            href="/PageNotFound"
             rel="noopener noreferrer"
             target="_blank"
           >
