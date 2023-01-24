@@ -10,7 +10,7 @@ import SignUp from '../FE/Views/SignUp.vue'
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         meta: {title: "Home"},
         component: Home
     },
