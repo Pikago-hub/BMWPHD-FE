@@ -60,10 +60,9 @@
             </v-list-item-content>
             <v-list-item-action v-for="item in attributeItems">
               <v-checkbox
-                v-model="item.selected"
                 :input-value="active"
                 :label="item.attribute" 
-                @change="addCol" 
+                @change="toggleColumn(item)" 
               >
             </v-checkbox>
             </v-list-item-action>
@@ -457,7 +456,7 @@ export default {
           inputValue: "",
         },
       ],
-      visibleHeaders: ["Flag", "Name", "Sire", "Dam", "Foal Date", "Owner"],
+      visibleHeaders: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
       attributeItems: [
         {
           attribute: "Flagged",
@@ -573,7 +572,7 @@ export default {
         },
         {
           attribute: "Schooling",
-          selected: false
+          checked: false
         },
       ],
     };
@@ -665,9 +664,28 @@ export default {
       this.change = ''
       // this.$refs.form.reset()
     },
-    // addCol() {
-    //   visibleHeaders.push(item.attribute);
-    // }
+    
+    toggleColumn(selectedItem) {
+      console.log(selectedItem.selected)
+      selectedItem.selected = !selectedItem.selected
+      this.attributeItems.selected = selectedItem.selected
+      console.log(selectedItem.selected)
+      // if checkbox checked: push
+      if (selectedItem.selected = true) {
+        this.visibleHeaders.push(selectedItem.attribute);
+      }
+      console.log("before elif")
+      if (selectedItem.selected = false) {
+        selectedItem.checked = false
+        console.log("this happens");
+        const index = this.visibleHeaders.indexOf(selectedItem);
+        console.log(index);
+        // this.visibleHeaders.pop(selectedItem.attribute);
+      }
+      console.log(selectedItem);
+    }
+
+
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
     //   this.$router.push("/result");
