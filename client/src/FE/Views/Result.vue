@@ -61,139 +61,121 @@
               v-model="selected"
               label="Sire"
               value="Sire"
-              ></v-checkbox>
-              <v-checkbox
-              v-model="selected"
-              label="Dam"
-              value="Dam"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Foul Date"
               value="Name"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Owner"
               value="Owner"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Dam Sire"
               value="Dam Sire"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="2nd Dam"
               value="2nd Dam"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Maneuver Scores"
               value="Maneuver Scores"
-              ></v-checkbox>
-              <v-checkbox
-              v-model="selected"
-              label="LTE"
-              value="LTE"
-              ></v-checkbox>
-              <v-checkbox
-              v-model="selected"
-              label="PE"
-              value="PE"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
+            <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Show"
               value="Show"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Class"
               value="Class"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Level"
               value="Level"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Open vs Non Pro"
               value="Open vs Non Pro"
-              ></v-checkbox>
-              <v-checkbox
-              v-model="selected"
-              label="Age"
-              value="Age"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Place"
               value="Place"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Money"
               value="Money"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Breeder"
               value="Breeder"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Rider"
               value="Rider"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Draw"
               value="Draw"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Back Number"
               value="Back Number"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="On Dirt"
               value="On Dirt"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Finalist"
               value="Finalist"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Notes"
               value="Notes"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="NRHA"
               value="NRHA"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Date of Show/Class"
               value="Date of Show/Class"
-              ></v-checkbox>
-              <v-checkbox
+            ></v-checkbox>
+            <v-checkbox
               v-model="selected"
               label="Schooling"
               value="Schooling"
-              ></v-checkbox>
-              
+            ></v-checkbox>
           </template>
         </v-list-item>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
-
 
   <v-main>
     <v-card
@@ -207,32 +189,32 @@
           placeholder="Enter Horse Name to Start Searching"
           variant="plain"
           ref="getValue"
-          class="ml-3" 
+          class="ml-3"
           @keyup.enter="onSearch"
         >
         </v-text-field>
-        <v-btn variant="tonal"  @click="onSearch">
+        <v-btn variant="tonal" @click="onSearch">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-3" >
+        <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-3">
           Find All Horses
         </v-btn>
         <v-btn
-          class="ml-3" 
+          class="ml-3"
           variant="tonal"
           prepend-icon="mdi-clipboard-text-search-outline"
           color="#0D47A1"
           @click="attributesDrawer = !attributesDrawer"
-          >
+        >
           Attributes Displayed
         </v-btn>
         <v-btn
-          class="mx-3 " 
+          class="mx-3"
           variant="tonal"
           prepend-icon="mdi-clipboard-text-search-outline"
           color="#0D47A1"
           @click="categoryDrawer = !categoryDrawer"
-          >
+        >
           Search By Category
         </v-btn>
       </v-toolbar>
@@ -246,41 +228,32 @@
       color="#c9e0ec"
     >
       <v-container fluid style="height: 60vh">
-        <v-table
-          height="600px"
-          theme="dark"
-          density="comfortable"
-        >
+        <v-table height="600px" theme="dark" density="comfortable">
           <thead>
             <tr>
-             <th v-for="(select, index) in selected"
-              :key="index"
-              scope="col"
-              >
-              {{ select }}
-            </th>
+              <th v-for="(select, index) in selected" :key="index" scope="col">
+                {{ select }}
+              </th>
             </tr>
           </thead>
 
           <tbody>
             <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
-              <td> 
-                <v-dialog
-                  v-model="dialog"
-                  contained=true
-                  >
+              <td>
+                <v-dialog v-model="dialog" contained="true">
                   <template v-slot:activator="{ props }">
-                    <v-btn
-                    color="white"
-                    v-bind="props"
-                    @click="openDialog"
-                    >
+                    <v-btn color="white" v-bind="props" @click="openDialog">
                       Flag Horse
                     </v-btn>
                   </template>
-                  <v-card class="mx-auto" width="75%" color="white" elevation="3" style="border-radius: 10px;">
+                  <v-card
+                    class="mx-auto"
+                    width="75%"
+                    color="white"
+                    elevation="3"
+                    style="border-radius: 10px"
+                  >
                     <v-form ref="form" lazy-validation color="#212121">
-
                       <v-select
                         v-model="select"
                         :items="items"
@@ -295,10 +268,20 @@
                         label="Suggested Change"
                         required
                       ></v-text-field>
-                      <p style="text-align:center">
-                      <v-btn class="mr-14 mb-6" color="#c9e0ec" @click="submitChanges">Submit Changes for Review</v-btn>
-                      <v-btn class="mr-2 mb-6" color="#c9e0ec" @click="dialog=false">Close</v-btn>
-                    </p>
+                      <p style="text-align: center">
+                        <v-btn
+                          class="mr-14 mb-6"
+                          color="#c9e0ec"
+                          @click="submitChanges"
+                          >Submit Changes for Review</v-btn
+                        >
+                        <v-btn
+                          class="mr-2 mb-6"
+                          color="#c9e0ec"
+                          @click="dialog = false"
+                          >Close</v-btn
+                        >
+                      </p>
                     </v-form>
                   </v-card>
                 </v-dialog>
@@ -306,7 +289,7 @@
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
-              <td>{{ horse.foaldate }} </td>
+              <td>{{ horse.foaldate }}</td>
               <td>{{ horse.owner }}</td>
               <td>{{ horse.sire2 }}</td>
               <td>{{ horse.dam2 }}</td>
@@ -346,8 +329,8 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
-      // for flagging a horse 
-      change: '',
+      // for flagging a horse
+      change: "",
       select: ["Select an Attribute"],
       items: [
         "Select an Attribute",
@@ -376,10 +359,10 @@ export default {
         "Notes",
         "NRHA",
         "Date of Show/Class",
-        "Schooling"
+        "Schooling",
       ],
       dialog: false,
-      // for selecting categories and attributes 
+      // for selecting categories and attributes
       drawer: false,
       categoryDrawer: false,
       attributesDrawer: false,
@@ -549,21 +532,18 @@ export default {
       ],
       selected: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
     };
-    
   },
 
-  computed: {
-  },
+  computed: {},
 
   mounted() {},
 
   methods: {
-
     async onFindAll() {
       this.$router.push("/result");
       try {
         const res = await axios
-          .get("http://localhost:3004/data", {})
+          .get("https://bmwphd-be.herokuapp.com/horses", {})
           .then((res) => (this.horseSearch = res.data.data));
         console.log(res);
       } catch (error) {
@@ -630,14 +610,13 @@ export default {
         }
       );
     },
-    
+
     submitChanges() {
-      console.log("this happends")
-      this.select = this.items[0]
-      this.change = ''
+      console.log("this happends");
+      this.select = this.items[0];
+      this.change = "";
       // this.$refs.form.reset()
     },
-
 
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
