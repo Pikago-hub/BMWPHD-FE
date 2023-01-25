@@ -296,8 +296,8 @@
                         required
                       ></v-text-field>
                       <p style="text-align:center">
-                      <v-btn color="white" @click="submitChanges">Submit Changes for Review</v-btn>
-                      <v-btn color="white" @click="dialog=false">Close</v-btn>
+                      <v-btn class="mr-14 mb-6" color="#c9e0ec" @click="submitChanges">Submit Changes for Review</v-btn>
+                      <v-btn class="mr-2 mb-6" color="#c9e0ec" @click="dialog=false">Close</v-btn>
                     </p>
                     </v-form>
                   </v-card>
@@ -637,21 +637,6 @@ export default {
       this.change = ''
       // this.$refs.form.reset()
     },
-    
-    toggleColumn(selectedItem) {
-      
-      if (selectedItem.selected = true) {
-        this.visibleHeaders.push(selectedItem.attribute);
-      }
-
-      if (selectedItem.selected = false) {
-        console.log("this happens");
-        const index = this.visibleHeaders.indexOf(selectedItem);
-        console.log(index);
-        // this.visibleHeaders.pop(selectedItem.attribute);
-      }
-      console.log(selectedItem);
-    }
 
 
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
