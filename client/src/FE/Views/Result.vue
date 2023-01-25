@@ -52,20 +52,142 @@
       <v-list-item-group multiple active-class="">
         <v-list-item width="85%" margin-bottom="10px">
           <template v-slot:default="{ active }">
-            <v-list-item-content
-              v-for="(item, index) in attributeItems"
-              :key="index"
-              :label="item.attribute"
-            >
-            </v-list-item-content>
-            <v-list-item-action v-for="item in attributeItems">
+            <v-checkbox
+              v-model="selected"
+              label="Flagged"
+              value="Flagged"
+            ></v-checkbox>
+            <v-checkbox
+              v-model="selected"
+              label="Sire"
+              value="Sire"
+              ></v-checkbox>
               <v-checkbox
-                :input-value="active"
-                :label="item.attribute" 
-                @change="toggleColumn(item)" 
-              >
-            </v-checkbox>
-            </v-list-item-action>
+              v-model="selected"
+              label="Dam"
+              value="Dam"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Foul Date"
+              value="Name"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Owner"
+              value="Owner"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Dam Sire"
+              value="Dam Sire"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="2nd Dam"
+              value="2nd Dam"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Maneuver Scores"
+              value="Maneuver Scores"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="LTE"
+              value="LTE"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="PE"
+              value="PE"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Show"
+              value="Show"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Class"
+              value="Class"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Level"
+              value="Level"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Open vs Non Pro"
+              value="Open vs Non Pro"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Age"
+              value="Age"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Place"
+              value="Place"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Money"
+              value="Money"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Breeder"
+              value="Breeder"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Rider"
+              value="Rider"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Draw"
+              value="Draw"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Back Number"
+              value="Back Number"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="On Dirt"
+              value="On Dirt"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Finalist"
+              value="Finalist"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Notes"
+              value="Notes"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="NRHA"
+              value="NRHA"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Date of Show/Class"
+              value="Date of Show/Class"
+              ></v-checkbox>
+              <v-checkbox
+              v-model="selected"
+              label="Schooling"
+              value="Schooling"
+              ></v-checkbox>
+              
           </template>
         </v-list-item>
       </v-list-item-group>
@@ -131,43 +253,12 @@
         >
           <thead>
             <tr>
-             <th v-for="(header, index) in visibleHeaders"
+             <th v-for="(select, index) in selected"
               :key="index"
               scope="col"
               >
-              {{ header }}
+              {{ select }}
             </th>
-            <!-- <th v-for="(item, index) in attributeItems"
-              :key="index" scope="col">
-              <template v-if="item.selected"> {{ item.attribute }} </template>
-            </th> -->
-              <!-- <th class="text-left" scope>Flag</th>
-              <th class="text-left" scope>Name</th>
-              <th class="text-left" scope>Sire</th>
-              <th class="text-left" scope>Dam</th>
-              <th class="text-left" scope>Dam Sire</th>
-              <th class="text-left" scope>2nd Dam</th>
-              <th class="text-left" scope>Maneuver Scores</th>
-              <th class="text-left" scope>LTE</th>
-              <th class="text-left" scope>PE</th>
-              <th class="text-left" scope>Show</th>
-              <th class="text-left" scope>Class</th>
-              <th class="text-left" scope>Level</th>
-              <th class="text-left" scope>Open vs Non Pro</th>
-              <th class="text-left" scope>Age</th>
-              <th class="text-left" scope>Place</th>
-              <th class="text-left" scope>Money</th>
-              <th class="text-left" scope>Breeder</th>
-              <th class="text-left" scope>Owner</th>
-              <th class="text-left" scope>Rider</th>
-              <th class="text-left" scope>Draw</th>
-              <th class="text-left" scope>Back Number</th>
-              <th class="text-left" scope>On Dirt</th>
-              <th class="text-left" scope>Finalist</th>
-              <th class="text-left" scope>Notes</th>
-              <th class="text-left" scope>NRHA</th>
-              <th class="text-left" scope>Date of Show/Class</th>
-              <th class="text-left" scope>Schooling</th> -->
             </tr>
           </thead>
 
@@ -456,125 +547,7 @@ export default {
           inputValue: "",
         },
       ],
-      visibleHeaders: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
-      attributeItems: [
-        {
-          attribute: "Flagged",
-          selected: true
-        },
-        {
-          attribute: "Name",
-          selected: true
-        },
-        {
-          attribute: "Sire",
-          selected: true
-        },
-        {
-          attribute: "Dam",
-          selected: true
-        },
-        {
-          attribute: "Foul Date",
-          selected: true
-        },
-        {
-          attribute: "Owner",
-          selected: true
-        },
-        {
-          attribute: "Dam Sire",
-          selected: false
-        },
-        {
-          attribute: "2nd Dam",
-          selected: false
-        },
-        {
-          attribute: "Maneuver Scores",
-          selected: false
-        },
-        {
-          attribute: "LTE",
-          selected: false
-        },
-        {
-          attribute: "PE",
-          selected: false
-        },
-        {
-          attribute: "Show",
-          selected: false
-        },
-        {
-          attribute: "Class",
-          selected: false
-        },
-        {
-          attribute: "Level",
-          selected: false
-        },
-        {
-          attribute: "Open vs Non Pro",
-          selected: false,
-        },
-        {
-          attribute: "Age",
-          selected: false
-        },
-        {
-          attribute: "Place",
-          selected: false
-        },
-        {
-          attribute: "Money",
-          selected: false
-        },
-        {
-          attribute: "Breeder",
-          selected: false
-        },
-        {
-          attribute: "Owner",
-          selected: false
-        },
-        {
-          attribute: "Rider",
-          selected: false
-        },
-        {
-          attribute: "Draw",
-          selected: false
-        },
-        {
-          attribute: "Back Number",
-          selected: false
-        },
-        {
-          attribute: "On Dirt",
-          selected: false
-        },
-        {
-          attribute: "Finalist",
-          selected: false
-        },
-        {
-          attribute: "Notes",
-          selected: false
-        },
-        {
-          attribute: "NRHA",
-          selected: false
-        },
-        {
-          attribute: "Date of Show/Class",
-          selected: false
-        },
-        {
-          attribute: "Schooling",
-          checked: false
-        },
-      ],
+      selected: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
     };
     
   },
@@ -666,17 +639,12 @@ export default {
     },
     
     toggleColumn(selectedItem) {
-      console.log(selectedItem.selected)
-      selectedItem.selected = !selectedItem.selected
-      this.attributeItems.selected = selectedItem.selected
-      console.log(selectedItem.selected)
-      // if checkbox checked: push
+      
       if (selectedItem.selected = true) {
         this.visibleHeaders.push(selectedItem.attribute);
       }
-      console.log("before elif")
+
       if (selectedItem.selected = false) {
-        selectedItem.checked = false
         console.log("this happens");
         const index = this.visibleHeaders.indexOf(selectedItem);
         console.log(index);
