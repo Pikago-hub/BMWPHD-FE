@@ -5,7 +5,6 @@ import Login from '../FE/Views/Login.vue'
 import Result from '../FE/Views/Result.vue'
 import ManageUsers from '../FE/Views/ManageUsers.vue'
 import PageNotFound from '../FE/Views/PageNotFound.vue'
-import SignUp from '../FE/Views/SignUp.vue'
 
 const routes = [
     {
@@ -25,12 +24,6 @@ const routes = [
         name: 'login',
         meta: {title: "Login Page"},
         component: Login
-    },
-    {
-        path: '/signup',
-        name: 'signup',
-        meta: {title: "Signup Page"},
-        component: SignUp
     },
     {
         path: '/about',

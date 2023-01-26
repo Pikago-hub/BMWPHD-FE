@@ -253,6 +253,9 @@
                     elevation="3"
                     style="border-radius: 10px"
                   >
+                  <h2 class="text-h4 mt-4 mb-4" style="text-align:center">
+                      Flag Horse 
+                  </h2>
                     <v-form ref="form" lazy-validation color="#212121">
                       <v-select
                         v-model="select"

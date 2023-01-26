@@ -17,14 +17,6 @@ const basicRoutes = [
       component: () => import("@/FE/Views/Login.vue"),
     },
     {
-        path: "/signup",
-        name:"signup",
-        meta: {
-            requiresAuth: false,
-        },
-     component: () => import("@/FE/Views/SignUp.vue"),
-    },
-    {
         path: '/about',
         name: 'about',
       meta: {
