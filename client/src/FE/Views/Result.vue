@@ -219,7 +219,7 @@
         </v-btn>
         <v-dialog v-model="dialog">
           <template v-slot:activator="{ props }">
-            <v-btn color="#0D47A1" variant="tonal" v-bind="props" @click="openDialog">
+            <v-btn color="#0D47A1" variant="tonal" v-bind="props">
               Flag A Horse
             </v-btn>
           </template>
@@ -237,7 +237,6 @@
                       <v-text-field
                         v-model="horseName"
                         :counter="10"
-                        :rules="nameRules"
                         label="Horse Name"
                         required
                       ></v-text-field>
@@ -252,7 +251,6 @@
                       <v-text-field
                         v-model="change"
                         :counter="10"
-                        :rules="changeRules"
                         label="Suggested Change"
                         required
                       ></v-text-field>
@@ -295,6 +293,7 @@
 
           <tbody>
             <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
+              <!-- row 1 6th columns -->
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
