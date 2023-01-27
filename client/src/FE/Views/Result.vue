@@ -54,8 +54,8 @@
           <template v-slot:default="{ active }">
             <v-checkbox
               v-model="selected"
-              label="Flagged"
-              value="Flagged"
+              label="Name"
+              value="Name"
             ></v-checkbox>
             <v-checkbox
               v-model="selected"
@@ -217,46 +217,31 @@
         >
           Search By Category
         </v-btn>
-      </v-toolbar>
-    </v-card>
-
-    <v-card
-      elevation="2"
-      class="mx-auto"
-      max-width="1000"
-      height="650px"
-      color="#c9e0ec"
-    >
-      <v-container fluid style="height: 60vh">
-        <v-table height="600px" theme="dark" density="comfortable">
-          <thead>
-            <tr>
-              <th v-for="(select, index) in selected" :key="index" scope="col">
-                {{ select }}
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
-              <td>
-                <v-dialog v-model="dialog" contained="true">
-                  <template v-slot:activator="{ props }">
-                    <v-btn color="white" v-bind="props" @click="openDialog">
-                      Flag Horse
-                    </v-btn>
-                  </template>
-                  <v-card
-                    class="mx-auto"
-                    width="75%"
-                    color="white"
-                    elevation="3"
-                    style="border-radius: 10px"
-                  >
-                  <h2 class="text-h4 mt-4 mb-4" style="text-align:center">
-                      Flag Horse 
-                  </h2>
+        <v-dialog v-model="dialog">
+          <template v-slot:activator="{ props }">
+            <v-btn color="#0D47A1" variant="tonal" v-bind="props" @click="openDialog">
+              Flag A Horse
+            </v-btn>
+          </template>
+          <v-card
+            class="mx-auto"
+            width="75%"
+            color="white"
+            elevation="3"
+            style="border-radius: 10px"
+          >
+            <h2 class="text-h4 mt-4 mb-4" style="text-align:center">
+              Flag Horse 
+            </h2>
                     <v-form ref="form" lazy-validation color="#212121">
+                      <v-text-field
+                        v-model="horseName"
+                        :counter="10"
+                        :rules="nameRules"
+                        label="Horse Name"
+                        required
+                      ></v-text-field>
+
                       <v-select
                         v-model="select"
                         :items="items"
@@ -288,7 +273,28 @@
                     </v-form>
                   </v-card>
                 </v-dialog>
-              </td>
+      </v-toolbar>
+    </v-card>
+
+    <v-card
+      elevation="2"
+      class="mx-auto"
+      max-width="1000"
+      height="650px"
+      color="#c9e0ec"
+    >
+      <v-container fluid style="height: 60vh">
+        <v-table height="600px" theme="dark" density="comfortable">
+          <thead>
+            <tr>
+              <th v-for="(select, index) in selected" :key="index" scope="col">
+                {{ select }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
@@ -334,6 +340,7 @@ export default {
     return {
       // for flagging a horse
       change: "",
+      horseName: "",
       select: ["Select an Attribute"],
       items: [
         "Select an Attribute",
@@ -533,7 +540,7 @@ export default {
           inputValue: "",
         },
       ],
-      selected: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
+      selected: ["Name", "Sire", "Dam", "Foul Date", "Owner"],
     };
   },
 
@@ -616,9 +623,9 @@ export default {
 
     submitChanges() {
       console.log("this happends");
+      this.horseName = "";
       this.select = this.items[0];
       this.change = "";
-      // this.$refs.form.reset()
     },
 
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
