@@ -134,7 +134,7 @@
           
                 <v-btn 
                   x-large 
-                  block :disabled="!valid" 
+                  block :disabled="!good" 
                   color="blue"
                   variant="tonal"
                   class="mb-8"
@@ -167,6 +167,7 @@ export default {
         {name:"Register", icon:"mdi-account-outline"}
     ],
     valid: true,
+    good: true,
     
     firstName: "",
     lastName: "",
@@ -198,6 +199,9 @@ export default {
   methods: {
     validate() {
       if (this.$refs.loginForm.validate()) {
+        this.$router.push('/');
+      }
+      else if (this.$refs.registerForm.validate()) {
         this.$router.push('/');
       }
     },
