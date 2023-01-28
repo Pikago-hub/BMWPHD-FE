@@ -3,6 +3,7 @@
     location="right"
     color="#c9e0ec"
     v-model="categoryDrawer"
+    v-click-outside="onClickOutsideCD"
   >
     <v-list flat subheader three-line>
       <v-banner height="65" lines="one" style="background-color: #c9e0ec">
@@ -44,6 +45,7 @@
     location="right"
     color="#c9e0ec"
     v-model="attributesDrawer"
+    v-click-outside="onClickOutsideAD"
   >
     <v-list flat subheader three-line>
       <v-banner height="65" lines="one" style="background-color: #c9e0ec">
@@ -53,6 +55,7 @@
         <v-list-item width="85%" margin-bottom="10px">
           <template v-slot:default="{ active }">
             <v-checkbox
+            id="myCheckbox"
               v-model="selected"
               label="Name"
               value="Name"
@@ -180,7 +183,7 @@
   <v-main>
     <v-card
       class="mx-auto my-10"
-      max-width="1100"
+      max-width="900"
       varaint="outlined"
       style="border-radius: 10px"
     >
@@ -199,27 +202,42 @@
         <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-3">
           Find All Horses
         </v-btn>
-        <v-btn
-          class="ml-3"
-          variant="tonal"
-          prepend-icon="mdi-clipboard-text-search-outline"
-          color="#0D47A1"
-          @click="attributesDrawer = !attributesDrawer"
-        >
-          Attributes Displayed
-        </v-btn>
-        <v-btn
-          class="mx-3"
-          variant="tonal"
-          prepend-icon="mdi-clipboard-text-search-outline"
-          color="#0D47A1"
-          @click="categoryDrawer = !categoryDrawer"
-        >
-          Search By Category
-        </v-btn>
+
+        <v-btn id="menu-activator" variant="tonal" color="#0D47A1" class="ml-3"> Advanced Search </v-btn>
+            <v-menu open-on-hover activator="#menu-activator">              
+                <v-list>
+                  <v-list-item>
+                  <template v-slot:append> 
+                    <v-btn
+                     
+                      variant="tonal"
+                      prepend-icon="mdi-clipboard-text-search-outline"
+                      color="#0D47A1"
+                      @click="attributesDrawer = !attributesDrawer"
+                    >
+                      Attributes Displayed
+                    </v-btn>
+                  </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template v-slot:append> 
+                    <v-btn
+                      
+                      variant="tonal"
+                      prepend-icon="mdi-clipboard-text-search-outline"
+                      color="#0D47A1"
+                      @click="categoryDrawer = !categoryDrawer"
+                    >
+                      Search By Category
+                    </v-btn>
+                    </template>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+         
         <v-dialog v-model="dialog">
           <template v-slot:activator="{ props }">
-            <v-btn color="#0D47A1" variant="tonal" v-bind="props">
+            <v-btn class="ml-3" color="#0D47A1" variant="tonal" v-bind="props">
               Flag A Horse
             </v-btn>
           </template>
@@ -282,7 +300,7 @@
       color="#c9e0ec"
     >
       <v-container fluid style="height: 60vh">
-        <v-table height="600px" theme="dark" density="comfortable">
+        <v-table id="table" height="600px" theme="dark" density="comfortable">
           <thead>
             <tr>
               <th v-for="(select, index) in selected" :key="index" scope="col">
@@ -543,11 +561,56 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    
+  },
 
-  mounted() {},
+  mounted() {
+    const headers = [].slice.call(table.querySelectorAll('th'));
+    const numColumns = headers.length;
+    var checkbox = document.getElementById("myCheckbox");
+
+    checkbox.addEventListener('change', function(e) {
+        e.target.checked ? showColumn(index) : hideColumn(index);
+    });
+    
+
+    const cells = [].slice.call(table.querySelectorAll('th, td'));
+    cells.forEach(function (cell, index) {
+      cell.setAttribute('data-column-index', index % numColumns);
+    });
+    const hideColumn = function (index) {
+    cells
+        .filter(function (cell) {
+            return cell.getAttribute('data-column-index') === `${index}`;
+        })
+        .forEach(function (cell) {
+            cell.style.display = 'none';
+        });
+    };
+    const showColumn = function (index) {
+    cells
+        .filter(function (cell) {
+            return cell.getAttribute('data-column-index') === `${index}`;
+        })
+        .forEach(function (cell) {
+            cell.style.display = '';
+        });
+        menu.querySelectorAll(`[type="checkbox"][disabled]`)
+        .forEach(function(checkbox) {
+            checkbox.removeAttribute('disabled');
+        });
+    };
+    },
 
   methods: {
+    onClickOutsideCD () {
+      this.categoryDrawer = false;
+    },
+    onClickOutsideAD() {
+      this.attributesDrawer = false;
+    },
+
     async onFindAll() {
       this.$router.push("/result");
       try {
@@ -626,6 +689,9 @@ export default {
       this.select = this.items[0];
       this.change = "";
     },
+    // onClickOutside() {
+    //   this.drawer = false;
+    // },
 
     //axios fetch from json server for presentation only. above commentted out code is for production from BE.
     // async onFindAll() {
