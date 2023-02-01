@@ -55,7 +55,6 @@
         <v-list-item width="85%" margin-bottom="10px">
           <template v-slot:default="{ active }">
             <v-checkbox
-            id="myCheckbox"
               v-model="selected"
               label="Name"
               value="Name"
@@ -296,9 +295,10 @@
       elevation="2"
       class="mx-auto"
       max-width="1000"
-      height="650px"
+      height="730px"
       color="#c9e0ec"
     >
+    
       <v-container fluid style="height: 60vh">
         <v-table id="table" height="600px" theme="dark" density="comfortable">
           <thead>
@@ -343,7 +343,29 @@
             </tr>
           </tbody>
         </v-table>
+
+        <v-row class="mt-4 mb-4 ml-10">
+        <v-col cols="4" sm="3">
+          <v-select
+            v-model="pageSize"
+            :items="pageSizes"
+            label="Items per Page"
+            @change="handlePageSizeChange"
+          ></v-select>
+        </v-col>
+        <v-col cols="12" sm="9">
+          <v-pagination
+            v-model="page"
+            :length="totalPages"
+            total-visible="7"
+            next-icon="mdi-menu-right"
+            prev-icon="mdi-menu-left"
+            @input="handlePageChange"
+          ></v-pagination>
+        </v-col>
+      </v-row>
       </v-container>
+     
     </v-card>
   </v-main>
 </template>
@@ -355,6 +377,12 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
+      // pagination 
+      page: 1,
+      totalPages: 10,
+      pageSize: 20,
+      pageSizes: [20, 30, 40],
+
       // for flagging a horse
       change: "",
       horseName: "",
@@ -566,44 +594,48 @@ export default {
   },
 
   mounted() {
-    const headers = [].slice.call(table.querySelectorAll('th'));
-    const numColumns = headers.length;
-    var checkbox = document.getElementById("myCheckbox");
-
-    checkbox.addEventListener('change', function(e) {
-        e.target.checked ? showColumn(index) : hideColumn(index);
-    });
-    
-
-    const cells = [].slice.call(table.querySelectorAll('th, td'));
-    cells.forEach(function (cell, index) {
-      cell.setAttribute('data-column-index', index % numColumns);
-    });
-    const hideColumn = function (index) {
-    cells
-        .filter(function (cell) {
-            return cell.getAttribute('data-column-index') === `${index}`;
-        })
-        .forEach(function (cell) {
-            cell.style.display = 'none';
-        });
-    };
-    const showColumn = function (index) {
-    cells
-        .filter(function (cell) {
-            return cell.getAttribute('data-column-index') === `${index}`;
-        })
-        .forEach(function (cell) {
-            cell.style.display = '';
-        });
-        menu.querySelectorAll(`[type="checkbox"][disabled]`)
-        .forEach(function(checkbox) {
-            checkbox.removeAttribute('disabled');
-        });
-    };
+      // const table = document.getElementById('table');
+      // const headers = [].slice.call(table.querySelectorAll('th'));
+      //  headers.forEach(function(th, index) {
+      //    checkbox.addEventListener('change', function(e) {
+      //      e.target.checked ? showColumn(index) : hideColumn(index);
+      // });
+      // });
+      // const numColumns = headers.length;
+      // const cells = [].slice.call(table.querySelectorAll('th, td'));
+      // cells.forEach(function (cell, index) {
+      // cell.setAttribute('data-column-index', index % numColumns);
+      // });
+      // const hideColumn = function (index) {
+      //   cells
+      //       .filter(function (cell) {
+      //           return cell.getAttribute('data-column-index') === `${index}`;
+      //       })
+      //       .forEach(function (cell) {
+      //           cell.style.display = 'none';
+      //       });
+      // };
+      // const showColumn = function (index) {
+      //   cells
+      //       .filter(function (cell) {
+      //           return cell.getAttribute('data-column-index') === `${index}`;
+      //       })
+      //       .forEach(function (cell) {
+      //           cell.style.display = '';
+      //       });
+      // };
     },
 
   methods: {
+    handlePageChange(value) {
+      this.page = value;
+      // this.retrieveTutorials();
+    },
+    handlePageSizeChange(size) {
+      this.pageSize = size;
+      this.page = 1;
+      // this.retrieveTutorials();
+    },
     onClickOutsideCD () {
       this.categoryDrawer = false;
     },
