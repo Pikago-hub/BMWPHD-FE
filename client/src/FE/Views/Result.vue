@@ -208,7 +208,6 @@
                   <v-list-item>
                   <template v-slot:append> 
                     <v-btn
-                     
                       variant="tonal"
                       prepend-icon="mdi-clipboard-text-search-outline"
                       color="#0D47A1"
