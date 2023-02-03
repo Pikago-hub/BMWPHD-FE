@@ -1,185 +1,185 @@
 <template>
-  <v-navigation-drawer
-    location="right"
-    color="#c9e0ec"
-    v-model="categoryDrawer"
-    v-click-outside="onClickOutsideCD"
-  >
-    <v-list flat subheader three-line>
-      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
-        <v-banner-text class="text-h6"> Categories </v-banner-text>
-      </v-banner>
-      <v-list-item-group multiple active-class="">
-        <v-list-item width="85%" margin-bottom="10px">
-          <template v-slot:default="{ active }">
-            <v-list-item-content
-              v-for="(item, index) in listItems"
-              :key="index"
-              :label="item.category"
-            >
-              <v-text-field
-                color="#12518e"
-                variant="underlined"
-                hint="key word search"
-                prepend-icon="mdi-magnify"
-                v-if="item.hasInput"
-                :label="`Enter ${item.category}`"
-                v-model="inputValue[index]"
-                @keyup.enter="onCategSearch"
-              ></v-text-field>
-            </v-list-item-content>
-            <v-list-item-action v-for="item in listItems">
-              <v-checkbox
-                v-model="item.hasInput"
-                :input-value="active"
-                :label="item.category"
-              ></v-checkbox>
-            </v-list-item-action>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
-
-  <v-navigation-drawer
-    location="right"
-    color="#c9e0ec"
-    v-model="attributesDrawer"
-    v-click-outside="onClickOutsideAD"
-  >
-    <v-list flat subheader three-line>
-      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
-        <v-banner-text class="text-h6"> Attributes </v-banner-text>
-      </v-banner>
-      <v-list-item-group multiple active-class="">
-        <v-list-item width="85%" margin-bottom="10px">
-          <template v-slot:default="{ active }">
-            <v-checkbox
-              v-model="selected"
-              label="Name"
-              value="Name"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Sire"
-              value="Sire"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Foul Date"
-              value="Name"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Owner"
-              value="Owner"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Dam Sire"
-              value="Dam Sire"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="2nd Dam"
-              value="2nd Dam"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Maneuver Scores"
-              value="Maneuver Scores"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
-            <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Show"
-              value="Show"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Class"
-              value="Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Level"
-              value="Level"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Open vs Non Pro"
-              value="Open vs Non Pro"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Place"
-              value="Place"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Money"
-              value="Money"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Breeder"
-              value="Breeder"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Rider"
-              value="Rider"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Draw"
-              value="Draw"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Back Number"
-              value="Back Number"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="On Dirt"
-              value="On Dirt"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Finalist"
-              value="Finalist"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Notes"
-              value="Notes"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="NRHA"
-              value="NRHA"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Date of Show/Class"
-              value="Date of Show/Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Schooling"
-              value="Schooling"
-            ></v-checkbox>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
-
   <v-main>
+    <v-navigation-drawer
+        location="right"
+        color="#c9e0ec"
+        v-model="categoryDrawer"
+        v-click-outside="onClickOutsideCD"
+    >
+      <v-list flat subheader three-line>
+        <v-banner height="65" lines="one" style="background-color: #c9e0ec">
+          <v-banner-text class="text-h6"> Categories </v-banner-text>
+        </v-banner>
+        <v-list-item-group multiple active-class="">
+          <v-list-item width="85%" margin-bottom="10px">
+            <template v-slot:default="{ active }">
+              <v-list-item-content
+                  v-for="(item, index) in listItems"
+                  :key="index"
+                  :label="item.category"
+              >
+                <v-text-field
+                    color="#12518e"
+                    variant="underlined"
+                    hint="key word search"
+                    prepend-icon="mdi-magnify"
+                    v-if="item.hasInput"
+                    :label="`Enter ${item.category}`"
+                    v-model="inputValue[index]"
+                    @keyup.enter="onCategSearch"
+                ></v-text-field>
+              </v-list-item-content>
+              <v-list-item-action v-for="item in listItems">
+                <v-checkbox
+                    v-model="item.hasInput"
+                    :input-value="active"
+                    :label="item.category"
+                ></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-navigation-drawer
+        location="right"
+        color="#c9e0ec"
+        v-model="attributesDrawer"
+        v-click-outside="onClickOutsideAD"
+    >
+      <v-list flat subheader three-line>
+        <v-banner height="65" lines="one" style="background-color: #c9e0ec">
+          <v-banner-text class="text-h6"> Attributes </v-banner-text>
+        </v-banner>
+        <v-list-item-group multiple active-class="">
+          <v-list-item width="85%" margin-bottom="10px">
+            <template v-slot:default="{ active }">
+              <v-checkbox
+                  v-model="selected"
+                  label="Name"
+                  value="Name"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Sire"
+                  value="Sire"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Foul Date"
+                  value="Name"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Owner"
+                  value="Owner"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Dam Sire"
+                  value="Dam Sire"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="2nd Dam"
+                  value="2nd Dam"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Maneuver Scores"
+                  value="Maneuver Scores"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
+              <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Show"
+                  value="Show"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Class"
+                  value="Class"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Level"
+                  value="Level"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Open vs Non Pro"
+                  value="Open vs Non Pro"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Place"
+                  value="Place"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Money"
+                  value="Money"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Breeder"
+                  value="Breeder"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Rider"
+                  value="Rider"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Draw"
+                  value="Draw"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Back Number"
+                  value="Back Number"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="On Dirt"
+                  value="On Dirt"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Finalist"
+                  value="Finalist"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Notes"
+                  value="Notes"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="NRHA"
+                  value="NRHA"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Date of Show/Class"
+                  value="Date of Show/Class"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Schooling"
+                  value="Schooling"
+              ></v-checkbox>
+            </template>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-card
       class="mx-auto my-10"
       max-width="900"
@@ -292,9 +292,10 @@
 
     <v-card
       elevation="2"
-      class="mx-auto"
+      class="mx-auto my-auto"
+      style="margin-bottom:100px !important;"
       max-width="1000"
-      height="730px"
+      height="725"
       color="#c9e0ec"
     >
     
@@ -801,7 +802,7 @@ export default {
 };
 </script>
 
-<style setup>
+<style scoped setup>
 .v-tooltip__content {
   pointer-events: initial;
 }
@@ -809,4 +810,5 @@ export default {
 .upperCase {
   text-transform: uppercase;
 }
+
 </style>
