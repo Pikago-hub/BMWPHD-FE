@@ -714,9 +714,7 @@ export default {
         }
       );
     },
-
     submitChanges() {
-      console.log("this happends");
       this.horseName = "";
       this.select = this.items[0];
       this.change = "";

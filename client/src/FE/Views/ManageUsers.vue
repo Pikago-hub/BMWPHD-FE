@@ -10,11 +10,6 @@
             </v-card>
 
             <v-dialog v-model="dialog">
-                    <template v-slot:activator="{ props }">
-                        <v-btn class="ml-3" color="#0D47A1" variant="tonal" v-bind="props">
-                        Flag A Horse
-                        </v-btn>
-                    </template>
                     <v-card
                         class="mx-auto"
                         width="75%"
@@ -50,7 +45,7 @@
                         <v-btn
                           class="mr-14 mb-6"
                           color="#c9e0ec"
-                          @click="submitChanges"
+                          @click="updateChanges"
                           >Update Changes</v-btn
                         >
                         <v-btn
@@ -72,7 +67,7 @@
                 color="#c9e0ec"
             >
             <v-container fluid style="height: 60vh">
-                <v-table height="600px" theme="dark" density="comfortable">
+                <v-table id="table" height="600px" theme="dark" density="comfortable">
                     <thead>
                         <tr>
                             <th>User Email</th>
@@ -82,21 +77,23 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>User Email</td>
-                            <td>Horse Name</td>
-                            <td>Attribute</td>
-                            <td>Suggested change</td>
-                            <td>
-                                <!-- <template v-slot:default="scope">  -->
-                                    <v-btn color="green" class="ml-8" @click="acceptReq(scope.row)"> Approve </v-btn>
-                                    <v-btn color="white" class="ml-5" @click="handleClick(scope.row)"> Edit </v-btn>
-                                    <v-btn color="red" class="ml-5" @click="deleteReq(scope.row)"> Deny </v-btn>
-                                <!-- </template> -->
-                            </td>
-                        </tr>
-                    </tbody>
+                        <tbody  >
+                            <tr>
+                                <td>User Email</td>
+                                <td>Horse Name</td>
+                                <td>Attribute</td>
+                                <td>Suggested change</td>
+                                    <td>
+                                        <!-- <template #default="scope"> -->
+                                        <!-- <template v-for="(row, id) in get_rows()"> -->
+                                            <v-btn color="green" class="ml-8" @click="acceptReq(row.id)"> Approve </v-btn>
+                                            <v-btn color="white" class="ml-5" @click="handleClick()"> Edit </v-btn>
+                                            <v-btn color="red" class="ml-5" @click="deleteReq(row.id)"> Deny </v-btn>   
+                                        <!-- </template> -->
+                                        <!-- </template> -->
+                                    </td>    
+                            </tr>
+                        </tbody>
                 </v-table>
             </v-container>
             </v-card>
@@ -109,6 +106,7 @@
 
 export default {
   name: 'ManageUsers',
+  props:[""],
   data: () => ({
     dialog: false,
     change: "",
@@ -148,8 +146,21 @@ export default {
   computed: {},
 
   methods: {
+    get_rows() {
+        var rows = document.getElementById('table').getElementsByTagName('tr');
+        var rows = document.getElementById('table').rows.length;
+        var count = rows.length;
+        for(let i = 0; i < count; i++) {
+            console.log(i);
+            var id = i;
+        }
+        console.log(id);
+        
+        // console.log(count);
+        return count, id;
+    },
     handleClick(row){       
-        this.form = row
+        // this.form = row
         this.dialog = true    
     },
     acceptReq(row) {
@@ -160,6 +171,11 @@ export default {
         row.status = 'Rejected'
         api.rejectRequest(row, row.id)
             
+    },
+    updateChanges() {
+      this.horseName = "";
+      this.select = this.items[0];
+      this.change = "";
     },
   }
 }
