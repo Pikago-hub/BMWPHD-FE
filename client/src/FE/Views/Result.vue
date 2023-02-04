@@ -594,36 +594,6 @@ export default {
   },
 
   mounted() {
-      // const table = document.getElementById('table');
-      // const headers = [].slice.call(table.querySelectorAll('th'));
-      //  headers.forEach(function(th, index) {
-      //    checkbox.addEventListener('change', function(e) {
-      //      e.target.checked ? showColumn(index) : hideColumn(index);
-      // });
-      // });
-      // const numColumns = headers.length;
-      // const cells = [].slice.call(table.querySelectorAll('th, td'));
-      // cells.forEach(function (cell, index) {
-      // cell.setAttribute('data-column-index', index % numColumns);
-      // });
-      // const hideColumn = function (index) {
-      //   cells
-      //       .filter(function (cell) {
-      //           return cell.getAttribute('data-column-index') === `${index}`;
-      //       })
-      //       .forEach(function (cell) {
-      //           cell.style.display = 'none';
-      //       });
-      // };
-      // const showColumn = function (index) {
-      //   cells
-      //       .filter(function (cell) {
-      //           return cell.getAttribute('data-column-index') === `${index}`;
-      //       })
-      //       .forEach(function (cell) {
-      //           cell.style.display = '';
-      //       });
-      // };
     },
 
   methods: {

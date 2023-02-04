@@ -23,7 +23,6 @@
                     <v-form ref="form" lazy-validation color="#212121">
                       <v-text-field
                         v-model="horseName"
-                        :counter="10"
                         label="Horse Name"
                         required
                       ></v-text-field>
@@ -37,7 +36,6 @@
 
                       <v-text-field
                         v-model="change"
-                        :counter="10"
                         label="Suggested Change"
                         required
                       ></v-text-field>
@@ -70,27 +68,23 @@
                 <v-table id="table" height="600px" theme="dark" density="comfortable">
                     <thead>
                         <tr>
-                            <th>User Email</th>
-                            <th>Horse Name</th>
-                            <th>Atttribute</th>
-                            <th>Suggested Change</th>
-                            <th>Actions</th>
+                            <th style="text-align: center" scope="col">User Email</th>
+                            <th style="text-align: center" scope="col">Horse Name</th>
+                            <th style="text-align: center" scope="col">Atttribute</th>
+                            <th style="text-align: center" scope="col">Suggested Change</th>
+                            <th style="text-align: center" scope="col">Actions</th>
                         </tr>
                     </thead>
-                        <tbody  >
-                            <tr>
-                                <td>User Email</td>
-                                <td>Horse Name</td>
-                                <td>Attribute</td>
-                                <td>Suggested change</td>
+                        <tbody>
+                            <tr class="table-row" v-for="request of requestList" :key="request.id">
+                                <td style="text-align: center"> {{ request.email }} </td>
+                                <td style="text-align: center"> {{ request.horse }} </td>
+                                <td style="text-align: center"> {{ request.attribute }} </td>
+                                <td style="text-align: center"> {{ request.change }} </td>
                                     <td>
-                                        <!-- <template #default="scope"> -->
-                                        <!-- <template v-for="(row, id) in get_rows()"> -->
-                                            <v-btn color="green" class="ml-8" @click="acceptReq(row.id)"> Approve </v-btn>
-                                            <v-btn color="white" class="ml-5" @click="handleClick()"> Edit </v-btn>
-                                            <v-btn color="red" class="ml-5" @click="deleteReq(row.id)"> Deny </v-btn>   
-                                        <!-- </template> -->
-                                        <!-- </template> -->
+                                        <v-btn color="green" @click="acceptReq(request)"> Approve </v-btn>
+                                        <v-btn color="white" class="ml-5" @click="editReq(request)"> Edit </v-btn>
+                                        <v-btn color="red" class="ml-5" @click="deleteReq(request)"> Deny </v-btn>   
                                     </td>    
                             </tr>
                         </tbody>
@@ -103,16 +97,52 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
+    requestList: [
+        {
+            id: 1,
+            email: "m.gresham@tcu.edu",
+            horse: "Piggy",
+            attribute: "Sire",
+            change: "Sire should be",
+            status: "Pending"
+        },
+        {
+            id: 2,
+            email: "j.wu@tcu.edu",
+            horse: "Skittle",
+            attribute: "Dam",
+            change: "Dam should be",
+            status: "Pending"
+        },
+        {
+            id: 3,
+            email: "c.jain@tcu.edu",
+            horse: "Lauren",
+            attribute: "Schooling",
+            change: "Schooling should be",
+            status: "Pending"
+        },
+        {
+            id: 4,
+            email: "d.hanft@tcu.edu",
+            horse: "Waterbottle",
+            attribute: "Score",
+            change: "Score should be",
+            status: "Pending"
+        },
+    ],
+    // flagging horse dialog 
     dialog: false,
     change: "",
-      horseName: "",
-      select: ["Select an Attribute"],
-      items: [
+    horseName: "",
+    select: ["Select an Attribute"],
+    items: [
         "Select an Attribute",
         "Name",
         "Sire",
@@ -140,36 +170,39 @@ export default {
         "NRHA",
         "Date of Show/Class",
         "Schooling",
-      ],
+    ],
   }),
 
   computed: {},
 
   methods: {
-    get_rows() {
-        var rows = document.getElementById('table').getElementsByTagName('tr');
-        var rows = document.getElementById('table').rows.length;
-        var count = rows.length;
-        for(let i = 0; i < count; i++) {
-            console.log(i);
-            var id = i;
-        }
-        console.log(id);
+    // get_rows() {
+    //     var rows = document.getElementById('table').getElementsByTagName('tr');
+    //     var rows = document.getElementById('table').rows.length;
+    //     var count = rows.length;
+    //     for(let i = 0; i < count; i++) {
+    //         console.log(i);
+    //         var id = i;
+    //     }
+    //     console.log(id);
         
-        // console.log(count);
-        return count, id;
-    },
-    handleClick(row){       
+    //     // console.log(count);
+    //     return count, id;
+    // },
+    editReq(request){       
         // this.form = row
         this.dialog = true    
+        this.horseName = request.horse
+        this.select = request.attribute
+        this.change = request.change
     },
-    acceptReq(row) {
-        row.status = 'Approved'
-        api.acceptRequest(row, row.id)          
+    acceptReq(request) {
+        request.status = 'Approved'
+        // api.acceptRequest(request, request.id)          
     },
-    deleteReq(row) {
-        row.status = 'Rejected'
-        api.rejectRequest(row, row.id)
+    deleteReq(request) {
+        request.status = 'Rejected'
+        // api.rejectRequest(request, request.id)
             
     },
     updateChanges() {
@@ -177,6 +210,7 @@ export default {
       this.select = this.items[0];
       this.change = "";
     },
+
   }
 }
 </script>
