@@ -293,6 +293,7 @@ export default {
   data: () => {
     return {
       change: "",
+      horses: [],
       select: ["Select an Attribute"],
       items: [
         "Select an Attribute",
@@ -514,8 +515,7 @@ export default {
           "https://bmwphd-be.herokuapp.com/horses",
           {}
         );
-        this.$emit("horseSearch", res);
-        console.log(res);
+        this.$emit("horseSearch", res.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -535,7 +535,6 @@ export default {
       }).then(
         (res) => {
           this.horseSearch = res.data.data;
-          console.log(res);
         },
         (error) => {
           console.log(error);
