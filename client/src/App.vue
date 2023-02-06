@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <NavBar location="top"/>
+
+    <router-view></router-view>
+
     <Footer location="bottom"/>
   </v-app>
 </template>

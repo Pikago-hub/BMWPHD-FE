@@ -1,5 +1,4 @@
 <template>
-  <v-app>
     <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
       <v-app-bar-nav-icon
         variant="plain"
@@ -34,7 +33,7 @@
         </v-list>
       </v-menu>
     </v-app-bar>
-
+  
     <v-navigation-drawer
       v-model="drawer"
       image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
@@ -69,8 +68,6 @@
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <router-view></router-view>
-  </v-app>
 </template>
 
 <script>

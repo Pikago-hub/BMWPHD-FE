@@ -1,186 +1,188 @@
 <template>
-  <v-navigation-drawer
-    location="right"
-    color="#c9e0ec"
-    v-model="categoryDrawer"
-  >
-    <v-list flat subheader three-line>
-      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
-        <v-banner-text class="text-h6"> Categories </v-banner-text>
-      </v-banner>
-      <v-list-item-group multiple active-class="">
-        <v-list-item width="85%" margin-bottom="10px">
-          <template v-slot:default="{ active }">
-            <v-list-item-content
-              v-for="(item, index) in listItems"
-              :key="index"
-              :label="item.category"
-            >
-              <v-text-field
-                color="#12518e"
-                variant="underlined"
-                hint="key word search"
-                prepend-icon="mdi-magnify"
-                v-if="item.hasInput"
-                :label="`Enter ${item.category}`"
-                v-model="inputValue[index]"
-                @keyup.enter="onCategSearch"
-              ></v-text-field>
-            </v-list-item-content>
-            <v-list-item-action v-for="item in listItems">
-              <v-checkbox
-                v-model="item.hasInput"
-                :input-value="active"
-                :label="item.category"
-              ></v-checkbox>
-            </v-list-item-action>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
-
-  <v-navigation-drawer
-    location="right"
-    color="#c9e0ec"
-    v-model="attributesDrawer"
-  >
-    <v-list flat subheader three-line>
-      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
-        <v-banner-text class="text-h6"> Attributes </v-banner-text>
-      </v-banner>
-      <v-list-item-group multiple active-class="">
-        <v-list-item width="85%" margin-bottom="10px">
-          <template v-slot:default="{ active }">
-            <v-checkbox
-              v-model="selected"
-              label="Flagged"
-              value="Flagged"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Sire"
-              value="Sire"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Foul Date"
-              value="Name"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Owner"
-              value="Owner"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Dam Sire"
-              value="Dam Sire"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="2nd Dam"
-              value="2nd Dam"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Maneuver Scores"
-              value="Maneuver Scores"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
-            <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Show"
-              value="Show"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Class"
-              value="Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Level"
-              value="Level"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Open vs Non Pro"
-              value="Open vs Non Pro"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Place"
-              value="Place"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Money"
-              value="Money"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Breeder"
-              value="Breeder"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Rider"
-              value="Rider"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Draw"
-              value="Draw"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Back Number"
-              value="Back Number"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="On Dirt"
-              value="On Dirt"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Finalist"
-              value="Finalist"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Notes"
-              value="Notes"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="NRHA"
-              value="NRHA"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Date of Show/Class"
-              value="Date of Show/Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Schooling"
-              value="Schooling"
-            ></v-checkbox>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
-
   <v-main>
+    <v-navigation-drawer
+        location="right"
+        color="#c9e0ec"
+        v-model="categoryDrawer"
+        v-click-outside="onClickOutsideCD"
+    >
+      <v-list flat subheader three-line>
+        <v-banner height="65" lines="one" style="background-color: #c9e0ec">
+          <v-banner-text class="text-h6"> Categories </v-banner-text>
+        </v-banner>
+        <v-list-item-group multiple active-class="">
+          <v-list-item width="85%" margin-bottom="10px">
+            <template v-slot:default="{ active }">
+              <v-list-item-content
+                  v-for="(item, index) in listItems"
+                  :key="index"
+                  :label="item.category"
+              >
+                <v-text-field
+                    color="#12518e"
+                    variant="underlined"
+                    hint="key word search"
+                    prepend-icon="mdi-magnify"
+                    v-if="item.hasInput"
+                    :label="`Enter ${item.category}`"
+                    v-model="inputValue[index]"
+                    @keyup.enter="onCategSearch"
+                ></v-text-field>
+              </v-list-item-content>
+              <v-list-item-action v-for="item in listItems">
+                <v-checkbox
+                    v-model="item.hasInput"
+                    :input-value="active"
+                    :label="item.category"
+                ></v-checkbox>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-navigation-drawer
+        location="right"
+        color="#c9e0ec"
+        v-model="attributesDrawer"
+        v-click-outside="onClickOutsideAD"
+    >
+      <v-list flat subheader three-line>
+        <v-banner height="65" lines="one" style="background-color: #c9e0ec">
+          <v-banner-text class="text-h6"> Attributes </v-banner-text>
+        </v-banner>
+        <v-list-item-group multiple active-class="">
+          <v-list-item width="85%" margin-bottom="10px">
+            <template v-slot:default="{ active }">
+              <v-checkbox
+                  v-model="selected"
+                  label="Name"
+                  value="Name"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Sire"
+                  value="Sire"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Foul Date"
+                  value="Name"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Owner"
+                  value="Owner"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Dam Sire"
+                  value="Dam Sire"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="2nd Dam"
+                  value="2nd Dam"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Maneuver Scores"
+                  value="Maneuver Scores"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
+              <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Show"
+                  value="Show"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Class"
+                  value="Class"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Level"
+                  value="Level"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Open vs Non Pro"
+                  value="Open vs Non Pro"
+              ></v-checkbox>
+              <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Place"
+                  value="Place"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Money"
+                  value="Money"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Breeder"
+                  value="Breeder"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Rider"
+                  value="Rider"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Draw"
+                  value="Draw"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Back Number"
+                  value="Back Number"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="On Dirt"
+                  value="On Dirt"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Finalist"
+                  value="Finalist"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Notes"
+                  value="Notes"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="NRHA"
+                  value="NRHA"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Date of Show/Class"
+                  value="Date of Show/Class"
+              ></v-checkbox>
+              <v-checkbox
+                  v-model="selected"
+                  label="Schooling"
+                  value="Schooling"
+              ></v-checkbox>
+            </template>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-card
       class="mx-auto my-10"
-      max-width="1100"
+      max-width="900"
       varaint="outlined"
       style="border-radius: 10px"
     >
@@ -257,6 +259,13 @@
                       Flag Horse
                     </h2>
                     <v-form ref="form" lazy-validation color="#212121">
+                      <v-text-field
+                        v-model="horseName"
+                        :counter="10"
+                        label="Horse Name"
+                        required
+                      ></v-text-field>
+
                       <v-select
                         v-model="select"
                         :items="items"
@@ -267,7 +276,6 @@
                       <v-text-field
                         v-model="change"
                         :counter="10"
-                        :rules="changeRules"
                         label="Suggested Change"
                         required
                       ></v-text-field>
@@ -288,7 +296,31 @@
                     </v-form>
                   </v-card>
                 </v-dialog>
-              </td>
+      </v-toolbar>
+    </v-card>
+
+    <v-card
+      elevation="2"
+      class="mx-auto my-auto"
+      style="margin-bottom:100px !important;"
+      max-width="1000"
+      height="725"
+      color="#c9e0ec"
+    >
+    
+      <v-container fluid style="height: 60vh">
+        <v-table id="table" height="600px" theme="dark" density="comfortable">
+          <thead>
+            <tr>
+              <th v-for="(select, index) in selected" :key="index" scope="col">
+                {{ select }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="table-row" v-for="horse of horseSearch" :key="horse.id">
+              <!-- row 1 6th columns -->
               <td>{{ horse.name }}</td>
               <td>{{ horse.sire1 }}</td>
               <td>{{ horse.dam1 }}</td>
@@ -320,7 +352,29 @@
             </tr>
           </tbody>
         </v-table>
+
+        <v-row class="mt-4 mb-4 ml-10">
+        <v-col cols="4" sm="3">
+          <v-select
+            v-model="pageSize"
+            :items="pageSizes"
+            label="Items per Page"
+            @change="handlePageSizeChange"
+          ></v-select>
+        </v-col>
+        <v-col cols="12" sm="9">
+          <v-pagination
+            v-model="page"
+            :length="totalPages"
+            total-visible="7"
+            next-icon="mdi-menu-right"
+            prev-icon="mdi-menu-left"
+            @input="handlePageChange"
+          ></v-pagination>
+        </v-col>
+      </v-row>
       </v-container>
+     
     </v-card>
   </v-main>
 </template>
@@ -332,8 +386,15 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
+      // pagination 
+      page: 1,
+      totalPages: 10,
+      pageSize: 20,
+      pageSizes: [20, 30, 40],
+
       // for flagging a horse
       change: "",
+      horseName: "",
       select: ["Select an Attribute"],
       items: [
         "Select an Attribute",
@@ -533,15 +594,34 @@ export default {
           inputValue: "",
         },
       ],
-      selected: ["Flagged", "Name", "Sire", "Dam", "Foul Date", "Owner"],
+      selected: ["Name", "Sire", "Dam", "Foul Date", "Owner"],
     };
   },
 
-  computed: {},
+  computed: {
+    
+  },
 
-  mounted() {},
+  mounted() {
+    },
 
   methods: {
+    handlePageChange(value) {
+      this.page = value;
+      // this.retrieveTutorials();
+    },
+    handlePageSizeChange(size) {
+      this.pageSize = size;
+      this.page = 1;
+      // this.retrieveTutorials();
+    },
+    onClickOutsideCD () {
+      this.categoryDrawer = false;
+    },
+    onClickOutsideAD() {
+      this.attributesDrawer = false;
+    },
+
     async onFindAll() {
       this.$router.push("/result");
       try {
@@ -613,18 +693,16 @@ export default {
         }
       );
     },
-
     submitChanges() {
-      console.log("this happends");
+      this.horseName = "";
       this.select = this.items[0];
       this.change = "";
-      // this.$refs.form.reset()
     },
   },
 };
 </script>
 
-<style setup>
+<style scoped setup>
 .v-tooltip__content {
   pointer-events: initial;
 }
@@ -632,4 +710,5 @@ export default {
 .upperCase {
   text-transform: uppercase;
 }
+
 </style>
