@@ -37,7 +37,7 @@
                     </v-text-field>
     
                     <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"> Password </div>
-                    <v-text-field 
+                    <!-- <v-text-field 
                       density="compact"
                       placeholder="Enter your password"
                       prepend-inner-icon="mdi-lock-outline"
@@ -47,6 +47,15 @@
                       label="Password" 
                       hint="At least 8 characters" 
                       counter 
+                      @click:append="show1 = !show1">
+                    </v-text-field> -->
+                    <v-text-field 
+                      density="compact"
+                      placeholder="Enter your password"
+                      prepend-inner-icon="mdi-lock-outline"
+                      variant="outlined"
+                      v-model="loginPassword" 
+
                       @click:append="show1 = !show1">
                     </v-text-field>
 

@@ -65,6 +65,7 @@
                 color="#c9e0ec"
             >
             <v-container fluid style="height: 60vh">
+              <v-btn @click="loadChangeRequests()" >Test</v-btn>
                 <v-table id="table" height="600px" theme="dark" density="comfortable">
                     <thead>
                         <tr>
@@ -98,44 +99,46 @@
 
 <script>
 import axios from "axios";
+import api from '../../api/systemApi';
+
 
 export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
     requestList: [
-        {
-            id: 1,
-            email: "m.gresham@tcu.edu",
-            horse: "Piggy",
-            attribute: "Sire",
-            change: "Sire should be",
-            status: "Pending"
-        },
-        {
-            id: 2,
-            email: "j.wu@tcu.edu",
-            horse: "Skittle",
-            attribute: "Dam",
-            change: "Dam should be",
-            status: "Pending"
-        },
-        {
-            id: 3,
-            email: "c.jain@tcu.edu",
-            horse: "Lauren",
-            attribute: "Schooling",
-            change: "Schooling should be",
-            status: "Pending"
-        },
-        {
-            id: 4,
-            email: "d.hanft@tcu.edu",
-            horse: "Waterbottle",
-            attribute: "Score",
-            change: "Score should be",
-            status: "Pending"
-        },
+         {
+             id: 1,
+             email: "m.gresham@tcu.edu",
+             horse: "Piggy",
+             attribute: "Sire",
+             change: "Sire should be",
+             status: "Pending"
+         },
+         {
+             id: 2,
+             email: "j.wu@tcu.edu",
+             horse: "Skittle",
+             attribute: "Dam",
+             change: "Dam should be",
+             status: "Pending"
+         },
+         {
+             id: 3,
+             email: "c.jain@tcu.edu",
+             horse: "Lauren",
+             attribute: "Schooling",
+             change: "Schooling should be",
+             status: "Pending"
+         },
+         {
+             id: 4,
+             email: "d.hanft@tcu.edu",
+             horse: "Waterbottle",
+             attribute: "Score",
+             change: "Score should be",
+             status: "Pending"
+         },
     ],
     // flagging horse dialog 
     dialog: false,
@@ -176,19 +179,12 @@ export default {
   computed: {},
 
   methods: {
-    // get_rows() {
-    //     var rows = document.getElementById('table').getElementsByTagName('tr');
-    //     var rows = document.getElementById('table').rows.length;
-    //     var count = rows.length;
-    //     for(let i = 0; i < count; i++) {
-    //         console.log(i);
-    //         var id = i;
-    //     }
-    //     console.log(id);
-        
-    //     // console.log(count);
-    //     return count, id;
-    // },
+    async loadChangeRequests () {
+          this.rawData = await api.getChangeRequests();//this should be getFormDataForReal()
+          this.requestList = this.rawData.data; 
+          console.log(this.rawData)
+    },
+
     editReq(request){       
         // this.form = row
         this.dialog = true    
