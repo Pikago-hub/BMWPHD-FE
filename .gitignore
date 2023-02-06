@@ -17,7 +17,8 @@ target
 .DS_Store
 
 # Intellij #
-.idea
+
+*.idea
 *.iml
 *.log
 
@@ -30,6 +31,7 @@ logback.out.xml
 backend/src/main/resources/public/
 backend/target
 BMWPHD-FE/dist/
+BMWPHD-FE/src/target
 BMWPHD-FE/node/
 BMWPHD-FE/node_modules/
 BMWPHD-FE/npm-debug.log
