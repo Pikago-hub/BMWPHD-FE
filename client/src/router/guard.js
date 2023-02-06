@@ -1,4 +1,6 @@
-import utils from '@/utils';
+import authService from '../services/auth.service';
+import authHeader from '../services/auth-header';
+import userService from '../services/user.service';
 import useUserStore from '@/store/userStore';
 
 function setupGuard(router) {

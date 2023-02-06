@@ -221,7 +221,7 @@
         </v-btn>
       </v-toolbar>
     </v-card>
-
+<!-- 
     <v-card
       elevation="2"
       class="mx-auto"
@@ -297,7 +297,7 @@
                   </v-card>
                 </v-dialog>
       </v-toolbar>
-    </v-card>
+    </v-card> -->
 
     <v-card
       elevation="2"

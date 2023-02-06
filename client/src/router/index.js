@@ -3,7 +3,8 @@ import Home from "../FE/Views/Home.vue";
 import About from "../FE/Views/About.vue";
 import Login from "../FE/Views/Login.vue";
 import Result from "../FE/Views/Result.vue";
-import ManageUsers from "../FE/Views/ManageUsers.vue";
+import ManageRequests from "../FE/Views/ManageRequests.vue";
+import ManageUsers from "../FE/Views/ManageUsers.vue"
 import PageNotFound from "../FE/Views/PageNotFound.vue";
 
 const routes = [
@@ -32,6 +33,12 @@ const routes = [
     component: About,
   },
   {
+    path: "/managerequests",
+    name: "managerequests",
+    meta: { title: "managerequests" },
+    component: ManageRequests,
+  },
+  {
     path: "/manageusers",
     name: "manageusers",
     meta: { title: "manageusers" },
@@ -40,17 +47,17 @@ const routes = [
   { path: "/:pathMatch(.*)*", component: PageNotFound },
 ];
 
-router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/home", "/about", "/result"];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
+// router.beforeEach((to, from, next) => {
+//   const publicPages = ["/login", "/home", "/about", "/result"];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem("user");
 
-  if (authRequired && !loggedIn) {
-    return next("/login");
-  } else {
-    next();
-  }
-});
+//   if (authRequired && !loggedIn) {
+//     return next("/login");
+//   } else {
+//     next();
+//   }
+// });
 
 const router = createRouter({
   history: createWebHistory(),

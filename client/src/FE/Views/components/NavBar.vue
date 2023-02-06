@@ -61,10 +61,16 @@
           @click="onAbout"
         ></v-list-item>
         <v-list-item
-          prepend-icon="mdi-account"
-          title="Manage"
+          prepend-icon="mdi-clipboard-check"
+          title="Manage Requests"
           link
-          @click="onManage"
+          @click="onManageRequests"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-account"
+          title="Manage Users"
+          link
+          @click="onManageUsers"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -99,7 +105,10 @@ export default {
     onHome() {
       this.$router.push("/");
     },
-    onManage() {
+    onManageRequests() {
+      this.$router.push("/managerequests");
+    },
+    onManageUsers () {
       this.$router.push("/manageusers");
     },
     onLogin() {
