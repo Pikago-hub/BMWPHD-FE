@@ -81,7 +81,7 @@
                                 <td style="text-align: center"> {{ request.email }} </td>
                                 <td style="text-align: center"> {{ request.horse }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
-                                <td style="text-align: center"> {{ request.change }} </td>
+                                <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                     <td>
                                         <v-btn color="green" @click="acceptReq(request)"> Approve </v-btn>
                                         <v-btn color="white" class="ml-5" @click="editReq(request)"> Edit </v-btn>
@@ -112,7 +112,7 @@ export default {
              email: "m.gresham@tcu.edu",
              horse: "Piggy",
              attribute: "Sire",
-             change: "Sire should be",
+             suggestedChange: "Sire should be",
              status: "Pending"
          },
          {
@@ -120,7 +120,7 @@ export default {
              email: "j.wu@tcu.edu",
              horse: "Skittle",
              attribute: "Dam",
-             change: "Dam should be",
+             suggestedChange: "Dam should be",
              status: "Pending"
          },
          {
@@ -128,7 +128,7 @@ export default {
              email: "c.jain@tcu.edu",
              horse: "Lauren",
              attribute: "Schooling",
-             change: "Schooling should be",
+             suggestedChange: "Schooling should be",
              status: "Pending"
          },
          {
@@ -136,7 +136,7 @@ export default {
              email: "d.hanft@tcu.edu",
              horse: "Waterbottle",
              attribute: "Score",
-             change: "Score should be",
+             suggestedChange: "Score should be",
              status: "Pending"
          },
     ],
@@ -190,7 +190,7 @@ export default {
         this.dialog = true    
         this.horseName = request.horse
         this.select = request.attribute
-        this.change = request.change
+        this.change = request.suggestedChange
     },
     acceptReq(request) {
         request.status = 'Approved'

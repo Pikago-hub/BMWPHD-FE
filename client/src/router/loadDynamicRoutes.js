@@ -1,7 +1,8 @@
 import dynamicRoutes from './dynamicRoutes';
-import useUserStore from '@/store/userStore';
-
-import cacheUtils from "@/utils/cacheUtils";
+import useUserStore from '../store/index';
+import authService from '../services/auth.service';
+import authHeader from '../services/auth-header';
+import userService from '../services/user.service';
 
 // this function is used to filter out views defined in dynamicRoutes that a user does not have access to
 function autoloadDynamicRoutes(router) {

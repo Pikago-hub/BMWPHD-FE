@@ -7,6 +7,14 @@ import ManageRequests from "../FE/Views/ManageRequests.vue";
 import ManageUsers from "../FE/Views/ManageUsers.vue"
 import PageNotFound from "../FE/Views/PageNotFound.vue";
 
+import basicRoutes from './basicRoutes';
+import setupGuard from './guard';
+import useUserStore from '../store/index';
+import autoloadDynamicRoutes from './loadDynamicRoutes';
+import authService from '../services/auth.service';
+import authHeader from '../services/auth-header';
+import userService from '../services/user.service';
+
 const routes = [
   {
     path: "/",

@@ -1,7 +1,8 @@
 import authService from '../services/auth.service';
 import authHeader from '../services/auth-header';
 import userService from '../services/user.service';
-import useUserStore from '@/store/userStore';
+import useUserStore from '../store/index';
+
 
 function setupGuard(router) {
   router.beforeEach((to, from) => {

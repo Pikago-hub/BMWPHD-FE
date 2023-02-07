@@ -22,23 +22,23 @@
                 <v-table id="table" height="600px" theme="dark" density="comfortable">
                     <thead>
                         <tr>
-                            <th style="text-align: center" scope="col">First Name</th>
-                            <th style="text-align: center" scope="col">Last Name</th>
+                            <th style="text-align: center" scope="col">Username</th>
+                            <th style="text-align: center" scope="col">Name</th>
                             <th style="text-align: center" scope="col">Email</th>
+                            <th style="text-align: center" scope="col">Role</th>
+                            <th style="text-align: center" scope="col">Actions</th>
                         </tr>
                     </thead>
                         <tbody>
-                            <!-- <tr class="table-row" v-for="request of requestList" :key="request.id">
-                                <td style="text-align: center"> {{ request.email }} </td>
-                                <td style="text-align: center"> {{ request.horse }} </td>
-                                <td style="text-align: center"> {{ request.attribute }} </td>
-                                <td style="text-align: center"> {{ request.change }} </td>
+                            <tr class="table-row" v-for="user of userList" :key="user.id">
+                                <td style="text-align: center"> {{ user.username }} </td>
+                                <td style="text-align: center"> {{ user.name }} </td>
+                                <td style="text-align: center"> {{ user.email }} </td>
+                                <td style="text-align: center"> {{ user.role }} </td>
                                     <td>
-                                        <v-btn color="green" @click="acceptReq(request)"> Approve </v-btn>
-                                        <v-btn color="white" class="ml-5" @click="editReq(request)"> Edit </v-btn>
-                                        <v-btn color="red" class="ml-5" @click="deleteReq(request)"> Deny </v-btn>   
+                                        <v-btn color="red"  class="ml-16" @click="deleteUser(user)"> Delete </v-btn>   
                                     </td>    
-                            </tr> -->
+                            </tr>
                         </tbody>
                 </v-table>
             </v-container>
@@ -56,107 +56,34 @@ export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
-    requestList: [
+    userList: [
          {
              id: 1,
+             username: 'mgresham',
+             name: 'Madison Gresham',
              email: "m.gresham@tcu.edu",
-             horse: "Piggy",
-             attribute: "Sire",
-             change: "Sire should be",
-             status: "Pending"
+             role: 'fan'
          },
          {
              id: 2,
-             email: "j.wu@tcu.edu",
-             horse: "Skittle",
-             attribute: "Dam",
-             change: "Dam should be",
-             status: "Pending"
-         },
-         {
-             id: 3,
+             username: 'cjain',
+             name: 'Chirayu Jain',
              email: "c.jain@tcu.edu",
-             horse: "Lauren",
-             attribute: "Schooling",
-             change: "Schooling should be",
-             status: "Pending"
+             role: 'admin'
          },
-         {
-             id: 4,
-             email: "d.hanft@tcu.edu",
-             horse: "Waterbottle",
-             attribute: "Score",
-             change: "Score should be",
-             status: "Pending"
-         },
+         
     ],
-    // flagging horse dialog 
-    dialog: false,
-    change: "",
-    horseName: "",
-    select: ["Select an Attribute"],
-    items: [
-        "Select an Attribute",
-        "Name",
-        "Sire",
-        "Dam",
-        "Dam Sire",
-        "2nd Dam",
-        "Maneuver Scores",
-        "LTE",
-        "PE",
-        "Show",
-        "Class",
-        "Level",
-        "Open vs Non Pro",
-        "Age",
-        "Place",
-        "Money",
-        "Breeder",
-        "Owner",
-        "Rider",
-        "Draw",
-        "Back Number",
-        "On Dirt",
-        "Finalist",
-        "Notes",
-        "NRHA",
-        "Date of Show/Class",
-        "Schooling",
-    ],
+
   }),
 
   computed: {},
 
   methods: {
-    async loadChangeRequests () {
-          this.rawData = await api.getChangeRequests();//this should be getFormDataForReal()
-          this.requestList = this.rawData.data; 
-          console.log(this.rawData)
-    },
-
-    editReq(request){       
-        // this.form = row
-        this.dialog = true    
-        this.horseName = request.horse
-        this.select = request.attribute
-        this.change = request.change
-    },
-    acceptReq(request) {
-        request.status = 'Approved'
-        // api.acceptRequest(request, request.id)          
-    },
-    deleteReq(request) {
-        request.status = 'Rejected'
+   
+    deleteUser(user) {
+        user.status = 'Delete'
         // api.rejectRequest(request, request.id)
-            
     },
-    updateChanges() {
-      this.horseName = "";
-      this.select = this.items[0];
-      this.change = "";
-    },
-
   }
 }
 </script>

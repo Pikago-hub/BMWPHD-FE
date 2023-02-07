@@ -27,7 +27,7 @@ class AuthService {
       lastname: user.lastname,
       email: user.email,
       password: user.password,
-      comfrimPassword: user.comfrimPassword,
+      comfirmPassword: user.comfirmPassword,
     });
   }
 }
