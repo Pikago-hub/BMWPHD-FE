@@ -2,12 +2,6 @@
     <v-main>
         <v-sheet class="py-16">
             <section id="filter">
-            <v-card class="mx-auto"
-                width="20%" color="#c9e0ec" elevation="3" style="border-radius: 10px;">
-                <h2 class="text-h4" style="text-align:center">
-                 Request Management
-                </h2>
-            </v-card>
 
             <v-dialog v-model="dialog">
                     <v-card
@@ -64,16 +58,18 @@
                 style="border-radius: 10px"
                 color="#c9e0ec"
             >
+                <h2 class="text-h4 mt-5" style="text-align:center">
+                 Request Management
+                </h2>
             <v-container fluid style="height: 60vh">
-              <v-btn @click="loadChangeRequests()" >Test</v-btn>
                 <v-table id="table" height="600px" theme="dark" density="comfortable">
                     <thead>
                         <tr>
-                            <th style="text-align: center" scope="col">User Email</th>
-                            <th style="text-align: center" scope="col">Horse Name</th>
-                            <th style="text-align: center" scope="col">Atttribute</th>
-                            <th style="text-align: center" scope="col">Suggested Change</th>
-                            <th style="text-align: center" scope="col">Actions</th>
+                            <th style="text-align: center; font-size:15px;" scope="col">User Email</th>
+                            <th style="text-align: center; font-size:15px;" scope="col">Horse Name</th>
+                            <th style="text-align: center; font-size:15px;" scope="col">Atttribute</th>
+                            <th style="text-align: center; font-size:15px;" scope="col">Suggested Change</th>
+                            <th style="text-align: center; font-size:15px;" scope="col">Actions</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -83,9 +79,21 @@
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                     <td>
-                                        <v-btn color="green" @click="acceptReq(request)"> Approve </v-btn>
-                                        <v-btn color="white" class="ml-5" @click="editReq(request)"> Edit </v-btn>
-                                        <v-btn color="red" class="ml-5" @click="deleteReq(request)"> Deny </v-btn>   
+                                      <v-tooltip text="Accept" location="top">
+                                      <template v-slot:activator="{ props }"> 
+                                        <v-btn v-bind="props" class="ml-4" color="green" @click="acceptReq(request)"> <v-icon icon="mdi-check-bold"></v-icon> </v-btn>
+                                      </template>
+                                      </v-tooltip>
+                                      <v-tooltip text="Edit" location="top">
+                                      <template v-slot:activator="{ props }">  
+                                        <v-btn v-bind="props" class="ml-4" color="white" @click="editReq(request)"> <v-icon icon="mdi-pencil-outline"></v-icon> </v-btn>  
+                                      </template>
+                                      </v-tooltip>
+                                      <v-tooltip text="Deny" location="top">
+                                      <template v-slot:activator="{ props }">    
+                                        <v-btn v-bind="props" class="ml-4" color="red" @click="deleteReq(request)"> <v-icon icon="mdi-cancel"></v-icon> </v-btn> 
+                                      </template>
+                                      </v-tooltip>
                                     </td>    
                             </tr>
                         </tbody>
@@ -212,5 +220,8 @@ export default {
 </script>
 
 <style>
+.v-tooltip__content {
+  pointer-events: initial;
+}
 
 </style>
