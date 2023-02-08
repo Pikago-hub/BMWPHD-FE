@@ -61,7 +61,7 @@ const basicRoutes = [
   {
     path: "/:pathMatch(.*)",
     name: "pageNotFound",
-    component: () => import("../FE/views/PageNotFound.vue"),
+    component: () => import("../FE/Views/PageNotFound.vue"),
   },
 ];
 
