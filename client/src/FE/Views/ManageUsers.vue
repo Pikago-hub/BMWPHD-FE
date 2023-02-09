@@ -1,6 +1,17 @@
 <template>
     <v-main>
-        <v-sheet class="py-16">
+              <v-alert
+              v-model="alert"
+                outlined
+                text
+                color="#E6FFE6"
+                closable="true"
+                close-text="Close Alert"
+              >
+              <v-icon icon="mdi-check-bold"></v-icon>
+              User has been <strong>updated</strong> in the database
+              </v-alert>
+        <v-sheet class="mt-6 mb-6">
             <section id="filter">
 
             <v-dialog v-model="dialog">
@@ -12,28 +23,37 @@
                         style="border-radius: 10px"
                     >
                         <h2 class="text-h4 mt-4 mb-4" style="text-align:center">
-                        User 
+                        Edit User 
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
-                      <v-text-field
-                        v-model="firstName"
-                        label="First Name"
-                        required
-                      ></v-text-field>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                            class="ml-6"
+                            v-model="firstName"
+                            label="First Name"
+                            required
+                        ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="6">
+                        <v-text-field
+                            class="mr-6"
+                            v-model="lastName"
+                            label="Last Name"
+                            required
+                        ></v-text-field>
+                        </v-col>
+                      </v-row>
 
                       <v-text-field
-                        v-model="lastName"
-                        label="Last Name"
-                        required
-                      ></v-text-field>
-
-                      <v-text-field
+                        class="mx-6"
                         v-model="email"
                         label="Email Address"
                         required
                       ></v-text-field>
 
                       <v-select
+                        class="mx-6"
                         v-model="select"
                         :items="items"
                         label="Role"
@@ -42,7 +62,7 @@
 
                       <p style="text-align: center">
                         <v-btn
-                          class="mr-14 mb-6"
+                          class="mr-7 mb-6"
                           color="#c9e0ec"
                           @click="updateChanges"
                           >Update Changes</v-btn
@@ -60,25 +80,24 @@
 
 
             <v-card
-                class="mx-auto my-10"
-                max-width="900"
+                class="mx-auto mt-5"
+                width="70%"
+                height="80vh"
                 varaint="outlined"
                 style="border-radius: 10px"
                 color="#c9e0ec"
             >
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  User Management
-                </h2>
-            <v-container fluid style="height: 60vh">
-             
-                <v-table id="table" height="600px" theme="dark" density="comfortable">
+                </h2>             
+                <v-table fixed-header="true" id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
-                            <th style="text-align: center; font-size:15px;" scope="col">First Name</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Last Name</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Email</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Role</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Actions</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">First Name</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Last Name</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Email</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Role</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Actions</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -102,7 +121,6 @@
                             </tr>
                         </tbody>
                 </v-table>
-            </v-container>
             </v-card>
             </section>
         </v-sheet>
@@ -117,6 +135,7 @@ export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
+    alert: false,
     dialog: false,
     firstName: "",
     lastName: "",
@@ -129,6 +148,118 @@ export default {
         "Admin"
     ],
     userList: [
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
+         {
+             id: 1,
+             firstName: 'Madison',
+             lastName: 'Gresham',
+             email: "m.gresham@tcu.edu",
+             role: 'Fan'
+         },
+         {
+             id: 2,
+             firstName: 'Chirayu',
+             lastName: 'Jain',
+             email: "c.jain@tcu.edu",
+             role: 'Admin'
+         },  
          {
              id: 1,
              firstName: 'Madison',
@@ -162,6 +293,11 @@ export default {
     deleteUser(user) {
         user.status = 'Delete'
         // api.rejectRequest(request, request.id)
+    },
+    updateChanges() {
+      this.alert = true
+      this.dialog = false
+      // send updated info to backed
     },
   }
 }

@@ -1,6 +1,6 @@
 <template>
     <v-main>
-        <v-sheet class="py-16">
+        <v-sheet class="py-9">
             <section id="filter">
 
             <v-dialog v-model="dialog">
@@ -16,12 +16,14 @@
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
                       <v-text-field
+                        class="mx-6"
                         v-model="horseName"
                         label="Horse Name"
                         required
                       ></v-text-field>
 
                       <v-select
+                        class="mx-6"
                         v-model="select"
                         :items="items"
                         label="Attribute selected to change"
@@ -29,6 +31,7 @@
                       ></v-select>
 
                       <v-text-field
+                        class="mx-6"
                         v-model="change"
                         label="Suggested Change"
                         required
@@ -52,8 +55,9 @@
                 </v-dialog>
 
             <v-card
-                class="mx-auto my-10"
-                max-width="900"
+                class="mx-auto"
+                width="70%"
+                height="80vh"
                 varaint="outlined"
                 style="border-radius: 10px"
                 color="#c9e0ec"
@@ -61,15 +65,14 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
-            <v-container fluid style="height: 60vh">
-                <v-table id="table" height="600px" theme="dark" density="comfortable">
+                <v-table fixed-header="true" id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
-                            <th style="text-align: center; font-size:15px;" scope="col">User Email</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Horse Name</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Atttribute</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Suggested Change</th>
-                            <th style="text-align: center; font-size:15px;" scope="col">Actions</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">User Email</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Horse Name</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Atttribute</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Suggested Change</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Actions</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -78,7 +81,7 @@
                                 <td style="text-align: center"> {{ request.horse }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
-                                    <td>
+                                    <td style="text-align: center">
                                       <v-tooltip text="Accept" location="top">
                                       <template v-slot:activator="{ props }"> 
                                         <v-btn v-bind="props" class="ml-4" color="green" @click="acceptReq(request)"> <v-icon icon="mdi-check-bold"></v-icon> </v-btn>
@@ -98,7 +101,6 @@
                             </tr>
                         </tbody>
                 </v-table>
-            </v-container>
             </v-card>
             </section>
         </v-sheet>
@@ -213,6 +215,7 @@ export default {
       this.horseName = "";
       this.select = this.items[0];
       this.change = "";
+      this.dialog = false;
     },
 
   }

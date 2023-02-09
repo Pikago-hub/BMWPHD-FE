@@ -1,4 +1,16 @@
 <template>
+              <v-alert
+              v-model="alert"
+                outlined
+                text
+                color="#E6FFE6"
+                closable="true"
+                close-text="Close Alert"
+              >
+              <v-icon icon="mdi-check-bold"></v-icon>
+              Your suggested changes have been submitted for review by our team
+              </v-alert>
+  
   <v-navigation-drawer
     location="right"
     color="#c9e0ec"
@@ -251,6 +263,7 @@
           </h2>
           <v-form ref="form" lazy-validation color="#212121">
             <v-text-field
+              class="mx-6"
               v-model="horseName"
               :counter="10"
               label="Horse Name"
@@ -258,6 +271,7 @@
             ></v-text-field>
 
             <v-select
+              class="mx-6"
               v-model="select"
               :items="items"
               label="Which field would you like to suggest a change for?"
@@ -265,6 +279,7 @@
             ></v-select>
 
             <v-text-field
+              class="mx-6"
               v-model="change"
               :counter="10"
               label="Suggested Change"
@@ -292,6 +307,7 @@ export default {
   props: ["itemDetails"],
   data: () => {
     return {
+      alert: false,
       change: "",
       horses: [],
       select: ["Select an Attribute"],
@@ -507,6 +523,8 @@ export default {
       this.horseName = "";
       this.select = this.items[0];
       this.change = "";
+      this.dialog = false;
+      this.alert = true;
     },
 
     async onFindAll() {
