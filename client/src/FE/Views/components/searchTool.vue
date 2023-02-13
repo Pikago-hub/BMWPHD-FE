@@ -4,7 +4,7 @@
                 outlined
                 text
                 color="#E6FFE6"
-                closable="true"
+                closable
                 close-text="Close Alert"
               >
               <v-icon icon="mdi-check-bold"></v-icon>

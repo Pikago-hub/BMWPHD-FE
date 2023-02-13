@@ -1,16 +1,29 @@
 <template>
     <v-main>
               <v-alert
-              v-model="alert"
+              v-model="editAlert"
                 outlined
                 text
                 color="#E6FFE6"
-                closable="true"
+                closable
                 close-text="Close Alert"
               >
               <v-icon icon="mdi-check-bold"></v-icon>
               User has been <strong>updated</strong> in the database
               </v-alert>
+
+              <v-alert
+              v-model="deleteAlert"
+                outlined
+                text
+                color="#FFCCCB"
+                closable
+                close-text="Close Alert"
+              >
+              <v-icon icon="mdi-check-bold"></v-icon>
+              User has been <strong>Deleted</strong> in the database
+              </v-alert>
+
         <v-sheet class="mt-6 mb-6">
             <section id="filter">
 
@@ -90,7 +103,7 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  User Management
                 </h2>             
-                <v-table fixed-header="true" id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
+                <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
                             <th style="text-align: center; font-size:20px;" scope="col">First Name</th>
@@ -135,7 +148,8 @@ export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
-    alert: false,
+    editAlert: false,
+    deleteAlert: false,
     dialog: false,
     firstName: "",
     lastName: "",
@@ -291,11 +305,12 @@ export default {
     },
    
     deleteUser(user) {
-        user.status = 'Delete'
+        this.deleteAlert = true
+        // user.status = 'Delete'
         // api.rejectRequest(request, request.id)
     },
-    updateChanges() {
-      this.alert = true
+    updateChanges(user) {
+      this.editAlert = true
       this.dialog = false
       // send updated info to backed
     },

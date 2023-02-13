@@ -1,5 +1,42 @@
 <template>
     <v-main>
+
+              <v-alert
+                v-model="acceptAlert"
+                  outlined
+                  text
+                  color="#E6FFE6"
+                  closable
+                  close-text="Close Alert"
+                >
+                <v-icon icon="mdi-check-bold"></v-icon>
+                Horse request has been <strong>accepted</strong> and the horse inforamtion has been <strong>updated</strong> for all users to see
+              </v-alert>
+
+            <v-alert
+                v-model="editAlert"
+                  outlined
+                  text
+                  color="#E6FFE6"
+                  closable
+                  close-text="Close Alert"
+                >
+                <v-icon icon="mdi-check-bold"></v-icon>
+                Horse request has been <strong>updated</strong>
+              </v-alert>
+
+              <v-alert
+                v-model="denyAlert"
+                  outlined
+                  text
+                  color="#FFCCCB"
+                  closable
+                  close-text="Close Alert"
+                >
+                <v-icon icon="mdi-check-bold"></v-icon>
+                Horse request has been <strong>Denied</strong>
+              </v-alert>
+
         <v-sheet class="py-9">
             <section id="filter">
 
@@ -15,6 +52,11 @@
                         Flaged Horse 
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
+                    <v-text-field
+                    class="mx-6"
+                    style="display: none;"
+                    v-model="horseID"> </v-text-field>
+
                       <v-text-field
                         class="mx-6"
                         v-model="horseName"
@@ -36,11 +78,12 @@
                         label="Suggested Change"
                         required
                       ></v-text-field>
+
                       <p style="text-align: center">
                         <v-btn
                           class="mr-14 mb-6"
                           color="#c9e0ec"
-                          @click="updateChanges"
+                          @click="updateChanges(request)"
                           >Update Changes</v-btn
                         >
                         <v-btn
@@ -65,7 +108,7 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
-                <v-table fixed-header="true" id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
+                <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
                             <th style="text-align: center; font-size:20px;" scope="col">User Email</th>
@@ -150,10 +193,14 @@ export default {
              status: "Pending"
          },
     ],
+    acceptAlert: false,
+    editAlert: false,
+    denyAlert: false,
     // flagging horse dialog 
     dialog: false,
     change: "",
     horseName: "",
+    horseID: "",
     select: ["Select an Attribute"],
     items: [
         "Select an Attribute",
@@ -194,24 +241,28 @@ export default {
           this.requestList = this.rawData.data; 
           console.log(this.rawData)
     },
-
     editReq(request){       
-        // this.form = row
-        this.dialog = true    
+        this.dialog = true   
+        this.horseID = request.id 
         this.horseName = request.horse
         this.select = request.attribute
         this.change = request.suggestedChange
     },
     acceptReq(request) {
-        request.status = 'Approved'
+        this.acceptAlert = true
+        // request.status = 'Approved'
         // api.acceptRequest(request, request.id)          
     },
     deleteReq(request) {
-        request.status = 'Rejected'
+        this.denyAlert = true
+        // request.status = 'Rejected'
         // api.rejectRequest(request, request.id)
-            
     },
     updateChanges() {
+      var requestID = this.horseID;
+      console.log(requestID);
+      console.log(this.horseName);
+      this.editAlert = true
       this.horseName = "";
       this.select = this.items[0];
       this.change = "";
