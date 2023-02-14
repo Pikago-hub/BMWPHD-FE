@@ -80,7 +80,7 @@
             <v-checkbox
               v-model="selected"
               label="Foul Date"
-              value="Name"
+              value="Foul Date"
             ></v-checkbox>
             <v-checkbox
               v-model="selected"

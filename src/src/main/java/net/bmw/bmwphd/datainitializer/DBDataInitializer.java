@@ -120,7 +120,7 @@ public class DBDataInitializer implements CommandLineRunner {
         u6.setPassword("123");
         u6.setName("Madison");
         u6.setEmail("madison@tcu.edu");
-        u6.setRole("Fan");
+        u6.setRole("Admin");
 
         userService.save(u4);
         userService.save(u6);

@@ -108,6 +108,7 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
+                <v-btn @click="loadChangeRequests()"> TEST </v-btn>
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
@@ -237,8 +238,8 @@ export default {
 
   methods: {
     async loadChangeRequests () {
-          this.rawData = await api.getChangeRequests();//this should be getFormDataForReal()
-          this.requestList = this.rawData.data; 
+          this.rawData = await api.getChangeRequests();
+          // this.requestList = this.rawData; 
           console.log(this.rawData)
     },
     editReq(request){       
