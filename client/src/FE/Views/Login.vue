@@ -15,42 +15,46 @@
         <v-window v-model="tab">
           <v-window-item value="Login">
             <v-card class="px-4">
-            <v-card-text>
-              <v-form ref="loginForm" v-model="valid" lazy-validation>
+              <v-card-text>
+                <v-form ref="loginForm" v-model="valid" lazy-validation>
+                  <div class="text-subtitle-1 text-medium-emphasis">Email</div>
+                  <v-text-field
+                    density="compact"
+                    placeholder="Email address"
+                    prepend-inner-icon="mdi-email-outline"
+                    variant="outlined"
+                    v-model="loginEmail"
+                    :rules="loginEmailRules"
+                    required
+                  >
+                  </v-text-field>
 
-                    <div class="text-subtitle-1 text-medium-emphasis">Email</div>
-                    <v-text-field 
-                      density="compact" 
-                      placeholder="Email address" 
-                      prepend-inner-icon="mdi-email-outline"
-                      variant="outlined"
-                      v-model="loginEmail" 
-                      :rules="loginEmailRules" 
-                      required>
-                    </v-text-field>
-    
-                    <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"> Password </div>
-                    <!-- <v-text-field 
+                  <div
+                    class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+                  >
+                    Password
+                  </div>
+                  <!-- <v-text-field
                       density="compact"
                       placeholder="Enter your password"
                       prepend-inner-icon="mdi-lock-outline"
                       variant="outlined"
-                      v-model="loginPassword" 
-                      :rules="[rules.required, rules.min]" 
-                      label="Password" 
-                      hint="At least 8 characters" 
-                      counter 
+                      v-model="loginPassword"
+                      :rules="[rules.required, rules.min]"
+                      label="Password"
+                      hint="At least 8 characters"
+                      counter
                       @click:append="show1 = !show1">
                     </v-text-field> -->
-                    <v-text-field 
-                      density="compact"
-                      placeholder="Enter your password"
-                      prepend-inner-icon="mdi-lock-outline"
-                      variant="outlined"
-                      v-model="loginPassword" 
-
-                      @click:append="show1 = !show1">
-                    </v-text-field>
+                  <v-text-field
+                    density="compact"
+                    placeholder="Enter your password"
+                    prepend-inner-icon="mdi-lock-outline"
+                    variant="outlined"
+                    v-model="loginPassword"
+                    @click:append="show1 = !show1"
+                  >
+                  </v-text-field>
 
                   <v-btn
                     x-large
@@ -149,30 +153,36 @@
                   >
                   </v-text-field>
 
-                <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">Confirm Password</div>
-                <v-text-field 
-                  block 
-                  density="compact"
-                  placeholder="Enter your password again"
-                  prepend-inner-icon="mdi-lock-outline"
-                  variant="outlined"
-                  v-model="verify" 
-                  :rules="[rules.required, passwordMatch]" 
-                  name="input-10-1" 
-                  counter 
-                  @click:append="show1 = !show1">
-                </v-text-field>
-          
-                <v-btn 
-                  x-large 
-                  block :disabled="!good" 
-                  color="blue"
-                  variant="tonal"
-                  class="mb-8"
-                  @click="validate">Register
-                </v-btn>
-             
-              </v-form>
+                  <div
+                    class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+                  >
+                    Confirm Password
+                  </div>
+                  <v-text-field
+                    block
+                    density="compact"
+                    placeholder="Enter your password again"
+                    prepend-inner-icon="mdi-lock-outline"
+                    variant="outlined"
+                    v-model="verify"
+                    :rules="[rules.required, passwordMatch]"
+                    name="input-10-1"
+                    counter
+                    @click:append="show1 = !show1"
+                  >
+                  </v-text-field>
+
+                  <v-btn
+                    x-large
+                    block
+                    :disabled="!good"
+                    color="blue"
+                    variant="tonal"
+                    class="mb-8"
+                    @click="validate"
+                    >Register
+                  </v-btn>
+                </v-form>
               </v-card-text>
             </v-card>
           </v-window-item>
@@ -183,6 +193,7 @@
 </template>
 
 <script>
+import authService from "../../services/auth.service.js";
 export default {
   data: () => ({
     dialog: true,
@@ -193,7 +204,7 @@ export default {
     ],
     valid: true,
     good: true,
-    
+
     firstName: "",
     lastName: "",
     email: "",
@@ -275,16 +286,28 @@ export default {
             error.toString();
         });
     },
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        this.$router.push("/");
-      }
-      else if (this.$refs.registerForm.validate()) {
-        this.$router.push('/');
-      }
-      else if (this.$refs.registerForm.validate()) {
-        this.$router.push('/');
-      }
+    async validate() {
+      const user = {
+        username: this.loginEmail,
+        password: this.loginPassword,
+      };
+      const response = await authService
+        .login(user)
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("user", JSON.stringify(data.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // if (this.$refs.loginForm.validate()) {
+      //   this.$router.push("/");
+      // } else if (this.$refs.registerForm.validate()) {
+      //   this.$router.push("/");
+      // } else if (this.$refs.registerForm.validate()) {
+      //   this.$router.push("/");
+      // }
     },
     reset() {
       this.$refs.form.reset();

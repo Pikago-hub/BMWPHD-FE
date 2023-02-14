@@ -1,21 +1,32 @@
 import axios from "axios";
 
-const API_URL = "https://bmwphd-be.herokuapp.com/auth";
+const API_URL = "https://bmwphd-be.herokuapp.com/auth/";
 
 class AuthService {
-  login(user) {
+  login = async (user) => {
+    console.log("validate");
     return axios
-      .post(API_URL + "login", {
-        username: user.username,
-        password: user.password,
-      })
+      .post(
+        API_URL + "login",
+        JSON.stringify({
+          email: user.username,
+          password: user.password,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Basic " + btoa(user.username + ":" + user.password),
+          },
+        }
+      )
       .then((response) => {
         if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          console.log("response.data", response.data);
         }
+
         return response.data;
       });
-  }
+  };
 
   logout() {
     localStorage.removeItem("user");
