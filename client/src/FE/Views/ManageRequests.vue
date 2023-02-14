@@ -108,7 +108,7 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
-                <v-btn @click="loadChangeRequests()"> TEST </v-btn>
+                <!-- <v-btn @click="loadChangeRequests()"> TEST </v-btn> -->
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
@@ -121,8 +121,8 @@
                     </thead>
                         <tbody>
                             <tr class="table-row" v-for="request of requestList" :key="request.id">
-                                <td style="text-align: center"> {{ request.email }} </td>
-                                <td style="text-align: center"> {{ request.horse }} </td>
+                                <td style="text-align: center"> {{ request.ownerId }} </td>
+                                <td style="text-align: center"> {{ request.horseId }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                     <td style="text-align: center">
@@ -161,38 +161,38 @@ export default {
   props:[""],
   data: () => ({
     requestList: [
-         {
-             id: 1,
-             email: "m.gresham@tcu.edu",
-             horse: "Piggy",
-             attribute: "Sire",
-             suggestedChange: "Sire should be",
-             status: "Pending"
-         },
-         {
-             id: 2,
-             email: "j.wu@tcu.edu",
-             horse: "Skittle",
-             attribute: "Dam",
-             suggestedChange: "Dam should be",
-             status: "Pending"
-         },
-         {
-             id: 3,
-             email: "c.jain@tcu.edu",
-             horse: "Lauren",
-             attribute: "Schooling",
-             suggestedChange: "Schooling should be",
-             status: "Pending"
-         },
-         {
-             id: 4,
-             email: "d.hanft@tcu.edu",
-             horse: "Waterbottle",
-             attribute: "Score",
-             suggestedChange: "Score should be",
-             status: "Pending"
-         },
+        //  {
+        //      id: 1,
+        //      email: "m.gresham@tcu.edu",
+        //      horse: "Piggy",
+        //      attribute: "Sire",
+        //      suggestedChange: "Sire should be",
+        //      status: "Pending"
+        //  },
+        //  {
+        //      id: 2,
+        //      email: "j.wu@tcu.edu",
+        //      horse: "Skittle",
+        //      attribute: "Dam",
+        //      suggestedChange: "Dam should be",
+        //      status: "Pending"
+        //  },
+        //  {
+        //      id: 3,
+        //      email: "c.jain@tcu.edu",
+        //      horse: "Lauren",
+        //      attribute: "Schooling",
+        //      suggestedChange: "Schooling should be",
+        //      status: "Pending"
+        //  },
+        //  {
+        //      id: 4,
+        //      email: "d.hanft@tcu.edu",
+        //      horse: "Waterbottle",
+        //      attribute: "Score",
+        //      suggestedChange: "Score should be",
+        //      status: "Pending"
+        //  },
     ],
     acceptAlert: false,
     editAlert: false,
@@ -236,12 +236,13 @@ export default {
 
   computed: {},
 
+  async mounted () {
+      this.data = await api.getChangeRequests();
+      this.requestList = this.data.data; 
+      console.log(this.requestList)
+  },
+
   methods: {
-    async loadChangeRequests () {
-          this.rawData = await api.getChangeRequests();
-          // this.requestList = this.rawData; 
-          console.log(this.rawData)
-    },
     editReq(request){       
         this.dialog = true   
         this.horseID = request.id 
@@ -251,13 +252,13 @@ export default {
     },
     acceptReq(request) {
         this.acceptAlert = true
-        // request.status = 'Approved'
-        // api.acceptRequest(request, request.id)          
+        request.status = 'Approved'
+        api.acceptRequest(request, request.id)          
     },
     deleteReq(request) {
         this.denyAlert = true
-        // request.status = 'Rejected'
-        // api.rejectRequest(request, request.id)
+        request.status = 'Rejected'
+        api.rejectRequest(request, request.id)
     },
     updateChanges() {
       var requestID = this.horseID;

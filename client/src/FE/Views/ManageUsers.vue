@@ -102,7 +102,7 @@
             >
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  User Management
-                </h2>             
+                </h2>
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
@@ -142,7 +142,7 @@
 
 <script>
 import axios from "axios";
-
+import api from '../../api/systemApi';
 
 export default {
   name: 'ManageUsers',
@@ -162,138 +162,144 @@ export default {
         "Admin"
     ],
     userList: [
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
-         {
-             id: 1,
-             firstName: 'Madison',
-             lastName: 'Gresham',
-             email: "m.gresham@tcu.edu",
-             role: 'Fan'
-         },
-         {
-             id: 2,
-             firstName: 'Chirayu',
-             lastName: 'Jain',
-             email: "c.jain@tcu.edu",
-             role: 'Admin'
-         },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
+        //  {
+        //      id: 1,
+        //      firstName: 'Madison',
+        //      lastName: 'Gresham',
+        //      email: "m.gresham@tcu.edu",
+        //      role: 'Fan'
+        //  },
+        //  {
+        //      id: 2,
+        //      firstName: 'Chirayu',
+        //      lastName: 'Jain',
+        //      email: "c.jain@tcu.edu",
+        //      role: 'Admin'
+        //  },  
     ],
    
 
   }),
 
   computed: {},
+
+  async mounted () {
+          this.data = await api.getAllUsers();
+          this.userList = this.data.data; 
+          console.log(this.userList)
+  },
 
   methods: {
     editUser(user){       
