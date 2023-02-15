@@ -61,6 +61,24 @@
 
                       <v-text-field
                         class="mx-6"
+                        style="display: none;"
+                        v-model="editingHorse.status">
+                      </v-text-field>
+
+                      <v-text-field
+                        class="mx-6"
+                        style="display: none;"
+                        v-model="editingHorse.horseId">
+                      </v-text-field>
+
+                      <v-text-field
+                        class="mx-6"
+                        style="display: none;"
+                        v-model="editingHorse.ownderId">
+                      </v-text-field>
+
+                      <v-text-field
+                        class="mx-6"
                         v-model="editingHorse.horseName"
                         label="Horse Name"
                         required
@@ -204,6 +222,9 @@ export default {
     // flagging horse dialog 
     dialog: false,
     editingHorse: {
+      status: "",
+      horseId: "",
+      ownderId: "",
       change: "",
       horseName: "",
       changeRequestId: "",
@@ -252,6 +273,9 @@ export default {
     editReq(request){       
         this.dialog = true   
         this.editingHorse.changeRequestId = request.id 
+        this.editingHorse.horseId = request.horseId 
+        this.editingHorse.ownderId = request.ownderId 
+        this.editingHorse.status = request.status 
         this.editingHorse.horseName = request.horse
         this.editingHorse.select = request.attribute
         this.editingHorse.change = request.suggestedChange
@@ -271,6 +295,10 @@ export default {
       await api.updateChangeRequest(this.editingHorse);
       this.editAlert = true
       this.dialog = false;
+      this.editingHorse.changeRequestId = "";
+      this.editingHorse.horseId = "";
+      this.editingHorse.ownderId = "";
+      this.editingHorse.status = ""; 
       this.editingHorse.horseName = "";
       this.editingHorse.changeRequestId = "";
       this.editingHorse.select = this.items[0];

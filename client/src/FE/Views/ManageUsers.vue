@@ -39,14 +39,24 @@
                         Edit User 
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
+
                         <v-text-field
                           class="mx-6"
                           style="display: none;"
                           v-model="editingUser.id">
                         </v-text-field>
+                        <v-text-field
+                          class="mx-6"
+                          style="display: none;"
+                          v-model="editingUser.active">
+                        </v-text-field>
+                        <v-text-field
+                          class="mx-6"
+                          style="display: none;"
+                          v-model="editingUser.username">
+                        </v-text-field>
 
-
-                      <v-row>
+                      <!-- <v-row>
                         <v-col cols="12" sm="6" md="6">
                         <v-text-field
                             class="ml-6"
@@ -55,15 +65,15 @@
                             required
                         ></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="6" md="6">
+                        <v-col cols="12" sm="6" md="6"> -->
                         <v-text-field
-                            class="mr-6"
-                            v-model="editingUser.lastName"
-                            label="Last Name"
+                            class="mx-6"
+                            v-model="editingUser.name"
+                            label="Name"
                             required
                         ></v-text-field>
-                        </v-col>
-                      </v-row>
+                        <!-- </v-col>
+                      </v-row> -->
 
                       <v-text-field
                         class="mx-6"
@@ -113,8 +123,7 @@
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
-                            <th style="text-align: center; font-size:20px;" scope="col">First Name</th>
-                            <th style="text-align: center; font-size:20px;" scope="col">Last Name</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Name</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Email</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Role</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Actions</th>
@@ -122,8 +131,7 @@
                     </thead>
                         <tbody>
                             <tr class="table-row" v-for="user of userList" :key="user.id">
-                                <td style="text-align: center"> {{ user.firstName }} </td>
-                                <td style="text-align: center"> {{ user.lastName }} </td>
+                                <td style="text-align: center"> {{ user.name }} </td>
                                 <td style="text-align: center"> {{ user.email }} </td>
                                 <td style="text-align: center"> {{ user.role }} </td>
                                     <td style="text-align: center">
@@ -162,8 +170,10 @@ export default {
     dialog: false,
     editingUser: {
       id: "",
-      firstName: "",
-      lastName: "",
+      active: "",
+      username: "",
+      name: "",
+      // lastName: "",
       email: "",
       select: [""],
     },
@@ -317,8 +327,10 @@ export default {
     editUser(user){       
         this.dialog = true    
         this.editingUser.id = user.id
-        this.editingUser.firstName = user.firstName
-        this.editingUser.lastName = user.lastName
+        this.editingUser.active = user.active
+        this.editingUser.username = user.username
+        this.editingUser.name = user.name
+        // this.editingUser.lastName = user.lastName
         this.editingUser.email = user.email
         this.editingUser.select = user.role
     },

@@ -146,12 +146,12 @@ const updateUser = async (data) => {
          method: 'PUT',
          mode: 'cors',
          body: JSON.stringify({
-            active: true,
+            active: data.active,
             email: data.email,
             id: data.id,
             name: data.name,
-            username: data.email,
-            password: data.password,
+            username: data.username,
+            // password: data.password,
             role: data.select
           }),
             headers: {
@@ -181,7 +181,6 @@ const deleteUser = async (data, id) => {
       },
     });
 };
-
 
 export default {
     postFlaggedHorse,
