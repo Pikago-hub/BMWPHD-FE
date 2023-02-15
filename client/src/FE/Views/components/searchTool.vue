@@ -264,7 +264,7 @@
           <v-form ref="form" lazy-validation color="#212121">
             <v-text-field
               class="mx-6"
-              v-model="horseName"
+              v-model="flaggedHorse.horseName"
               :counter="10"
               label="Horse Name"
               required
@@ -272,7 +272,7 @@
 
             <v-select
               class="mx-6"
-              v-model="select"
+              v-model="flaggedHorse.select"
               :items="items"
               label="Which field would you like to suggest a change for?"
               required
@@ -280,7 +280,7 @@
 
             <v-text-field
               class="mx-6"
-              v-model="change"
+              v-model="flaggedHorse.change"
               :counter="10"
               label="Suggested Change"
               required
@@ -302,15 +302,20 @@
 
 <script>
 import axios from "axios";
+import api from '../../../api/systemApi';
+
 export default {
   name: "searchTool",
   props: ["itemDetails"],
   data: () => {
     return {
+      flaggedHorse: {
+        change: "",
+        horseName: "",
+        select: ["Select an Attribute"],
+      },
       alert: false,
-      change: "",
       horses: [],
-      select: ["Select an Attribute"],
       items: [
         "Select an Attribute",
         "Name",
@@ -519,12 +524,19 @@ export default {
       this.attributesDrawer = false;
     },
 
-    submitChanges() {
-      this.horseName = "";
-      this.select = this.items[0];
-      this.change = "";
-      this.dialog = false;
-      this.alert = true;
+    async submitChanges() {
+      if (this.flaggedHorse.horseName == "" || this.flaggedHorse.select == this.items[0] || this.flaggedHorse.change == "") {
+         alert("please fill out all fields"); 
+       } 
+      else {
+        console.log(this.flaggedHorse);
+        await api.postFlaggedHorse(this.flaggedHorse);
+        this.flaggedHorse.horseName = "";
+        this.flaggedHorse.select = this.items[0];
+        this.flaggedHorse.change = "";
+        this.dialog = false;
+        this.alert = true;
+      }
     },
 
     async onFindAll() {

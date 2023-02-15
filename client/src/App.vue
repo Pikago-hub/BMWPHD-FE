@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <NavBar location="top"/>
+    <NavBar />
 
     <router-view></router-view>
 
-    <Footer location="bottom"/>
+    <Footer/>
   </v-app>
 </template>
   
