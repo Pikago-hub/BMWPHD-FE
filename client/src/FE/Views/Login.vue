@@ -63,7 +63,7 @@
                     color="blue"
                     class="mb-8 mt-3"
                     variant="tonal"
-                    @click="validate"
+                    @click="Login"
                   >
                     Login
                   </v-btn>
@@ -81,12 +81,7 @@
           <v-window-item value="Sign up"
             ><v-card class="px-4">
               <v-card-text>
-                <v-form
-                  @submit="handleRegister"
-                  ref="registerForm"
-                  v-model="valid"
-                  lazy-validation
-                >
+                <v-form ref="registerForm" v-model="valid" lazy-validation>
                   <v-row>
                     <v-col cols="12" sm="6" md="6">
                       <div class="text-subtitle-1 text-medium-emphasis">
@@ -179,7 +174,7 @@
                     color="blue"
                     variant="tonal"
                     class="mb-8"
-                    @click="validate"
+                    @click="Register"
                     >Register
                   </v-btn>
                 </v-form>
@@ -250,43 +245,26 @@ export default {
   },
 
   methods: {
-    handleLogin(user) {
-      this.valid = true;
-
-      this.$store
-        .dispatch("auth/login", user)
-        .then(() => {
-          this.$router.push("/manageusers");
-        })
-        .catch((error) => {
-          this.loading = false;
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-        });
-    },
-
-    handleRegister(user) {
-      this.valid = true;
-
-      this.$store
-        .dispatch("auth/register", user)
+    async Register() {
+      const user = {
+        email: this.email,
+        password: this.password,
+        name: this.firstName + " " + this.lastName,
+      };
+      const response = await authService
+        .register(user)
         .then((data) => {
-          this.message = data.message;
+          alert("Registration Successful!");
+          console.log(data);
+        })
+        .then(() => {
+          this.$router.push("/login");
         })
         .catch((error) => {
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+          console.log(error);
         });
     },
-    async validate() {
+    async Login() {
       const user = {
         username: this.loginEmail,
         password: this.loginPassword,
@@ -297,17 +275,12 @@ export default {
           console.log(data);
           localStorage.setItem("user", JSON.stringify(data.data));
         })
+        .then(() => {
+          this.$router.push("/manageusers");
+        })
         .catch((error) => {
           console.log(error);
         });
-
-      // if (this.$refs.loginForm.validate()) {
-      //   this.$router.push("/");
-      // } else if (this.$refs.registerForm.validate()) {
-      //   this.$router.push("/");
-      // } else if (this.$refs.registerForm.validate()) {
-      //   this.$router.push("/");
-      // }
     },
     reset() {
       this.$refs.form.reset();
