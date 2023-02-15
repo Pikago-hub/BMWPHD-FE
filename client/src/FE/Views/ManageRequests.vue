@@ -52,21 +52,23 @@
                         Flaged Horse 
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
-                    <v-text-field
-                    class="mx-6"
-                    style="display: none;"
-                    v-model="horseID"> </v-text-field>
 
                       <v-text-field
                         class="mx-6"
-                        v-model="horseName"
+                        style="display: none;"
+                        v-model="editingHorse.changeRequestId">
+                      </v-text-field>
+
+                      <v-text-field
+                        class="mx-6"
+                        v-model="editingHorse.horseName"
                         label="Horse Name"
                         required
                       ></v-text-field>
 
                       <v-select
                         class="mx-6"
-                        v-model="select"
+                        v-model="editingHorse.select"
                         :items="items"
                         label="Attribute selected to change"
                         required
@@ -74,7 +76,7 @@
 
                       <v-text-field
                         class="mx-6"
-                        v-model="change"
+                        v-model="editingHorse.change"
                         label="Suggested Change"
                         required
                       ></v-text-field>
@@ -116,6 +118,7 @@
                             <th style="text-align: center; font-size:20px;" scope="col">Horse Name</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Atttribute</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Suggested Change</th>
+                            <th style="text-align: center; font-size:20px;" scope="col">Status</th>
                             <th style="text-align: center; font-size:20px;" scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -125,6 +128,7 @@
                                 <td style="text-align: center"> {{ request.horseId }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
+                                <td style="text-align: center"> {{ request.status }} </td>
                                     <td style="text-align: center">
                                       <v-tooltip text="Accept" location="top">
                                       <template v-slot:activator="{ props }"> 
@@ -199,10 +203,12 @@ export default {
     denyAlert: false,
     // flagging horse dialog 
     dialog: false,
-    change: "",
-    horseName: "",
-    horseID: "",
-    select: ["Select an Attribute"],
+    editingHorse: {
+      change: "",
+      horseName: "",
+      changeRequestId: "",
+      select: ["Select an Attribute"],
+    },
     items: [
         "Select an Attribute",
         "Name",
@@ -245,10 +251,10 @@ export default {
   methods: {
     editReq(request){       
         this.dialog = true   
-        this.horseID = request.id 
-        this.horseName = request.horse
-        this.select = request.attribute
-        this.change = request.suggestedChange
+        this.editingHorse.changeRequestId = request.id 
+        this.editingHorse.horseName = request.horse
+        this.editingHorse.select = request.attribute
+        this.editingHorse.change = request.suggestedChange
     },
     acceptReq(request) {
         this.acceptAlert = true
@@ -260,15 +266,15 @@ export default {
         request.status = 'Rejected'
         api.rejectRequest(request, request.id)
     },
-    updateChanges() {
-      var requestID = this.horseID;
-      console.log(requestID);
-      console.log(this.horseName);
+    async updateChanges() {
+      console.log(this.editingHorse);
+      await api.updateChangeRequest(this.editingHorse);
       this.editAlert = true
-      this.horseName = "";
-      this.select = this.items[0];
-      this.change = "";
       this.dialog = false;
+      this.editingHorse.horseName = "";
+      this.editingHorse.changeRequestId = "";
+      this.editingHorse.select = this.items[0];
+      this.editingHorse.change = "";
     },
 
   }

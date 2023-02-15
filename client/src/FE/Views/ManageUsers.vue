@@ -39,11 +39,18 @@
                         Edit User 
                         </h2>
                     <v-form ref="form" lazy-validation color="#212121">
+                        <v-text-field
+                          class="mx-6"
+                          style="display: none;"
+                          v-model="editingUser.id">
+                        </v-text-field>
+
+
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
                         <v-text-field
                             class="ml-6"
-                            v-model="firstName"
+                            v-model="editingUser.firstName"
                             label="First Name"
                             required
                         ></v-text-field>
@@ -51,7 +58,7 @@
                         <v-col cols="12" sm="6" md="6">
                         <v-text-field
                             class="mr-6"
-                            v-model="lastName"
+                            v-model="editingUser.lastName"
                             label="Last Name"
                             required
                         ></v-text-field>
@@ -60,14 +67,14 @@
 
                       <v-text-field
                         class="mx-6"
-                        v-model="email"
+                        v-model="editingUser.email"
                         label="Email Address"
                         required
                       ></v-text-field>
 
                       <v-select
                         class="mx-6"
-                        v-model="select"
+                        v-model="editingUser.select"
                         :items="items"
                         label="Role"
                         required
@@ -77,7 +84,7 @@
                         <v-btn
                           class="mr-7 mb-6"
                           color="#c9e0ec"
-                          @click="updateChanges"
+                          @click="updateChanges()"
                           >Update Changes</v-btn
                         >
                         <v-btn
@@ -148,13 +155,18 @@ export default {
   name: 'ManageUsers',
   props:[""],
   data: () => ({
+    // alerts 
     editAlert: false,
     deleteAlert: false,
+    // edit user dialog 
     dialog: false,
-    firstName: "",
-    lastName: "",
-    email: "",
-    select: [""],
+    editingUser: {
+      id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      select: [""],
+    },
     items: [
         "Fan",
         "Judge",
@@ -296,29 +308,32 @@ export default {
   computed: {},
 
   async mounted () {
-          this.data = await api.getAllUsers();
-          this.userList = this.data.data; 
-          console.log(this.userList)
+      this.data = await api.getAllUsers();
+      this.userList = this.data.data; 
+      console.log(this.userList)
   },
 
   methods: {
     editUser(user){       
         this.dialog = true    
-        this.firstName = user.firstName
-        this.lastName = user.lastName
-        this.email = user.email
-        this.select = user.role
+        this.editingUser.id = user.id
+        this.editingUser.firstName = user.firstName
+        this.editingUser.lastName = user.lastName
+        this.editingUser.email = user.email
+        this.editingUser.select = user.role
     },
    
     deleteUser(user) {
-        this.deleteAlert = true
-        // user.status = 'Delete'
-        // api.rejectRequest(request, request.id)
+      this.deleteAlert = true
+      // user.status = 'Delete'
+      // api.rejectRequest(request, request.id)
     },
-    updateChanges(user) {
+
+    async updateChanges() {
+      console.log(this.editingUser);
+      await api.updateUser(this.editingUser);
       this.editAlert = true
       this.dialog = false
-      // send updated info to backed
     },
   }
 }

@@ -6,7 +6,6 @@ const url = "https://bmwphd-be.herokuapp.com/";
 // add a new change request from the Result view searchTool component
 const postFlaggedHorse = async (data) => {
     var token = JSON.parse(localStorage.getItem("user"));
-    // var user = cacheUtils.get("user_info");
     var id = token.userInfo.id;
     var hID = 1;
     console.log(data.select);
@@ -63,6 +62,28 @@ const acceptRequest = async (data, id) => {
     });
   };
 
+// edit a change request on ManageRequest view
+const updateChangeRequest = async (data) => {
+    var token = JSON.parse(localStorage.getItem("user"));
+    console.log(data.suggestedChange);
+    return await fetch(url + "changeRequests/" + data.changeRequestId, {
+         method: 'PUT',
+         mode: 'cors',
+         body: JSON.stringify({
+            attribute: data.select,
+            horseId: data.horseId,
+            id: data.changeRequestId,
+            ownerId: data.ownerId,
+            status: data.status,
+            suggestedChange: data.change,
+          }),
+            headers: {
+              "Content-type": "application/json",
+              Authorization: "Bearer " + token.token,
+        },
+       }).then((response) => response.json());
+};
+
 // reject a change request to update a horse on ManageRequests view
 const rejectRequest = async (data, id) => {
     var token = JSON.parse(localStorage.getItem("user"));
@@ -118,10 +139,32 @@ const getAllUsers = async () => {
        }).then((response) => response.json());
 };
 
+// edit a user on ManageUsers view
+const updateUser = async (data) => {
+    var token = JSON.parse(localStorage.getItem("user"));
+    return await fetch(url + "users/" + data.id, {
+         method: 'PUT',
+         mode: 'cors',
+         body: JSON.stringify({
+            active: true,
+            email: data.email,
+            id: data.id,
+            name: data.name,
+            username: data.email,
+            password: data.password,
+            role: data.select
+          }),
+            headers: {
+              "Content-type": "application/json",
+              Authorization: "Bearer " + token.token,
+        },
+       }).then((response) => response.json());
+};
+
 // delete a user from the database on ManageUsers view
 const deleteUser = async (data, id) => {
     var token = JSON.parse(localStorage.getItem("user"));
-    return await fetch(url + "changeRequests/" + id, {
+    return await fetch(url + "users/" + id, {
       method: "DELETE",
       mode: "cors",
       body: JSON.stringify({
@@ -129,7 +172,8 @@ const deleteUser = async (data, id) => {
         username: data.username,
         password: data.password,
         name: data.name,
-        email: data.email
+        email: data.email,
+        role: data.role
       }),
       headers: {
         "Content-type": "application/json",
@@ -143,8 +187,10 @@ export default {
     postFlaggedHorse,
     getChangeRequests,
     acceptRequest,
+    updateChangeRequest,
     rejectRequest,
     deleteRequest,
     getAllUsers,
+    updateUser,
     deleteUser
 };
