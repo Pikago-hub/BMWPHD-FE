@@ -86,6 +86,7 @@ const updateChangeRequest = async (data) => {
 
 // reject a change request to update a horse on ManageRequests view
 const rejectRequest = async (data, id) => {
+    console.log(data.ownerId)
     var token = JSON.parse(localStorage.getItem("user"));
     return await fetch(url + "changeRequests/" + id, {
       // forms/id

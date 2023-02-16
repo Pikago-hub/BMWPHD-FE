@@ -74,7 +74,7 @@
                       <v-text-field
                         class="mx-6"
                         style="display: none;"
-                        v-model="editingHorse.ownderId">
+                        v-model="editingHorse.ownerId">
                       </v-text-field>
 
                       <v-text-field
@@ -224,7 +224,7 @@ export default {
     editingHorse: {
       status: "",
       horseId: "",
-      ownderId: "",
+      ownerId: "",
       change: "",
       horseName: "",
       changeRequestId: "",
@@ -274,7 +274,7 @@ export default {
         this.dialog = true   
         this.editingHorse.changeRequestId = request.id 
         this.editingHorse.horseId = request.horseId 
-        this.editingHorse.ownderId = request.ownderId 
+        this.editingHorse.ownerId = request.ownerId 
         this.editingHorse.status = request.status 
         this.editingHorse.horseName = request.horse
         this.editingHorse.select = request.attribute
@@ -297,7 +297,7 @@ export default {
       this.dialog = false;
       this.editingHorse.changeRequestId = "";
       this.editingHorse.horseId = "";
-      this.editingHorse.ownderId = "";
+      this.editingHorse.ownerId = "";
       this.editingHorse.status = ""; 
       this.editingHorse.horseName = "";
       this.editingHorse.changeRequestId = "";
