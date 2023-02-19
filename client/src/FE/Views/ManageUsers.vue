@@ -317,20 +317,22 @@ export default {
 
   computed: {},
 
-  async mounted () {
-      this.data = await api.getAllUsers();
-      this.userList = this.data.data; 
-      console.log(this.userList)
+  created() {
+      this.loadAllUsers();
   },
 
   methods: {
+    async loadAllUsers() {
+      this.data = await api.getAllUsers();
+      this.userList = this.data.data; 
+      console.log(this.userList);
+    },
     editUser(user){       
         this.dialog = true    
         this.editingUser.id = user.id
         this.editingUser.active = user.active
         this.editingUser.username = user.username
         this.editingUser.name = user.name
-        // this.editingUser.lastName = user.lastName
         this.editingUser.email = user.email
         this.editingUser.select = user.role
     },
@@ -344,6 +346,7 @@ export default {
     async updateChanges() {
       console.log(this.editingUser);
       await api.updateUser(this.editingUser);
+      this.loadAllUsers();
       this.editAlert = true
       this.dialog = false
     },

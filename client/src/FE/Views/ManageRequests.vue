@@ -263,13 +263,16 @@ export default {
 
   computed: {},
 
-  async mounted () {
-      this.data = await api.getChangeRequests();
-      this.requestList = this.data.data; 
-      console.log(this.requestList)
+  created() {
+      this.loadChangeRequests();
   },
 
   methods: {
+    async loadChangeRequests() {
+      this.data = await api.getChangeRequests();
+      this.requestList = this.data.data; 
+      console.log(this.requestList)
+    },
     editReq(request){       
         this.dialog = true   
         this.editingHorse.changeRequestId = request.id 
@@ -293,7 +296,8 @@ export default {
     async updateChanges() {
       console.log(this.editingHorse);
       await api.updateChangeRequest(this.editingHorse);
-      this.editAlert = true
+      this.loadChangeRequests();
+      this.editAlert = true;
       this.dialog = false;
       this.editingHorse.changeRequestId = "";
       this.editingHorse.horseId = "";
