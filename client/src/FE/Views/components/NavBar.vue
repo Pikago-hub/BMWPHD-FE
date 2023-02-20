@@ -16,6 +16,14 @@
         </template>
       </v-tooltip>
 
+      <v-tooltip text="Logout" location="bottom">
+        <template v-slot:activator="{ props }">
+          <v-btn size="large" @click="onLogout" v-bind="props">
+            <v-icon>mdi-logout-variant</v-icon>
+          </v-btn>
+        </template>
+      </v-tooltip>
+
       <v-menu leffbottom temporary>
         <template v-slot:activator="{ props }">
           <v-btn variant="plain" v-bind="props" v-on="on">
@@ -79,6 +87,7 @@
 <script>
 import { useRouter } from "vue-router";
 const router = useRouter();
+import auth from "../../../services/auth.service"
 
 export default {
   name: "NavBar",
@@ -112,6 +121,10 @@ export default {
       this.$router.push("/manageusers");
     },
     onLogin() {
+      this.$router.push("/login");
+    },
+    onLogout() {
+      auth.logout();
       this.$router.push("/login");
     },
     onAbout() {
