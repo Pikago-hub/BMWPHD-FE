@@ -7,10 +7,6 @@ import userService from '../services/user.service';
 // this function is used to filter out views defined in dynamicRoutes that a user does not have access to
 function autoloadDynamicRoutes(router) {
   const userStore = useUserStore();
-  //console.log('this is user store ' + userStore);
-  //console.log('this is user store state ' + userStore.userInfo);
-  //const userPermissions = userStore.userInfo?.permissions;
-  //console.log('this is the permissions ' + userPermissions)
   var user = cacheUtils.get("user_info");
   console.log('this is the user ' + user.userInfo.role);
   const userPermissions = user.userInfo.role
@@ -24,7 +20,7 @@ function autoloadDynamicRoutes(router) {
         return userPermissions === p
       })) {
         console.log(router.getRoutes())
-        router.addRoute('DashBoard', route)
+        router.addRoute('Home', route)
         //router.addRoute({ path: '/DirectorReqManagement', component: () => import('@/views/DirectorReqMngmt.vue') });
         //console.log(router.getRoutes())
         // add view as a child of main layout

@@ -25,7 +25,7 @@ const postFlaggedHorse = async (data) => {
         Authorization: "Bearer " + token.token,
       },
     });
-  };
+};
 
 // gets all change requests from users on ManageRequests view
 const getChangeRequests = async () => {
@@ -37,6 +37,34 @@ const getChangeRequests = async () => {
               Authorization: "Bearer " + token.token,
         },
        }).then((response) => response.json());
+};
+
+const getUserByID = async (id) => {
+  var token = JSON.parse(localStorage.getItem("user"));
+     return await fetch(url + "users/" + id, {
+         method: 'GET',
+         mode: 'cors',
+            headers: {
+              Authorization: "Bearer " + token.token,
+        },
+       }).then((response) => response.json());
+
+}
+
+const getHorseByID = async (id) => {
+  console.log("THIS ID =" + id)
+  var token = JSON.parse(localStorage.getItem("user"));
+     return await fetch(url + 'horses/search', {
+         method: 'post',
+         mode: 'cors',
+         body: JSON.stringify({
+          id: id
+        }),
+         headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + token.token,
+    },
+   }).then((response) => response.json());
 };
 
 // reject a change request to update a horse on ManageRequests view
@@ -60,7 +88,7 @@ const acceptRequest = async (data, id) => {
         Authorization: "Bearer " + token.token,
       },
     });
-  };
+};
 
 // edit a change request on ManageRequest view
 const updateChangeRequest = async (data) => {
@@ -105,7 +133,7 @@ const rejectRequest = async (data, id) => {
         Authorization: "Bearer " + token.token,
       },
     });
-  };
+};
 
 // delete a change request to update a horse on ManageRequests view
 const deleteRequest = async (data, id) => {
@@ -152,7 +180,6 @@ const updateUser = async (data) => {
             id: data.id,
             name: data.name,
             username: data.username,
-            // password: data.password,
             role: data.select
           }),
             headers: {
@@ -162,19 +189,42 @@ const updateUser = async (data) => {
        }).then((response) => response.json());
 };
 
+// deactivate a user on ManageUsers view
+const deactivateUser = async (data) => {
+var token = JSON.parse(localStorage.getItem("user"));
+    return await fetch(url + "users/" + data.id, {
+      // forms/id
+      method: "PUT",
+      mode: "cors",
+      body: JSON.stringify({
+        active: data.active,
+        email: data.email,
+        id: data.id,
+        name: data.name,
+        username: data.username,
+        role: data.select
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + token.token,
+      },
+    });
+};
+
 // delete a user from the database on ManageUsers view
-const deleteUser = async (data, id) => {
+const deleteUser = async (data) => {
+  console.log(data)
     var token = JSON.parse(localStorage.getItem("user"));
-    return await fetch(url + "users/" + id, {
+    return await fetch(url + "users/" + data.id, {
       method: "DELETE",
       mode: "cors",
       body: JSON.stringify({
-        id: data.id,
-        username: data.username,
-        password: data.password,
-        name: data.name,
+        active: data.active,
         email: data.email,
-        role: data.role
+        id: data.id,
+        name: data.name,
+        username: data.username,
+        role: data.select
       }),
       headers: {
         "Content-type": "application/json",
@@ -186,11 +236,14 @@ const deleteUser = async (data, id) => {
 export default {
     postFlaggedHorse,
     getChangeRequests,
+    getUserByID,
+    getHorseByID,
     acceptRequest,
     updateChangeRequest,
     rejectRequest,
     deleteRequest,
     getAllUsers,
     updateUser,
+    deactivateUser,
     deleteUser
 };

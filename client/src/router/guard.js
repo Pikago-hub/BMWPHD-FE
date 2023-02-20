@@ -10,7 +10,7 @@ function setupGuard(router) {
     // redirect to the login page
     if (to.meta.requiresAuth && !isLoggedIn(to)) {
       console.log('i am in guard')
-      router.push('/')
+      router.push('/login')
     };
     
 
@@ -44,7 +44,8 @@ function isVisitorOnly(route) {
 }
 
 function getToken() {
-  return utils.cacheUtils.get('login_token')?.token;
+  var token = JSON.parse(localStorage.getItem("user"));
+  return token?.token;
 }
 
 function getUserInfo() {

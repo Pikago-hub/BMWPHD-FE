@@ -1,11 +1,22 @@
-// Not all users can see the views defined here, e.g., a user must have 'orders' permission to see /orders
 // See loadDynamicRoutes.js for how to filter views based on user permissions
 
 const dynamicRoutes = [
   {
+    path: "/result",
+    name: "result",
+    meta: { title: "Result" },
+    component: () => import("../FE/Views/Result.vue"),
+  },
+  {
+    path: "/managerequests",
+    name: "managerequests",
+    meta: { title: "managerequests" },
+    component: () => import("../FE/Views/ManageRequests.vue"),
+  },
+  {
     path: "/manageusers",
-    name: "user  management",
-    meta: { title: "Users", permissions: ["admin"] },
+    name: "manageusers",
+    meta: { title: "manageusers" },
     component: () => import("../FE/Views/ManageUsers.vue"),
   },
 ];

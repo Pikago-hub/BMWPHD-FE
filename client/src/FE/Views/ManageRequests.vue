@@ -1,6 +1,5 @@
 <template>
     <v-main>
-
               <v-alert
                 v-model="acceptAlert"
                   outlined
@@ -128,7 +127,7 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
-                <!-- <v-btn @click="loadChangeRequests()"> TEST </v-btn> -->
+                <!-- <v-btn @click="loadHorseName()"> TEST </v-btn> -->
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
@@ -141,9 +140,11 @@
                         </tr>
                     </thead>
                         <tbody>
-                            <tr class="table-row" v-for="request of requestList" :key="request.id">
-                                <td style="text-align: center"> {{ request.ownerId }} </td>
-                                <td style="text-align: center"> {{ request.horseId }} </td>
+                            <tr 
+                              class="table-row" 
+                              v-for="request of requestList" :key="request.id">
+                                <td style="text-align: center"> {{ userList.email }} </td>
+                                <td style="text-align: center"> {{ horseList[request.horseId].name }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                 <td style="text-align: center"> {{ request.status }} </td>
@@ -164,6 +165,7 @@
                                       </template>
                                       </v-tooltip>
                                     </td>    
+                                <!-- </div> -->
                             </tr>
                         </tbody>
                 </v-table>
@@ -174,7 +176,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import api from '../../api/systemApi';
 
 
@@ -183,38 +184,13 @@ export default {
   props:[""],
   data: () => ({
     requestList: [
-        //  {
-        //      id: 1,
-        //      email: "m.gresham@tcu.edu",
-        //      horse: "Piggy",
-        //      attribute: "Sire",
-        //      suggestedChange: "Sire should be",
-        //      status: "Pending"
-        //  },
-        //  {
-        //      id: 2,
-        //      email: "j.wu@tcu.edu",
-        //      horse: "Skittle",
-        //      attribute: "Dam",
-        //      suggestedChange: "Dam should be",
-        //      status: "Pending"
-        //  },
-        //  {
-        //      id: 3,
-        //      email: "c.jain@tcu.edu",
-        //      horse: "Lauren",
-        //      attribute: "Schooling",
-        //      suggestedChange: "Schooling should be",
-        //      status: "Pending"
-        //  },
-        //  {
-        //      id: 4,
-        //      email: "d.hanft@tcu.edu",
-        //      horse: "Waterbottle",
-        //      attribute: "Score",
-        //      suggestedChange: "Score should be",
-        //      status: "Pending"
-        //  },
+        
+    ],
+    userList: [
+
+    ],
+    horseList: [
+
     ],
     acceptAlert: false,
     editAlert: false,
@@ -265,13 +241,37 @@ export default {
 
   created() {
       this.loadChangeRequests();
+      this.loadUserEmail();
+      this.loadHorseName();
   },
 
   methods: {
     async loadChangeRequests() {
       this.data = await api.getChangeRequests();
       this.requestList = this.data.data; 
-      console.log(this.requestList)
+      console.log(this.requestList);
+      this.requestList.forEach(async (request) => {
+        this.data = await api.getUserByID(request.ownerId);
+        this.userList = this.data.data;
+      }) 
+      this.requestList.forEach(async (request) => {
+        this.data = await api.getHorseByID(request.horseId);
+        this.horseList = this.data.data;
+        console.log(this.horseList);
+      }) 
+    },
+    async loadUserEmail() {
+      this.requestList.forEach(async (request) => {
+        this.data = await api.getUserByID(request.ownerId);
+        this.userList = this.data.data;
+      }) 
+    },
+    async loadHorseName() {
+      this.requestList.forEach(async (request) => {
+        this.data = await api.getHorseByID(request.horseId);
+        this.horseList = this.data.data;
+        console.log(this.horseList);
+      }) 
     },
     editReq(request){       
         this.dialog = true   

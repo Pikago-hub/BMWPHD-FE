@@ -24,40 +24,6 @@ const basicRoutes = [
     },
     component: () => import("../FE/Views/About.vue"),
   },
-  /*
-    {
-      path: "/DirectorRequestManagement",
-      //name: 'orders  view',
-      //meta: { title: 'Requests', permissions: ['director'] },
-      meta: { requiresAuth: false },
-      component: () => import("@/views/DirectorReqMngmt.vue"),
-    },
-    
-    {
-      path: "/UserManagement",
-      name: "director user management",
-      meta: { requiresAuth: false },
-      component: () => import("@/views/UserManagement.vue"),
-    },
-    {
-      path: '/RequestLandingPage',
-      name: 'landing',
-      meta: { requiresAuth: false },
-      component: () => import('@/views/RequestLandingPage.vue'),
-    },
-    {
-      path: '/CustomerRequestForm',
-      name: 'customer dashboard',
-      meta: { requiresAuth: false },
-      component: () => import('@/views/CustomerReqForm.vue'),
-    },
-    {
-      path: '/SuperFrogRequestManagement',
-      name: 'superfrog dashboard',
-      meta: { requiresAuth: false },
-      component: () => import('@/views/SuperFrogReqMngmt.vue'),
-    },
-    */
   {
     path: "/:pathMatch(.*)",
     name: "pageNotFound",
