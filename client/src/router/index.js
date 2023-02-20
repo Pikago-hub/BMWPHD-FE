@@ -54,19 +54,6 @@ const routes = [
   },
   { path: "/:pathMatch(.*)*", component: PageNotFound },
 ];
-
-// router.beforeEach((to, from, next) => {
-//   const publicPages = ["/login", "/home", "/about", "/result"];
-//   const authRequired = !publicPages.includes(to.path);
-//   const loggedIn = localStorage.getItem("user");
-
-//   if (authRequired && !loggedIn) {
-//     return next("/login");
-//   } else {
-//     next();
-//   }
-// });
-
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -74,6 +61,27 @@ const router = createRouter({
   //     ...basicRoutes,
   // ]
 });
+
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ["/login", "/home", "/about", "/result"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+
+  if (authRequired && !loggedIn) {
+    return next("/login");
+  } else {
+    next();
+  }
+});
+
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes,
+//   // routes:[
+//   //     ...basicRoutes,
+//   // ]
+// });
 
 export async function setupRouter(app) {
   if (utils.cacheUtils.get("login_token")?.token) {
