@@ -1,11 +1,24 @@
 <template>
-  <div class="py-10 mt-16">
+  <v-main>
+    <v-alert
+        v-model="registerAlert"
+        outlined
+        text
+        color="#E6FFE6"
+        closable
+        close-text="Close Alert"
+      >
+      <v-icon icon="mdi-check-bold"></v-icon> 
+      Registration <strong> Successful</strong> 
+      </v-alert>
+
     <v-card
-      class="mx-auto pa-12 pb-8"
+      class="mx-auto mt-14 pa-12 pb-8"
       elevation="8"
       max-width="500"
       rounded="lg"
     >
+
       <v-tabs v-model="tab" bg-color="blue" align-tabs="center" fixed-tabs>
         <v-tab value="Login">Login</v-tab>
         <v-tab value="Sign up">Sign up</v-tab>
@@ -34,18 +47,6 @@
                   >
                     Password
                   </div>
-                  <!-- <v-text-field
-                      density="compact"
-                      placeholder="Enter your password"
-                      prepend-inner-icon="mdi-lock-outline"
-                      variant="outlined"
-                      v-model="loginPassword"
-                      :rules="[rules.required, rules.min]"
-                      label="Password"
-                      hint="At least 8 characters"
-                      counter
-                      @click:append="show1 = !show1">
-                    </v-text-field> -->
                   <v-text-field
                     density="compact"
                     placeholder="Enter your password"
@@ -184,13 +185,14 @@
         </v-window>
       </v-card-text>
     </v-card>
-  </div>
+</v-main>
 </template>
 
 <script>
 import authService from "../../services/auth.service.js";
 export default {
   data: () => ({
+    registerAlert: false,
     dialog: true,
     tab: 0,
     tabs: [
@@ -199,7 +201,6 @@ export default {
     ],
     valid: true,
     good: true,
-
     firstName: "",
     lastName: "",
     email: "",
@@ -215,7 +216,6 @@ export default {
       (v) => !!v || "Required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
-
     show1: false,
     rules: {
       required: (value) => !!value || "Required.",
@@ -234,7 +234,7 @@ export default {
 
   mounted() {
     if (this.loggedIn) {
-      this.$router.push("/manageusers");
+      this.$router.push("/");
     }
   },
 
@@ -254,7 +254,14 @@ export default {
       const response = await authService
         .register(user)
         .then((data) => {
-          alert("Registration Successful!");
+          // alert("Registration Successful!");
+          this.registerAlert = true;
+          this.firstName = "";
+          this.lastName = "";
+          this.email = "";
+          this.password = "";
+          this.verify = "";
+          this.tab = "Login";
           console.log(data);
         })
         .then(() => {

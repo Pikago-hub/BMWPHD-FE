@@ -39,6 +39,7 @@ const getChangeRequests = async () => {
        }).then((response) => response.json());
 };
 
+// get a user by id to display their email on ManageRequests view
 const getUserByID = async (id) => {
   var token = JSON.parse(localStorage.getItem("user"));
      return await fetch(url + "users/" + id, {
@@ -51,21 +52,33 @@ const getUserByID = async (id) => {
 
 }
 
+
+// get a horse by id to display their name on ManageRequests view
 const getHorseByID = async (id) => {
-  console.log("THIS ID =" + id)
   var token = JSON.parse(localStorage.getItem("user"));
-     return await fetch(url + 'horses/search', {
-         method: 'post',
+     return await fetch(url + "horses/" + id, {
+         method: 'GET',
          mode: 'cors',
-         body: JSON.stringify({
-          id: id
-        }),
-         headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + token.token,
-    },
-   }).then((response) => response.json());
-};
+            headers: {
+              Authorization: "Bearer " + token.token,
+        },
+       }).then((response) => response.json());
+}
+
+// const getHorseByID = async (id) => {
+//   var token = JSON.parse(localStorage.getItem("user"));
+//      return await fetch(url + 'horses/search', {
+//          method: 'GET',
+//          mode: 'cors',
+//          body: JSON.stringify({
+//           id: id
+//         }),
+//          headers: {
+//           "Content-type": "application/json",
+//           Authorization: "Bearer " + token.token,
+//     },
+//    }).then((response) => response.json());
+// };
 
 // reject a change request to update a horse on ManageRequests view
 const acceptRequest = async (data, id) => {

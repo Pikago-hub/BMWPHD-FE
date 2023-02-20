@@ -127,7 +127,6 @@
                 <h2 class="text-h4 mt-5" style="text-align:center">
                  Request Management
                 </h2>
-                <!-- <v-btn @click="loadHorseName()"> TEST </v-btn> -->
                 <v-table fixed-header id="table" height="65vh" theme="dark" density="comfortable" class="mx-4 mt-5 mb-10">
                     <thead>
                         <tr>
@@ -143,8 +142,8 @@
                             <tr 
                               class="table-row" 
                               v-for="request of requestList" :key="request.id">
-                                <td style="text-align: center"> {{ userList.email }} </td>
-                                <td style="text-align: center"> {{ horseList[request.horseId].name }} </td>
+                                <td style="text-align: center"> {{ userList[1].email }} </td>
+                                <td style="text-align: center"> {{ horseList[1].name}} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                 <td style="text-align: center"> {{ request.status }} </td>
@@ -252,12 +251,11 @@ export default {
       console.log(this.requestList);
       this.requestList.forEach(async (request) => {
         this.data = await api.getUserByID(request.ownerId);
-        this.userList = this.data.data;
+        this.userList.push(this.data.data);
       }) 
       this.requestList.forEach(async (request) => {
         this.data = await api.getHorseByID(request.horseId);
-        this.horseList = this.data.data;
-        console.log(this.horseList);
+        this.horseList.push(this.data.data);
       }) 
     },
     async loadUserEmail() {
@@ -269,8 +267,7 @@ export default {
     async loadHorseName() {
       this.requestList.forEach(async (request) => {
         this.data = await api.getHorseByID(request.horseId);
-        this.horseList = this.data.data;
-        console.log(this.horseList);
+        this.horseList.push(this.data.data);
       }) 
     },
     editReq(request){       
