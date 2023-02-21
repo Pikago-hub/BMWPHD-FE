@@ -1,16 +1,16 @@
 <template>
-              <v-alert
-              v-model="alert"
-                outlined
-                text
-                color="#E6FFE6"
-                closable
-                close-text="Close Alert"
-              >
-              <v-icon icon="mdi-check-bold"></v-icon>
-              Your suggested changes have been submitted for review by our team
-              </v-alert>
-  
+  <v-alert
+    v-model="alert"
+    outlined
+    text
+    color="#E6FFE6"
+    closable
+    close-text="Close Alert"
+  >
+    <v-icon icon="mdi-check-bold"></v-icon>
+    Your suggested changes have been submitted for review by our team
+  </v-alert>
+
   <v-navigation-drawer
     location="right"
     color="#c9e0ec"
@@ -302,7 +302,7 @@
 
 <script>
 import axios from "axios";
-import api from '../../../api/systemApi';
+import api from "../../../api/systemApi";
 
 export default {
   name: "searchTool",
@@ -525,10 +525,13 @@ export default {
     },
 
     async submitChanges() {
-      if (this.flaggedHorse.horseName == "" || this.flaggedHorse.select == this.items[0] || this.flaggedHorse.change == "") {
-         alert("please fill out all fields"); 
-       } 
-      else {
+      if (
+        this.flaggedHorse.horseName == "" ||
+        this.flaggedHorse.select == this.items[0] ||
+        this.flaggedHorse.change == ""
+      ) {
+        alert("please fill out all fields");
+      } else {
         console.log(this.flaggedHorse);
         await api.postFlaggedHorse(this.flaggedHorse);
         this.flaggedHorse.horseName = "";
@@ -564,7 +567,7 @@ export default {
         },
       }).then(
         (res) => {
-          this.horseSearch = res.data.data;
+          this.$emit("horseSearch", res.data.data);
         },
         (error) => {
           console.log(error);
@@ -600,8 +603,7 @@ export default {
         },
       }).then(
         (res) => {
-          this.horseSearch = res.data.data;
-          console.log(res);
+          this.$emit("horseSearch", res.data.data);
         },
         (error) => {
           console.log(error);
