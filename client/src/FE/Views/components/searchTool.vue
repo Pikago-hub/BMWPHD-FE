@@ -245,7 +245,7 @@
         </v-list>
       </v-menu>
 
-      <v-dialog v-model="dialog">
+      <v-dialog v-if="loggedIn" v-model="dialog">
         <template v-slot:activator="{ props }">
           <v-btn class="ml-3" color="#0D47A1" variant="tonal" v-bind="props">
             Flag A Horse

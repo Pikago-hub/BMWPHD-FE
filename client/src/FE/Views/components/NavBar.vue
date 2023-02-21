@@ -7,7 +7,7 @@
       <v-toolbar-title>
         <v-btn size="large" variant="text" @click="onHome">BMWPHD</v-btn>
       </v-toolbar-title>
-
+      <!-- <v-btn @click="test()"> TEST </v-btn> -->
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn size="large" @click="onLogin" v-bind="props">
@@ -18,30 +18,40 @@
 
       <v-tooltip text="Logout" location="bottom">
         <template v-slot:activator="{ props }">
-          <v-btn size="large" @click="onLogout" v-bind="props">
+          <v-btn v-if="hasToken" size="large" @click="onLogout" v-bind="props" :key="updateKey">
             <v-icon>mdi-logout-variant</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
 
-      <v-menu leffbottom temporary>
+      <!-- <v-menu leffbottom temporary>
         <template v-slot:activator="{ props }">
           <v-btn variant="plain" v-bind="props" v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
         <v-list bg-color="#1976D2">
-          <v-list-item
-            v-for="(dotItem, index) in dotItems"
-            :key="index"
-            :value="index"
-          >
-            <v-list-item-title>{{ dotItem.title }}</v-list-item-title>
-          </v-list-item>
+          <v-list-item>
+          <v-tooltip text="Login" location="bottom">
+            <template v-slot:activator="{ props }">
+              <v-btn id="login" size="large" @click="onLogin" v-bind="props">
+                <v-icon>mdi-login-variant</v-icon> Login
+              </v-btn>
+            </template>
+          </v-tooltip>
+        </v-list-item>
+        <v-list-item>
+          <v-tooltip text="Logout" location="bottom">
+            <template v-slot:activator="{ props }">
+              <v-btn id="logout" size="large" @click="onLogout" v-bind="props">
+                Logout<v-icon>mdi-logout-variant</v-icon>
+              </v-btn>
+            </template>
+          </v-tooltip>
+        </v-list-item>
         </v-list>
-      </v-menu>
+      </v-menu> -->
     </v-app-bar>
-  
     <v-navigation-drawer
       v-model="drawer"
       image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
@@ -88,23 +98,26 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 import auth from "../../../services/auth.service"
+import state from "../../../store/index"
 
 export default {
   name: "NavBar",
   data: () => ({
     drawer: false,
     group: null,
-    dotItems: [
-      { title: "Implementing 1" },
-      { title: "Implementing 2" },
-      { title: "Implementing 3" },
-      { title: "Implementing 4" },
-    ],
+    state,
   }),
 
-  watch: {},
+  computed: {
+    hasToken() {
+      return JSON.stringify(this.state.state.auth.status.loggedIn) === "true";
+    }
+  },
 
   methods: {
+    test() {
+      console.log(JSON.stringify(this.state.state.auth.status.loggedIn));
+    },
     onReturnHome() {
       this.$router.push("/");
     },

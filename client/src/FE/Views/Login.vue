@@ -283,7 +283,7 @@ export default {
           localStorage.setItem("user", JSON.stringify(data.data));
         })
         .then(() => {
-          this.$router.push("/manageusers");
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);

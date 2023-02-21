@@ -141,9 +141,9 @@
                         <tbody>
                             <tr 
                               class="table-row" 
-                              v-for="request of requestList" :key="request.id">
-                                <td style="text-align: center"> {{ userList[1].email }} </td>
-                                <td style="text-align: center"> {{ horseList[1].name}} </td>
+                              v-for="(request, index) in requestList" :key="index">
+                                <td style="text-align: center"> {{ userList[index].email }} </td>
+                                <td style="text-align: center"> {{ horseList[index].name }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                 <td style="text-align: center"> {{ request.status }} </td>
@@ -164,7 +164,6 @@
                                       </template>
                                       </v-tooltip>
                                     </td>    
-                                <!-- </div> -->
                             </tr>
                         </tbody>
                 </v-table>
@@ -248,7 +247,6 @@ export default {
     async loadChangeRequests() {
       this.data = await api.getChangeRequests();
       this.requestList = this.data.data; 
-      console.log(this.requestList);
       this.requestList.forEach(async (request) => {
         this.data = await api.getUserByID(request.ownerId);
         this.userList.push(this.data.data);

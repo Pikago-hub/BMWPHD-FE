@@ -65,21 +65,6 @@ const getHorseByID = async (id) => {
        }).then((response) => response.json());
 }
 
-// const getHorseByID = async (id) => {
-//   var token = JSON.parse(localStorage.getItem("user"));
-//      return await fetch(url + 'horses/search', {
-//          method: 'GET',
-//          mode: 'cors',
-//          body: JSON.stringify({
-//           id: id
-//         }),
-//          headers: {
-//           "Content-type": "application/json",
-//           Authorization: "Bearer " + token.token,
-//     },
-//    }).then((response) => response.json());
-// };
-
 // reject a change request to update a horse on ManageRequests view
 const acceptRequest = async (data, id) => {
     console.log("into accept request");
