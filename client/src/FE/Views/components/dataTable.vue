@@ -3,17 +3,18 @@
     table-class-name="customize-table"
     id="table"
     show-index
-    v-model:items-selected="itemsSelected"
     :theme-color="themeColor"
     :headers="headers"
     :items="items"
     buttons-pagination
   >
-    <template #item-operation="item">
+    <template #item-operation="horseD">
       <v-row justify="center">
         <v-dialog v-model="dialog" persistent width="1024">
           <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props"> Details </v-btn>
+            <v-btn color="primary" v-bind="props" @click="findOneHorse(horseD)">
+              Details
+            </v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -23,49 +24,94 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Name"></v-text-field>
+                    <v-text-field
+                      v-model="horseDetails.name"
+                      label="Name"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Dam"></v-text-field>
+                    <v-text-field
+                      label="Dam"
+                      v-model="horseDetails.dam1"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Sire"></v-text-field>
+                    <v-text-field
+                      label="Sire"
+                      v-model="horseDetails.sire1"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Dam Sire"></v-text-field>
+                    <v-text-field
+                      label="Dam Sire"
+                      v-model="horseDetails.sire2"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="2nd Dam"></v-text-field>
+                    <v-text-field
+                      label="2nd Dam"
+                      v-model="horseDetails.dam2"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="European OPT"></v-text-field>
+                    <v-text-field
+                      label="European OPT"
+                      v-model="horseDetails.european_opt"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Foal Date"></v-text-field>
+                    <v-text-field
+                      label="Foal Date"
+                      v-model="horseDetails.foal_date"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Horse Class"></v-text-field>
+                    <v-text-field
+                      label="Horse Class"
+                      v-model="horseDetails.horse_class"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Level"></v-text-field>
+                    <v-text-field
+                      label="Level"
+                      v-model="horseDetails.level"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="LTE"></v-text-field>
+                    <v-text-field
+                      label="LTE"
+                      v-model="horseDetails.horse_lte"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Maneuver Score"></v-text-field>
+                    <v-text-field
+                      label="Maneuver Score"
+                      v-model="horseDetails.maneuver_score"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Nominator"></v-text-field>
+                    <v-text-field
+                      label="Nominator"
+                      v-model="horseDetails.nominator"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="PE"></v-text-field>
+                    <v-text-field
+                      label="PE"
+                      v-model="horseDetails.pe"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Show"></v-text-field>
+                    <v-text-field
+                      label="Show"
+                      v-model="horseDetails.show"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Year"></v-text-field>
+                    <v-text-field
+                      label="Year"
+                      v-model="horseDetails.year"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -96,35 +142,35 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import axios from "axios";
 
 export default defineComponent({
   name: "DataTable",
   props: ["dataHorses"],
+  item: [],
   data: () => {
     return {
+      horseDetails: {},
       dialog: false,
       showModal: false,
       formTitle: "Horse Details",
       formData: {
-        name: "1",
-        sire: "1",
+        name: "",
         // Add more fields for each field in your form
       },
       headers: [
         { text: "Name", value: "name" },
         { text: "Sire", value: "sire1" },
         { text: "Dam", value: "dam1" },
-        { text: "Dam Sire", value: "sire2" },
-        { text: "2nd Dam", value: "dam2" },
-        { text: "Foal Date", value: "foal_date", sortable: true },
-        { text: "European OPT", value: "european_opt" },
-        { text: "Year", value: "year", sortable: true },
-        { text: "Nominator", value: "nominator" },
+        { text: "Maneuver Score", value: "maneuver_score" },
+        // { text: "Dam Sire", value: "sire2" },
+        // { text: "2nd Dam", value: "dam2" },
+        // { text: "Foal Date", value: "foal_date", sortable: true },
+        // { text: "European OPT", value: "european_opt" },
+        // { text: "Year", value: "year", sortable: true },
+        // { text: "Nominator", value: "nominator" },
         { text: "Operation", value: "operation", sortable: false },
       ],
       items: [],
-      itemsSelected: ref([]),
       themeColor: "orange",
     };
   },
@@ -136,10 +182,10 @@ export default defineComponent({
   },
 
   methods: {
-    onHorses() {
-      console.log("onHorses", this.dataHorses);
-      this.assignData();
-    },
+    // onHorses() {
+    //   console.log("onHorses", this.dataHorses);
+    //   this.assignData();
+    // },
 
     assignData() {
       this.items = this.dataHorses;
@@ -148,6 +194,11 @@ export default defineComponent({
     cancel() {
       this.showModal = false;
       // Reset the form data here
+    },
+
+    findOneHorse(item) {
+      this.horseDetails = item;
+      console.log(this.horseDetails);
     },
   },
 });
