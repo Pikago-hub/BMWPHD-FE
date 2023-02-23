@@ -45,12 +45,28 @@ const routes = [
     name: "managerequests",
     meta: { title: "managerequests" },
     component: ManageRequests,
+    beforeEnter: (to, from, next) => {
+      if(isAdmin() == true) {
+        next()
+      } else {
+          // If params.blah is blank or in your case, does not have permission, redirect back to the home page
+          return next("/login");
+      }
+    }
   },
   {
     path: "/manageusers",
     name: "manageusers",
     meta: { title: "manageusers" },
     component: ManageUsers,
+    beforeEnter: (to, from, next) => {
+      if(isAdmin() == true) {
+        next()
+      } else {
+          // If params.blah is blank or in your case, does not have permission, redirect back to the home page
+          return next("/login");
+      }
+    }
   },
   { path: "/:pathMatch(.*)*", component: PageNotFound },
 ];
@@ -62,6 +78,18 @@ const router = createRouter({
   //     ...basicRoutes,
   // ]
 });
+
+function isAdmin() {
+    const user = localStorage.getItem("user");
+    console.log(user);
+    // const role = user.userInfo.role;
+    if (user.includes("Admin")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+};
 
 
 router.beforeEach((to, from, next) => {

@@ -70,12 +70,6 @@
                   </v-btn>
                 </v-form>
               </v-card-text>
-
-              <div>
-                <div v-if="message" class="alertMessage" role="alert">
-                  {{ message }}
-                </div>
-              </div>
             </v-card>
           </v-window-item>
 
@@ -192,6 +186,8 @@
 import authService from "../../services/auth.service.js";
 export default {
   data: () => ({
+    userData: null,
+    isLoggedIn: false,
     registerAlert: false,
     dialog: true,
     tab: 0,
@@ -220,7 +216,7 @@ export default {
     rules: {
       required: (value) => !!value || "Required.",
       min: (v) => (v && v.length >= 8) || "Min 8 characters",
-    },
+    },    
   }),
 
   computed: {
@@ -240,7 +236,7 @@ export default {
 
   created() {
     if (this.loggedIn) {
-      this.$router.push("/manageusers");
+      this.$router.push("/");
     }
   },
 
@@ -254,7 +250,6 @@ export default {
       const response = await authService
         .register(user)
         .then((data) => {
-          // alert("Registration Successful!");
           this.registerAlert = true;
           this.firstName = "";
           this.lastName = "";
@@ -280,7 +275,8 @@ export default {
         .login(user)
         .then((data) => {
           console.log(data);
-          localStorage.setItem("user", JSON.stringify(data.data));
+          localStorage.setItem("user", JSON.stringify(data.data)); 
+          this.$emit("isLoggedIn", "true");
         })
         .then(() => {
           this.$router.push("/");
@@ -297,4 +293,5 @@ export default {
     },
   },
 };
+
 </script>

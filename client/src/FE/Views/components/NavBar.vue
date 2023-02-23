@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
+    <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" :key="navBarKey">
       <v-app-bar-nav-icon
         variant="plain"
         @click="drawer = !drawer"
@@ -7,10 +7,9 @@
       <v-toolbar-title>
         <v-btn size="large" variant="text" @click="onHome">BMWPHD</v-btn>
       </v-toolbar-title>
-      <!-- <v-btn @click="test()"> TEST </v-btn> -->
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
-          <v-btn size="large" @click="onLogin" v-bind="props">
+          <v-btn v-if="!token" size="large" @click="onLogin" v-bind="props">
             <v-icon>mdi-login-variant</v-icon>
           </v-btn>
         </template>
@@ -18,39 +17,12 @@
 
       <v-tooltip text="Logout" location="bottom">
         <template v-slot:activator="{ props }">
-          <v-btn v-if="hasToken" size="large" @click="onLogout" v-bind="props" :key="updateKey">
+          <v-btn v-if="token" size="large" @click="onLogout" v-bind="props">
             <v-icon>mdi-logout-variant</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
 
-      <!-- <v-menu leffbottom temporary>
-        <template v-slot:activator="{ props }">
-          <v-btn variant="plain" v-bind="props" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list bg-color="#1976D2">
-          <v-list-item>
-          <v-tooltip text="Login" location="bottom">
-            <template v-slot:activator="{ props }">
-              <v-btn id="login" size="large" @click="onLogin" v-bind="props">
-                <v-icon>mdi-login-variant</v-icon> Login
-              </v-btn>
-            </template>
-          </v-tooltip>
-        </v-list-item>
-        <v-list-item>
-          <v-tooltip text="Logout" location="bottom">
-            <template v-slot:activator="{ props }">
-              <v-btn id="logout" size="large" @click="onLogout" v-bind="props">
-                Logout<v-icon>mdi-logout-variant</v-icon>
-              </v-btn>
-            </template>
-          </v-tooltip>
-        </v-list-item>
-        </v-list>
-      </v-menu> -->
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
@@ -103,20 +75,17 @@ import state from "../../../store/index"
 export default {
   name: "NavBar",
   data: () => ({
+    LoggedIn: false,
     drawer: false,
     group: null,
+    token: localStorage.getItem("user"),
     state,
+    navBarKey: 0,
   }),
 
-  computed: {
-    hasToken() {
-      return JSON.stringify(this.state.state.auth.status.loggedIn) === "true";
-    }
-  },
-
   methods: {
-    test() {
-      console.log(JSON.stringify(this.state.state.auth.status.loggedIn));
+    forceRerender() {
+      this.navBarKey += 1;  
     },
     onReturnHome() {
       this.$router.push("/");
@@ -139,6 +108,8 @@ export default {
     onLogout() {
       auth.logout();
       this.$router.push("/login");
+      this.token = null; 
+      this.forceRerender();
     },
     onAbout() {
       this.$router.push("/about");

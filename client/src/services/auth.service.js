@@ -1,10 +1,13 @@
 import axios from "axios";
 
 const API_URL = "https://bmwphd-be.herokuapp.com/";
+let isLoggedin = false; 
+
 
 class AuthService {
   login = async (user) => {
-    console.log("validate");
+    isLoggedin = true;
+    console.log("auth service " + isLoggedin);
     return axios
       .post(
         API_URL + "auth/login",
@@ -45,12 +48,12 @@ class AuthService {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: "Bearer " + localStorage.getItem(user.token),
           },
         }
       )
       .then((response) => {
         if (response.data.accessToken) {
+          // isLoggedin = false;
           console.log("response.data", response.data);
         }
 

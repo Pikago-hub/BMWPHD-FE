@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar :key="componentKey" />
 
-    <router-view></router-view>
+    <router-view @isLoggedIn="test($event)" >
+    </router-view>
 
     <Footer/>
   </v-app>
@@ -19,6 +20,20 @@
       NavBar,
       Footer,
   },
+  data() {
+    return {
+      componentKey: 0,
+    };
+  },
+  methods: {
+    forceRerender() {
+      this.componentKey += 1;  
+    },
+    test() {
+      this.forceRerender();
+    }
+  }
+
 }
   </script>
   
