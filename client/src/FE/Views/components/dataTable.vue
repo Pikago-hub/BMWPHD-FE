@@ -10,153 +10,22 @@
   >
     <template #item-operation="horseD">
       <v-row justify="center">
-        <v-dialog v-model="dialog" persistent width="1024">
-          <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props" @click="findOneHorse(horseD)">
-              Details
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">Horse Detailed Information</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="horseDetails.name"
-                      label="Name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Dam"
-                      v-model="horseDetails.dam1"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Sire"
-                      v-model="horseDetails.sire1"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Dam Sire"
-                      v-model="horseDetails.sire2"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="2nd Dam"
-                      v-model="horseDetails.dam2"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="European OPT"
-                      v-model="horseDetails.european_opt"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Foal Date"
-                      v-model="horseDetails.foal_date"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Horse Class"
-                      v-model="horseDetails.horse_class"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Level"
-                      v-model="horseDetails.level"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="LTE"
-                      v-model="horseDetails.horse_lte"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Maneuver Score"
-                      v-model="horseDetails.maneuver_score"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Nominator"
-                      v-model="horseDetails.nominator"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="PE"
-                      v-model="horseDetails.pe"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Show"
-                      v-model="horseDetails.show"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Year"
-                      v-model="horseDetails.year"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="dialog = false"
-              >
-                Close
-              </v-btn>
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="dialog = false"
-              >
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-btn color="primary" @click="findOneHorse(horseD)" class="mr-2">
+          Details
+        </v-btn>
       </v-row>
     </template>
   </EasyDataTable>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DataTable",
   props: ["dataHorses"],
-  item: [],
   data: () => {
     return {
-      horseDetails: {},
-      dialog: false,
-      showModal: false,
-      formTitle: "Horse Details",
-      formData: {
-        name: "",
-        // Add more fields for each field in your form
-      },
       headers: [
         { text: "Name", value: "name" },
         { text: "Sire", value: "sire1" },
@@ -182,24 +51,22 @@ export default defineComponent({
   },
 
   methods: {
-    // onHorses() {
-    //   console.log("onHorses", this.dataHorses);
-    //   this.assignData();
-    // },
-
     assignData() {
       this.items = this.dataHorses;
     },
 
-    cancel() {
-      this.showModal = false;
-      // Reset the form data here
+    findOneHorse(horseD) {
+      const horseId = horseD.id;
+      // // this.$emit("horseDetails", horseD);
+      // console.log(horseD);
+      console.log("Horse ID:", horseId);
+      this.$router.push(`/horse/${horseId}`);
     },
-
-    findOneHorse(item) {
-      this.horseDetails = item;
-      console.log(this.horseDetails);
-    },
+    // findOneHorse() {
+    //   const horseId = this.dataHorses[0].id;
+    //   const url = `localhost:3666/horse/${horseId}`;
+    //   window.open(url, "_blank");
+    // },
   },
 });
 </script>
