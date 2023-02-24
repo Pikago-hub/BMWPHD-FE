@@ -10,7 +10,7 @@
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn v-if="!token" size="large" @click="onLogin" v-bind="props">
-            <v-icon>mdi-login-variant</v-icon>
+            <v-icon>mdi-login</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
@@ -18,7 +18,7 @@
       <v-tooltip text="Logout" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn v-if="token" size="large" @click="onLogout" v-bind="props">
-            <v-icon>mdi-logout-variant</v-icon>
+            <v-icon>mdi-logout</v-icon>
           </v-btn>
         </template>
       </v-tooltip>

@@ -53,144 +53,6 @@
     </v-list>
   </v-navigation-drawer>
 
-  <v-navigation-drawer
-    location="right"
-    color="#c9e0ec"
-    v-model="attributesDrawer"
-    v-click-outside="onClickOutsideAD"
-  >
-    <v-list flat subheader three-line>
-      <v-banner height="65" lines="one" style="background-color: #c9e0ec">
-        <v-banner-text class="text-h6"> Attributes </v-banner-text>
-      </v-banner>
-      <v-list-item-group multiple active-class="">
-        <v-list-item width="85%" margin-bottom="10px">
-          <template v-slot:default="{ active }">
-            <v-checkbox
-              v-model="selected"
-              label="Name"
-              value="Name"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Sire"
-              value="Sire"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Dam" value="Dam"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Foul Date"
-              value="Foul Date"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Owner"
-              value="Owner"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Dam Sire"
-              value="Dam Sire"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="2nd Dam"
-              value="2nd Dam"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Maneuver Scores"
-              value="Maneuver Scores"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="LTE" value="LTE"></v-checkbox>
-            <v-checkbox v-model="selected" label="PE" value="PE"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Show"
-              value="Show"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Class"
-              value="Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Level"
-              value="Level"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Open vs Non Pro"
-              value="Open vs Non Pro"
-            ></v-checkbox>
-            <v-checkbox v-model="selected" label="Age" value="Age"></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Place"
-              value="Place"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Money"
-              value="Money"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Breeder"
-              value="Breeder"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Rider"
-              value="Rider"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Draw"
-              value="Draw"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Back Number"
-              value="Back Number"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="On Dirt"
-              value="On Dirt"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Finalist"
-              value="Finalist"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Notes"
-              value="Notes"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="NRHA"
-              value="NRHA"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Date of Show/Class"
-              value="Date of Show/Class"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="selected"
-              label="Schooling"
-              value="Schooling"
-            ></v-checkbox>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-navigation-drawer>
-
   <v-card
     class="mx-auto my-10"
     max-width="900"
@@ -202,52 +64,22 @@
         placeholder="Enter Horse Name to Start Searching"
         variant="plain"
         ref="getValue"
-        class="ml-3"
+        class="ml-2"
         @keyup.enter="onSearch"
       >
       </v-text-field>
       <v-btn variant="tonal" @click="onSearch">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-3">
+      <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-2">
         Find All Horses
       </v-btn>
-
-      <v-btn id="menu-activator" variant="tonal" color="#0D47A1" class="ml-3">
-        Advanced Search
+      <v-btn class="ml-2" variant="tonal" color="#0D47A1" @click="categoryDrawer = !categoryDrawer">
+        Search By Category
       </v-btn>
-      <v-menu open-on-hover activator="#menu-activator">
-        <v-list>
-          <v-list-item>
-            <template v-slot:append>
-              <v-btn
-                variant="tonal"
-                prepend-icon="mdi-clipboard-text-search-outline"
-                color="#0D47A1"
-                @click="attributesDrawer = !attributesDrawer"
-              >
-                Attributes Displayed
-              </v-btn>
-            </template>
-          </v-list-item>
-          <v-list-item>
-            <template v-slot:append>
-              <v-btn
-                variant="tonal"
-                prepend-icon="mdi-clipboard-text-search-outline"
-                color="#0D47A1"
-                @click="categoryDrawer = !categoryDrawer"
-              >
-                Search By Category
-              </v-btn>
-            </template>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
       <v-dialog v-model="dialog">
         <template v-slot:activator="{ props }">
-          <v-btn class="ml-3" color="#0D47A1" variant="tonal" v-bind="props">
+          <v-btn class="ml-2" color="#0D47A1" variant="tonal" v-bind="props">
             Flag A Horse
           </v-btn>
         </template>
@@ -348,7 +180,6 @@ export default {
       dialog: false,
       drawer: false,
       categoryDrawer: false,
-      attributesDrawer: false,
       group: null,
       newItem: [],
       inputValue: [],
@@ -512,7 +343,6 @@ export default {
           inputValue: "",
         },
       ],
-      selected: ["Name", "Sire", "Dam", "Foul Date", "Owner"],
     };
   },
 
@@ -520,10 +350,6 @@ export default {
     onClickOutsideCD() {
       this.categoryDrawer = false;
     },
-    onClickOutsideAD() {
-      this.attributesDrawer = false;
-    },
-
     async submitChanges() {
       if (
         this.flaggedHorse.horseName == "" ||
