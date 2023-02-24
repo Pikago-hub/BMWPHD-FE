@@ -161,21 +161,10 @@ export default {
         "Show",
         "Class",
         "Level",
-        "Open vs Non Pro",
-        "Age",
-        "Place",
-        "Money",
-        "Breeder",
-        "Owner",
-        "Rider",
-        "Draw",
-        "Back Number",
-        "On Dirt",
-        "Finalist",
-        "Notes",
-        "NRHA",
-        "Date of Show/Class",
-        "Schooling",
+        "Foal Date",
+        "European Opt",
+        "Year",
+        "Nominator"
       ],
       dialog: false,
       drawer: false,
@@ -359,7 +348,9 @@ export default {
         alert("please fill out all fields");
       } else {
         console.log(this.flaggedHorse);
-        await api.postFlaggedHorse(this.flaggedHorse);
+        const horse = await api.getFalggedHorseId(this.flaggedHorse.horseName);
+        const hID = horse.data[0].id;
+        await api.postFlaggedHorse(this.flaggedHorse, hID);
         this.flaggedHorse.horseName = "";
         this.flaggedHorse.select = this.items[0];
         this.flaggedHorse.change = "";

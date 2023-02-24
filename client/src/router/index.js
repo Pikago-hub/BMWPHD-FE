@@ -92,7 +92,7 @@ const router = createRouter({
 
 function isAdmin() {
   const user = localStorage.getItem("user");
-  console.log(user);
+  // console.log(user);
   // const role = user.userInfo.role;
   if (user.includes("Admin")) {
     return true;

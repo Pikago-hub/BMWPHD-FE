@@ -142,8 +142,8 @@
                             <tr 
                               class="table-row" 
                               v-for="(request, index) in requestList" :key="index">
-                                <td style="text-align: center"> {{ userList[index].email }} </td>
-                                <td style="text-align: center"> {{ horseList[index].name }} </td>
+                                <td style="text-align: center"> {{ userList[index] }} </td>
+                                <td style="text-align: center"> {{ horseList[index] }} </td>
                                 <td style="text-align: center"> {{ request.attribute }} </td>
                                 <td style="text-align: center"> {{ request.suggestedChange }} </td>
                                 <td style="text-align: center"> {{ request.status }} </td>
@@ -155,7 +155,7 @@
                                       </v-tooltip>
                                       <v-tooltip text="Edit" location="top">
                                       <template v-slot:activator="{ props }">  
-                                        <v-btn v-bind="props" class="ml-4" color="white" @click="editReq(request)"> <v-icon icon="mdi-pencil-outline"></v-icon> </v-btn>  
+                                        <v-btn v-bind="props" class="ml-4" color="white" @click="editReq(request, horseList)"> <v-icon icon="mdi-pencil-outline"></v-icon> </v-btn>  
                                       </template>
                                       </v-tooltip>
                                       <v-tooltip text="Deny" location="top">
@@ -239,47 +239,86 @@ export default {
 
   created() {
       this.loadChangeRequests();
-      this.loadUserEmail();
-      this.loadHorseName();
   },
 
   methods: {
     async loadChangeRequests() {
       this.data = await api.getChangeRequests();
       this.requestList = this.data.data; 
+      console.log(this.requestList);
       this.requestList.forEach(async (request) => {
+        // console.log(request.ownerId);
         this.data = await api.getUserByID(request.ownerId);
-        this.userList.push(this.data.data);
+        this.userList.push(this.data.data.email);
       }) 
       this.requestList.forEach(async (request) => {
         this.data = await api.getHorseByID(request.horseId);
-        this.horseList.push(this.data.data);
+        this.horseList.push(this.data.data.name);
       }) 
     },
-    async loadUserEmail() {
-      this.requestList.forEach(async (request) => {
-        this.data = await api.getUserByID(request.ownerId);
-        this.userList = this.data.data;
-      }) 
-    },
-    async loadHorseName() {
-      this.requestList.forEach(async (request) => {
-        this.data = await api.getHorseByID(request.horseId);
-        this.horseList.push(this.data.data);
-      }) 
-    },
-    editReq(request){       
+
+    async editReq(request, horseList){       
         this.dialog = true   
         this.editingHorse.changeRequestId = request.id 
         this.editingHorse.horseId = request.horseId 
         this.editingHorse.ownerId = request.ownerId 
         this.editingHorse.status = request.status 
-        this.editingHorse.horseName = request.horse
+        const data = await api.getHorseByID(request.horseId);
+        const name = data.data.name;
+        this.editingHorse.horseName = name
         this.editingHorse.select = request.attribute
         this.editingHorse.change = request.suggestedChange
     },
-    acceptReq(request) {
+    async acceptReq(request) {
         this.acceptAlert = true
+        const horse = await api.getHorseByID(request.horseId);
+        const horseData = horse.data;
+        const hID = horse.data.id;
+        if (request.attribute === "Dam") {
+          api.updateHorseDam(hID, horseData, request);
+        }
+        if (request.attribute === "Sire") {
+          api.updateHorseSire(hID, horseData, request);
+        }
+        if (request.attribute === "name") {
+          api.updateHorseName(hID, horseData, request);
+        }
+        if (request.attribute === "Dam Sire") {
+          api.updateHorseDamSire(hID, horseData, request);
+        }
+        if (request.attribute === "2nd Dam") {
+          api.updateHorseSecondDam(hID, horseData, request);
+        }
+        if (request.attribute === "Maneuver Scores") {
+          api.updateHorseManeuverScores(hID, horseData, request);
+        }
+        if (request.attribute === "LTE") {
+          api.updateHorseLTE(hID, horseData, request);
+        }
+        if (request.attribute === "PE") {
+          api.updateHorsePE(hID, horseData, request);
+        }
+        if (request.attribute === "Show") {
+          api.updateHorseShow(hID, horseData, request);
+        }
+        if (request.attribute === "Class") {
+          api.updateHorseClass(hID, horseData, request);
+        }
+        if (request.attribute === "Level") {
+          api.updateHorseLevel(hID, horseData, request);
+        }
+        if (request.attribute === "Foal Date") {
+          api.updateHorseFoalDate(hID, horseData, request);
+        }
+        if (request.attribute === "European Opt") {
+          api.updateHorseEuropeanOpt(hID, horseData, request);
+        }
+        if (request.attribute === "Year") {
+          api.updateHorseYear(hID, horseData, request);
+        }
+        if (request.attribute === "Nominator") {
+          api.updateHorseNominator(hID, horseData, request);
+        }
         request.status = 'Approved'
         api.acceptRequest(request, request.id)          
     },
@@ -289,7 +328,6 @@ export default {
         api.rejectRequest(request, request.id)
     },
     async updateChanges() {
-      console.log(this.editingHorse);
       await api.updateChangeRequest(this.editingHorse);
       this.loadChangeRequests();
       this.editAlert = true;

@@ -55,26 +55,12 @@
                         style="display: none;"
                         v-model="editingUser.username">
                       </v-text-field>
-
-                    <!-- <v-row>
-                      <v-col cols="12" sm="6" md="6">
-                      <v-text-field
-                          class="ml-6"
-                          v-model="editingUser.firstName"
-                          label="First Name"
-                          required
-                      ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6"> -->
                       <v-text-field
                           class="mx-6"
                           v-model="editingUser.name"
                           label="Name"
                           required
                       ></v-text-field>
-                      <!-- </v-col>
-                    </v-row> -->
-
                     <v-text-field
                       class="mx-6"
                       v-model="editingUser.email"
@@ -202,7 +188,6 @@ methods: {
   async loadAllUsers() {
     this.data = await api.getAllUsers();
     this.userList = this.data.data; 
-    console.log(this.userList);
   },
   editUser(user){       
       this.dialog = true    
@@ -221,7 +206,6 @@ methods: {
   },
 
   async updateChanges() {
-    console.log(this.editingUser);
     await api.updateUser(this.editingUser);
     this.loadAllUsers();
     this.editAlert = true
