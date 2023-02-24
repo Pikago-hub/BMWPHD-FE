@@ -57,16 +57,9 @@ export default defineComponent({
 
     findOneHorse(horseD) {
       const horseId = horseD.id;
-      // // this.$emit("horseDetails", horseD);
-      // console.log(horseD);
-      console.log("Horse ID:", horseId);
-      this.$router.push(`/horse/${horseId}`);
+      const url = `https://bmwphdfe.herokuapp.com/horse/${horseId}`;
+      window.open(url, "_blank");
     },
-    // findOneHorse() {
-    //   const horseId = this.dataHorses[0].id;
-    //   const url = `localhost:3666/horse/${horseId}`;
-    //   window.open(url, "_blank");
-    // },
   },
 });
 </script>
