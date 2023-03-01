@@ -8,10 +8,8 @@ import ManageUsers from "../FE/Views/ManageUsers.vue";
 import PageNotFound from "../FE/Views/PageNotFound.vue";
 import horseDetail from "../FE/Views/components/horseDetail.vue";
 
-import basicRoutes from "./basicRoutes";
-import setupGuard from "./guard";
+
 import useUserStore from "../store/index";
-import autoloadDynamicRoutes from "./loadDynamicRoutes";
 import authService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 import userService from "../services/user.service";
@@ -55,7 +53,6 @@ const routes = [
       if (isAdmin() == true) {
         next();
       } else {
-        // If params.blah is blank or in your case, does not have permission, redirect back to the home page
         return next("/login");
       }
     },
@@ -69,7 +66,6 @@ const routes = [
       if (isAdmin() == true) {
         next();
       } else {
-        // If params.blah is blank or in your case, does not have permission, redirect back to the home page
         return next("/login");
       }
     },

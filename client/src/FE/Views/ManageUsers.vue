@@ -161,7 +161,6 @@ data: () => ({
     active: "",
     username: "",
     name: "",
-    // lastName: "",
     email: "",
     select: [""],
   },

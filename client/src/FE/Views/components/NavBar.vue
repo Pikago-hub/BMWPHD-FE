@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-const router = useRouter();
 import auth from "../../../services/auth.service"
 import state from "../../../store/index"
 

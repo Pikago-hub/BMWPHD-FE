@@ -21,7 +21,7 @@
         close-text="Close Alert"
       >
       <v-icon icon="mdi-close-thick"></v-icon> 
-      Login Information <strong> Invalid</strong> 
+      Login information <strong> Invalid.</strong> Please make sure your email and password are correct.
     </v-alert>
 
 
