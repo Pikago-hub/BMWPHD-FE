@@ -10,7 +10,21 @@
       >
       <v-icon icon="mdi-check-bold"></v-icon> 
       Registration <strong> Successful</strong> 
-      </v-alert>
+    </v-alert>
+
+    <v-alert
+        v-model="notLoggedInAlert"
+        outlined
+        text
+        color="#FFCCCB"
+        closable
+        close-text="Close Alert"
+      >
+      <v-icon icon="mdi-close-thick"></v-icon> 
+      Login Information <strong> Invalid</strong> 
+    </v-alert>
+
+
 
     <v-card
       class="mx-auto mt-14 pa-12 pb-8"
@@ -189,6 +203,7 @@ export default {
     userData: null,
     isLoggedIn: false,
     registerAlert: false,
+    notLoggedInAlert: false,
     dialog: true,
     tab: 0,
     tabs: [
@@ -282,6 +297,7 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
+          this.notLoggedInAlert = true;
           console.log(error);
         });
     },
