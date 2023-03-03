@@ -8,12 +8,6 @@ import ManageUsers from "../FE/Views/ManageUsers.vue";
 import PageNotFound from "../FE/Views/PageNotFound.vue";
 import horseDetail from "../FE/Views/components/horseDetail.vue";
 
-
-import useUserStore from "../store/index";
-import authService from "../services/auth.service";
-import authHeader from "../services/auth-header";
-import userService from "../services/user.service";
-
 const routes = [
   {
     path: "/",
@@ -42,6 +36,7 @@ const routes = [
   {
     path: "/horseDetail",
     name: "horsedetail",
+    meta: { title: "about" },
     component: horseDetail,
   },
   {
