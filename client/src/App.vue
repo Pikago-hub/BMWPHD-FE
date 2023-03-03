@@ -40,23 +40,23 @@ export default {
       let token = "";
       if (user != null) {
         token = user.token;
+        axios({
+          url: "https://bmwphd-be.herokuapp.com/token/" + token,
+          method: "get",
+        }).then(
+          (res) => {
+            console.log(res);
+            if (res.data.data == false) {
+              this.$router.push("/login");
+              localStorage.removeItem("user");
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       }
       console.log(token);
-      axios({
-        url: "https://bmwphd-be.herokuapp.com/token/" + token,
-        method: "get",
-      }).then(
-        (res) => {
-          console.log(res);
-          if (res.data.data == false) {
-            this.$router.push("/login");
-            localStorage.removeItem("user");
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
     },
   },
 };

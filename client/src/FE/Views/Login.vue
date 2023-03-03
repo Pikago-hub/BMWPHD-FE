@@ -1,30 +1,29 @@
 <template>
   <v-main>
     <v-alert
-        v-model="registerAlert"
-        outlined
-        text
-        color="#E6FFE6"
-        closable
-        close-text="Close Alert"
-      >
-      <v-icon icon="mdi-check-bold"></v-icon> 
-      Registration <strong> Successful</strong> 
+      v-model="registerAlert"
+      outlined
+      text
+      color="#E6FFE6"
+      closable
+      close-text="Close Alert"
+    >
+      <v-icon icon="mdi-check-bold"></v-icon>
+      Registration <strong> Successful</strong>
     </v-alert>
 
     <v-alert
-        v-model="notLoggedInAlert"
-        outlined
-        text
-        color="#FFCCCB"
-        closable
-        close-text="Close Alert"
-      >
-      <v-icon icon="mdi-close-thick"></v-icon> 
-      Login information <strong> Invalid.</strong> Please make sure your email and password are correct.
+      v-model="notLoggedInAlert"
+      outlined
+      text
+      color="#FFCCCB"
+      closable
+      close-text="Close Alert"
+    >
+      <v-icon icon="mdi-close-thick"></v-icon>
+      Login information <strong> Invalid.</strong> Please make sure your email
+      and password are correct.
     </v-alert>
-
-
 
     <v-card
       class="mx-auto mt-14 pa-12 pb-8"
@@ -32,7 +31,6 @@
       max-width="500"
       rounded="lg"
     >
-
       <v-tabs v-model="tab" bg-color="blue" align-tabs="center" fixed-tabs>
         <v-tab value="Login">Login</v-tab>
         <v-tab value="Sign up">Sign up</v-tab>
@@ -53,6 +51,7 @@
                     v-model="loginEmail"
                     :rules="loginEmailRules"
                     required
+                    @:keyup.enter="Login"
                   >
                   </v-text-field>
 
@@ -67,6 +66,7 @@
                     prepend-inner-icon="mdi-lock-outline"
                     variant="outlined"
                     v-model="loginPassword"
+                    @:keyup.enter="Login"
                     @click:append="show1 = !show1"
                   >
                   </v-text-field>
@@ -193,7 +193,7 @@
         </v-window>
       </v-card-text>
     </v-card>
-</v-main>
+  </v-main>
 </template>
 
 <script>
@@ -231,7 +231,7 @@ export default {
     rules: {
       required: (value) => !!value || "Required.",
       min: (v) => (v && v.length >= 8) || "Min 8 characters",
-    },    
+    },
   }),
 
   computed: {
@@ -290,7 +290,7 @@ export default {
         .login(user)
         .then((data) => {
           console.log(data);
-          localStorage.setItem("user", JSON.stringify(data.data)); 
+          localStorage.setItem("user", JSON.stringify(data.data));
           this.$emit("isLoggedIn", "true");
         })
         .then(() => {
@@ -309,5 +309,4 @@ export default {
     },
   },
 };
-
 </script>
