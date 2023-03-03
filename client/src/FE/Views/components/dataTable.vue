@@ -57,7 +57,7 @@ export default defineComponent({
 
     findOneHorse(horseD) {
       const horseId = horseD.id;
-      const url = `https://bmwphdfe.herokuapp.com/horse/${horseId}`;
+      const url = "http://localhost:3666/horse/" + horseId;
       window.open(url, "_blank");
     },
   },

@@ -93,8 +93,8 @@ function isAdmin() {
 }
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/", "/about", "/result"];
-  const authRequired = !publicPages.includes(to.path);
+  const protectedPages = ["/managerequests", "/manageusers"];
+  const authRequired = protectedPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 
   if (authRequired && !loggedIn) {
