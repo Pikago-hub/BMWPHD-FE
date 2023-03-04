@@ -51,7 +51,7 @@
                     v-model="loginEmail"
                     :rules="loginEmailRules"
                     required
-                    @:keyup.enter="Login"
+                    
                   >
                   </v-text-field>
 
@@ -66,7 +66,7 @@
                     prepend-inner-icon="mdi-lock-outline"
                     variant="outlined"
                     v-model="loginPassword"
-                    @:keyup.enter="Login"
+                    :rules="passwordRules"
                     @click:append="show1 = !show1"
                   >
                   </v-text-field>
@@ -226,6 +226,9 @@ export default {
     emailRules: [
       (v) => !!v || "Required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
+    passwordRules: [
+      (v) => !!v || "Required",
     ],
     show1: false,
     rules: {
