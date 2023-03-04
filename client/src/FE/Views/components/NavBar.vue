@@ -36,7 +36,6 @@
           prepend-icon="mdi-home"
           title="Home"
           link
-          color="white"
           @click="onHome"
         ></v-list-item>
         <v-list-item
