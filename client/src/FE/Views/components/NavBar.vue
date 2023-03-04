@@ -1,16 +1,16 @@
 <template>
     <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" :key="navBarKey">
       <v-app-bar-nav-icon
-        variant="plain"
+        color="#FFFFFFDE"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <v-btn size="large" variant="text" @click="onHome">BMWPHD</v-btn>
+        <v-btn size="large" color="#FFFFFFDE" variant="text" @click="onHome">BMWPHD</v-btn>
       </v-toolbar-title>
       <v-tooltip text="Login" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn v-if="!token" size="large" @click="onLogin" v-bind="props">
-            <v-icon>mdi-login</v-icon>
+            <v-icon style="color:#FFFFFFDE">mdi-login</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
@@ -18,7 +18,7 @@
       <v-tooltip text="Logout" location="bottom">
         <template v-slot:activator="{ props }">
           <v-btn v-if="token" size="large" @click="onLogout" v-bind="props">
-            <v-icon>mdi-logout</v-icon>
+            <v-icon style="color:#FFFFFFDE">mdi-logout</v-icon>
           </v-btn>
         </template>
       </v-tooltip>
@@ -36,6 +36,7 @@
           prepend-icon="mdi-home"
           title="Home"
           link
+          color="white"
           @click="onHome"
         ></v-list-item>
         <v-list-item
