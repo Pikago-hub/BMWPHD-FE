@@ -1,15 +1,4 @@
 <template>
-  <v-alert
-    v-model="alert"
-    outlined
-    text
-    color="#E6FFE6"
-    closable
-    close-text="Close Alert"
-  >
-    <v-icon icon="mdi-check-bold"></v-icon>
-    Your suggested changes have been submitted for review by our team
-  </v-alert>
 
   <v-navigation-drawer
     location="right"
@@ -55,7 +44,7 @@
 
   <v-card
     class="mx-auto my-10"
-    max-width="900"
+    max-width="800"
     varaint="outlined"
     style="border-radius: 10px"
   >
@@ -64,7 +53,7 @@
         placeholder="Enter Horse Name to Start Searching"
         variant="plain"
         ref="getValue"
-        class="ml-2"
+        class="ml-8"
         @keyup.enter="onSearch"
       >
       </v-text-field>
@@ -77,96 +66,19 @@
       <v-btn class="ml-2" variant="tonal" color="#0D47A1" @click="categoryDrawer = !categoryDrawer">
         Search By Category
       </v-btn>
-      <v-dialog v-model="dialog">
-        <template v-slot:activator="{ props }">
-          <v-btn class="ml-2" color="#0D47A1" variant="tonal" v-bind="props">
-            Flag A Horse
-          </v-btn>
-        </template>
-        <v-card
-          class="mx-auto"
-          width="75%"
-          color="white"
-          elevation="3"
-          style="border-radius: 10px"
-        >
-          <h2 class="text-h4 mt-4 mb-4" style="text-align: center">
-            Flag Horse
-          </h2>
-          <v-form ref="form" lazy-validation color="#212121">
-            <v-text-field
-              class="mx-6"
-              v-model="flaggedHorse.horseName"
-              :counter="10"
-              label="Horse Name"
-              required
-            ></v-text-field>
-
-            <v-select
-              class="mx-6"
-              v-model="flaggedHorse.select"
-              :items="items"
-              label="Which field would you like to suggest a change for?"
-              required
-            ></v-select>
-
-            <v-text-field
-              class="mx-6"
-              v-model="flaggedHorse.change"
-              :counter="10"
-              label="Suggested Change"
-              required
-            ></v-text-field>
-            <p style="text-align: center">
-              <v-btn class="mr-14 mb-6" color="#c9e0ec" @click="submitChanges"
-                >Submit Changes for Review</v-btn
-              >
-              <v-btn class="mr-2 mb-6" color="#c9e0ec" @click="dialog = false"
-                >Close</v-btn
-              >
-            </p>
-          </v-form>
-        </v-card>
-      </v-dialog>
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
 import axios from "axios";
-import api from "../../../api/systemApi";
 
 export default {
   name: "searchTool",
   props: ["itemDetails"],
   data: () => {
     return {
-      flaggedHorse: {
-        change: "",
-        horseName: "",
-        select: ["Select an Attribute"],
-      },
-      alert: false,
       horses: [],
-      items: [
-        "Select an Attribute",
-        "Name",
-        "Sire",
-        "Dam",
-        "Dam Sire",
-        "2nd Dam",
-        "Maneuver Scores",
-        "LTE",
-        "PE",
-        "Show",
-        "Class",
-        "Level",
-        "Foal Date",
-        "European Opt",
-        "Year",
-        "Nominator"
-      ],
-      dialog: false,
       drawer: false,
       categoryDrawer: false,
       group: null,
@@ -338,25 +250,6 @@ export default {
   methods: {
     onClickOutsideCD() {
       this.categoryDrawer = false;
-    },
-    async submitChanges() {
-      if (
-        this.flaggedHorse.horseName == "" ||
-        this.flaggedHorse.select == this.items[0] ||
-        this.flaggedHorse.change == ""
-      ) {
-        alert("please fill out all fields");
-      } else {
-        console.log(this.flaggedHorse);
-        const horse = await api.getFalggedHorseId(this.flaggedHorse.horseName);
-        const hID = horse.data[0].id;
-        await api.postFlaggedHorse(this.flaggedHorse, hID);
-        this.flaggedHorse.horseName = "";
-        this.flaggedHorse.select = this.items[0];
-        this.flaggedHorse.change = "";
-        this.dialog = false;
-        this.alert = true;
-      }
     },
 
     async onFindAll() {
