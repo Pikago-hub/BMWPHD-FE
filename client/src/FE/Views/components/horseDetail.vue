@@ -13,6 +13,18 @@
       Your suggested changes have been submitted for review by our team
     </v-alert>
 
+    <v-alert
+      v-model="mustLogIn"
+      outlined
+      text
+      color="#FFCCCB"
+      closable
+      close-text="Close Alert"
+    >
+      <v-icon icon="mdi-close-thick"></v-icon>
+      Please <strong>login</strong> with your BMWPHD account to Flag a Horse
+    </v-alert>
+
     <v-card
       class="mx-auto mt-6 pa-12 pb-8"
       elevation="8"
@@ -138,24 +150,20 @@
                   </v-list-item>
                 </v-col>
                 <v-col> 
-                  <v-dialog v-if="token" v-model="dialog">
-                      <template v-slot:activator="{ props }">
-                        <v-btn color="#c9e0ec" v-bind="props">
-                          Flag Horse: {{ horse.name }}
-                        </v-btn>
-                      </template>
-                    <v-card
+                  <v-btn @click="displayAlert" color="#c9e0ec">
+                    Flag Horse: {{ horse.name }}
+                    <v-dialog v-if="loggedIn" v-model="dialog" activator="parent">
+                      <v-card
                       class="mx-auto"
                       width="75%"
                       color="white"
                       elevation="3"
                       style="border-radius: 10px"
-                    >
+                      >
                       <h2 class="text-h4 mt-4 mb-4" style="text-align: center">
                         Flag Horse: {{ horse.name }}
                       </h2>
                           <v-form ref="form" lazy-validation color="#212121">
-          
                             <v-select
                               class="mx-6"
                               v-model="flaggedHorse.select"
@@ -182,6 +190,7 @@
                         </v-form>
                       </v-card>
                     </v-dialog>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-list>
@@ -209,6 +218,7 @@ export default {
       horse: {},
       token: localStorage.getItem("user"),
       alert: false,
+      mustLogIn: false,
       flaggedHorse: {
         change: "",
         select: ["Select an Attribute"],
@@ -245,7 +255,23 @@ export default {
         console.log(error);
       });
   },
+  computed: {
+    loggedIn () {
+      // token = localStorage.getItem("user");
+      if (this.token) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  },
   methods: {
+    displayAlert() {
+      if(!this.token) {
+        this.mustLogIn = true;
+      }
+    },
     async submitChanges() {
       if (
         this.flaggedHorse.select == this.items[0] ||
