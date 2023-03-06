@@ -94,6 +94,7 @@
                   </v-list-item>
                 </v-col>
               </v-row>
+
               <v-row>
                 <v-col cols="12" sm="6" md="6">
                   <v-list-item>
@@ -138,30 +139,23 @@
                 </v-col>
                 <v-col> 
                   <v-dialog v-model="dialog">
-                        <template v-slot:activator="{ props }">
-                          <v-btn color="#c9e0ec" v-bind="props">
-                            Flag Horse: {{ horse.name }}
-                          </v-btn>
-                        </template>
-                        <v-card
-                          class="mx-auto"
-                          width="75%"
-                          color="white"
-                          elevation="3"
-                          style="border-radius: 10px"
-                        >
-                          <h2 class="text-h4 mt-4 mb-4" style="text-align: center">
-                            Flag Horse
-                          </h2>
+                      <template v-slot:activator="{ props }">
+                        <v-btn color="#c9e0ec" v-bind="props">
+                          Flag Horse: {{ horse.name }}
+                        </v-btn>
+                      </template>
+                    <v-card
+                      class="mx-auto"
+                      width="75%"
+                      color="white"
+                      elevation="3"
+                      style="border-radius: 10px"
+                    >
+                      <h2 class="text-h4 mt-4 mb-4" style="text-align: center">
+                        Flag Horse: {{ horse.name }}
+                      </h2>
                           <v-form ref="form" lazy-validation color="#212121">
-                            <v-text-field
-                              class="mx-6"
-                              v-model="flaggedHorse.horseName"
-                              :counter="10"
-                              label="Horse Name"
-                              required
-                            ></v-text-field>
-
+          
                             <v-select
                               class="mx-6"
                               v-model="flaggedHorse.select"
@@ -185,9 +179,9 @@
                                 >Close</v-btn
                               >
                             </p>
-                          </v-form>
-                        </v-card>
-                      </v-dialog>
+                        </v-form>
+                      </v-card>
+                    </v-dialog>
                 </v-col>
               </v-row>
             </v-list>
