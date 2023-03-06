@@ -253,8 +253,7 @@ export default {
         alert("please fill out all fields");
       } else {
         console.log(this.flaggedHorse);
-        const horse = await api.getFalggedHorseId(this.horse.name);
-        const hID = horse.data[0].id;
+        const hID = this.horse.id;
         await api.postFlaggedHorse(this.flaggedHorse, hID);
         this.flaggedHorse.select = this.items[0];
         this.flaggedHorse.change = "";
