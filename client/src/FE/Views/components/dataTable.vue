@@ -57,7 +57,7 @@ export default defineComponent({
 
     findOneHorse(horseD) {
       const horseId = horseD.id;
-      const url = "http://localhost:3666/horse/" + horseId;
+      const url = "http://bmwphd.net/horse/" + horseId;
       window.open(url, "_blank");
     },
   },
