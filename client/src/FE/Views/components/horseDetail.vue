@@ -210,7 +210,6 @@ export default {
       alert: false,
       flaggedHorse: {
         change: "",
-        horseName: "",
         select: ["Select an Attribute"],
       },
       items: [
@@ -248,17 +247,15 @@ export default {
   methods: {
     async submitChanges() {
       if (
-        this.flaggedHorse.horseName == "" ||
         this.flaggedHorse.select == this.items[0] ||
         this.flaggedHorse.change == ""
       ) {
         alert("please fill out all fields");
       } else {
         console.log(this.flaggedHorse);
-        const horse = await api.getFalggedHorseId(this.flaggedHorse.horseName);
+        const horse = await api.getFalggedHorseId(this.horse.name);
         const hID = horse.data[0].id;
         await api.postFlaggedHorse(this.flaggedHorse, hID);
-        this.flaggedHorse.horseName = "";
         this.flaggedHorse.select = this.items[0];
         this.flaggedHorse.change = "";
         this.dialog = false;
