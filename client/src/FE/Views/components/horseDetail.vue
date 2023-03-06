@@ -138,7 +138,7 @@
                   </v-list-item>
                 </v-col>
                 <v-col> 
-                  <v-dialog v-model="dialog">
+                  <v-dialog v-if="token" v-model="dialog">
                       <template v-slot:activator="{ props }">
                         <v-btn color="#c9e0ec" v-bind="props">
                           Flag Horse: {{ horse.name }}
@@ -207,6 +207,7 @@ export default {
     return {
       id: this.$route.params.id,
       horse: {},
+      token: localStorage.getItem("user"),
       alert: false,
       flaggedHorse: {
         change: "",
