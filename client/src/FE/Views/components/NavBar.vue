@@ -51,17 +51,20 @@
           @click="onAbout"
         ></v-list-item>
         <v-list-item
+          v-if="testing"
           prepend-icon="mdi-clipboard-check"
           title="Manage Requests"
           link
           @click="onManageRequests"
         ></v-list-item>
         <v-list-item
+          v-if="testing"
           prepend-icon="mdi-account"
           title="Manage Users"
           link
           @click="onManageUsers"
         ></v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -77,13 +80,31 @@ export default {
     drawer: false,
     group: null,
     token: localStorage.getItem("user"),
+    user: localStorage.getItem("user"),
     state,
     navBarKey: 0,
+    isAdmin:false
   }),
+
+  computed: {
+    testing() {
+      if (this.token) {
+        const obj = JSON.parse(this.user);
+        let role = obj.userInfo.role
+        if (role.includes("Admin")) {
+          this.isAdmin=true;
+          return true;
+        }
+      }
+      else {
+        return false;
+      }
+    }
+  },
 
   methods: {
     forceRerender() {
-      this.navBarKey += 1;  
+      this.navBarKey += 1; 
     },
     onReturnHome() {
       this.$router.push("/");
