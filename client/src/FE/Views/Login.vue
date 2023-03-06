@@ -62,6 +62,7 @@
                   </div>
                   <v-text-field
                     density="compact"
+                    type=password
                     placeholder="Enter your password"
                     prepend-inner-icon="mdi-lock-outline"
                     variant="outlined"
