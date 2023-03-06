@@ -146,6 +146,7 @@
                   </div>
                   <v-text-field
                     density="compact"
+                    type=password
                     placeholder="Enter your password"
                     prepend-inner-icon="mdi-lock-outline"
                     variant="outlined"
@@ -166,6 +167,7 @@
                   <v-text-field
                     block
                     density="compact"
+                    type=password
                     placeholder="Enter your password again"
                     prepend-inner-icon="mdi-lock-outline"
                     variant="outlined"
