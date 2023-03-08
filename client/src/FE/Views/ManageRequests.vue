@@ -118,7 +118,7 @@
 
             <v-card
                 class="mx-auto"
-                width="70%"
+                width="80%"
                 height="80vh"
                 varaint="outlined"
                 style="border-radius: 10px"

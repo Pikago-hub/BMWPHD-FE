@@ -22,8 +22,8 @@
           </v-btn>
         </template>
       </v-tooltip>
-
     </v-app-bar>
+  
     <v-navigation-drawer
       v-model="drawer"
       image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
