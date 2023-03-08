@@ -26,7 +26,7 @@
     </v-alert>
 
     <v-card
-      class="mx-auto mt-6 pa-12 pb-8"
+      class="mx-auto mt-8 pa-12 pb-8"
       elevation="8"
       max-width="900"
       rounded="lg"
@@ -145,7 +145,7 @@
                 <v-col cols="12" sm="6" md="6">
                   <v-list-item>
                     <v-list-item-content>
-                      <strong>Nominator </strong> {{ horse.nominator }}
+                      <strong>Nominator: </strong> {{ horse.nominator }}
                     </v-list-item-content>
                   </v-list-item>
                 </v-col>
@@ -201,6 +201,11 @@
         </v-col>
       </v-row>
     </v-card>
+
+    <v-container>
+
+    </v-container>
+
   </v-main>
   
 </template>
