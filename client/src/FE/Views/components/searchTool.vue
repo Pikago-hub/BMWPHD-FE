@@ -1,5 +1,4 @@
 <template>
-
   <v-navigation-drawer
     location="right"
     color="#c9e0ec"
@@ -63,7 +62,12 @@
       <v-btn variant="tonal" color="#0D47A1" @click="onFindAll" class="ml-2">
         Find All Horses
       </v-btn>
-      <v-btn class="ml-2" variant="tonal" color="#0D47A1" @click="categoryDrawer = !categoryDrawer">
+      <v-btn
+        class="ml-2"
+        variant="tonal"
+        color="#0D47A1"
+        @click="categoryDrawer = !categoryDrawer"
+      >
         Search By Category
       </v-btn>
     </v-toolbar>
@@ -84,6 +88,7 @@ export default {
       group: null,
       newItem: [],
       inputValue: [],
+      loading: false,
       listItems: [
         {
           category: "Name",
@@ -254,6 +259,7 @@ export default {
 
     async onFindAll() {
       try {
+        this.loading = true;
         const res = await axios.get(
           "https://bmwphd-be.herokuapp.com/horses",
           {}

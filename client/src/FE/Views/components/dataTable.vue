@@ -6,8 +6,18 @@
     :theme-color="themeColor"
     :headers="headers"
     :items="items"
+    :loading="loading"
     buttons-pagination
   >
+    <template #loading>
+      <img
+        src="https://i.pinimg.com/originals/94/fd/2b/94fd2bf50097ade743220761f41693d5.gif"
+        style="width: 100px; height: 80px !important"
+      />
+    </template>
+    <template #empty-message>
+      <a style="color: white">No Data</a>
+    </template>
     <template #item-operation="horseD">
       <v-row justify="center">
         <v-btn color="primary" @click="findOneHorse(horseD)" class="mr-2">
@@ -27,10 +37,10 @@ export default defineComponent({
   data: () => {
     return {
       headers: [
-        { text: "Name", value: "name" },
-        { text: "Sire", value: "sire1" },
-        { text: "Dam", value: "dam1" },
-        { text: "Maneuver Score", value: "maneuver_score" },
+        { text: "Name", value: "name", sortable: true },
+        { text: "Sire", value: "sire1", sortable: true },
+        { text: "Dam", value: "dam1", sortable: true },
+        { text: "Maneuver Score", value: "maneuver_score", sortable: true },
         // { text: "Dam Sire", value: "sire2" },
         // { text: "2nd Dam", value: "dam2" },
         // { text: "Foal Date", value: "foal_date", sortable: true },
@@ -41,6 +51,7 @@ export default defineComponent({
       ],
       items: [],
       themeColor: "orange",
+      loading: false,
     };
   },
 
@@ -53,12 +64,11 @@ export default defineComponent({
   methods: {
     assignData() {
       this.items = this.dataHorses;
+      this.loading = false;
     },
-
     findOneHorse(horseD) {
       const horseId = horseD.id;
       const url = "http://www.bmwphd.net/horse/" + horseId;
-      // const url = "http://www.localhost:3666/horse/" + horseId;
       window.open(url, "_blank");
     },
   },
