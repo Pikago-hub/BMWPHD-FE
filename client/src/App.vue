@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavBar :key="componentKey" />
-    <!-- <v-alert
+    <v-alert
       class="mt-16"
       v-model="notvalidLogin"
       outlined
@@ -12,7 +12,7 @@
     >
       <v-icon icon="mdi-close-thick"></v-icon>
       Login token <strong> Expired.</strong> Please logout and log back in to restore token.
-    </v-alert> -->
+    </v-alert>
     <router-view @isLoggedIn="test($event)"> </router-view>
     <Footer />
   </v-app>
@@ -59,7 +59,7 @@ export default {
           (res) => {
             console.log(res);
             if (res.data.data == false) {
-              // this.notvalidLogin = true;
+              this.notvalidLogin = true;
               this.$router.push("/login");
               localStorage.removeItem("user");
             }
