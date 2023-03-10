@@ -2,6 +2,7 @@
   <v-app>
     <NavBar :key="componentKey" />
     <v-alert
+      class="mt-16"
       v-model="notvalidLogin"
       outlined
       text
