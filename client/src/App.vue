@@ -1,6 +1,17 @@
 <template>
   <v-app>
     <NavBar :key="componentKey" />
+    <v-alert
+      v-model="notvalidLogin"
+      outlined
+      text
+      color="#FFCCCB"
+      closable
+      close-text="Close Alert"
+    >
+      <v-icon icon="mdi-close-thick"></v-icon>
+      Login token <strong> Expired.</strong> Please logout and log back in to restore token.
+    </v-alert>
     <router-view @isLoggedIn="test($event)"> </router-view>
     <Footer />
   </v-app>
@@ -10,7 +21,6 @@
 import NavBar from "./FE/Views/components/NavBar.vue";
 import Footer from "./FE/Views/components/Footer.vue";
 import axios from "axios";
-
 export default {
   name: "App",
   components: {
@@ -20,6 +30,7 @@ export default {
   data() {
     return {
       componentKey: 0,
+      notvalidLogin: false,
     };
   },
 
@@ -47,6 +58,7 @@ export default {
           (res) => {
             console.log(res);
             if (res.data.data == false) {
+              this.notvalidLogin = true;
               this.$router.push("/login");
               localStorage.removeItem("user");
             }
