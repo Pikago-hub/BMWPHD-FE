@@ -51,7 +51,7 @@
                     v-model="loginEmail"
                     :rules="loginEmailRules"
                     required
-                    
+                    @keyup.enter="Login"
                   >
                   </v-text-field>
 
@@ -68,6 +68,7 @@
                     variant="outlined"
                     v-model="loginPassword"
                     :rules="passwordRules"
+                    @keyup.enter="Login"
                     @click:append="show1 = !show1"
                   >
                   </v-text-field>
