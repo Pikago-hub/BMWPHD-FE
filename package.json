@@ -19,6 +19,7 @@
     "g": "^2.0.1",
     "heroku": "^7.66.2",
     "heroku-cli-util": "^8.0.12",
+    "html2pdf.js": "^0.10.1",
     "json-server": "^0.17.1",
     "mock": "^0.1.1",
     "nprogress": "^0.2.0",

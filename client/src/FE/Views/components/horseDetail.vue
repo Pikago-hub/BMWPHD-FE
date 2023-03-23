@@ -1,6 +1,5 @@
 <template>
   <v-main>
-
     <v-alert
       v-model="alert"
       outlined
@@ -35,9 +34,9 @@
       <v-row justify-center align-center>
         <v-col>
           <v-card class="mx-auto" max-width="900">
-            <h2 class="text-h4 mt-5" style="text-align:center">
+            <h2 class="text-h4 mt-5" style="text-align: center">
               Horse: {{ horse.name }}
-              </h2>
+            </h2>
             <v-list dense>
               <v-row>
                 <v-col cols="12" sm="6" md="6">
@@ -72,12 +71,13 @@
                   </v-list-item>
                 </v-col>
               </v-row>
-              
+
               <v-row>
                 <v-col cols="12" sm="6" md="6">
                   <v-list-item>
                     <v-list-item-content>
-                      <strong>Maneuver Score: </strong> {{ horse.maneuver_score }}
+                      <strong>Maneuver Score: </strong>
+                      {{ horse.maneuver_score }}
                     </v-list-item-content>
                   </v-list-item>
                 </v-col>
@@ -89,7 +89,7 @@
                   </v-list-item>
                 </v-col>
               </v-row>
-              
+
               <v-row>
                 <v-col cols="12" sm="6" md="6">
                   <v-list-item>
@@ -149,44 +149,57 @@
                     </v-list-item-content>
                   </v-list-item>
                 </v-col>
-                <v-col> 
+                <v-col>
                   <v-btn @click="displayAlert" color="#c9e0ec">
                     Flag Horse: {{ horse.name }}
-                    <v-dialog v-if="loggedIn" v-model="dialog" activator="parent">
+                    <v-dialog
+                      v-if="loggedIn"
+                      v-model="dialog"
+                      activator="parent"
+                    >
                       <v-card
-                      class="mx-auto"
-                      width="75%"
-                      color="white"
-                      elevation="3"
-                      style="border-radius: 10px"
+                        class="mx-auto"
+                        width="75%"
+                        color="white"
+                        elevation="3"
+                        style="border-radius: 10px"
                       >
-                      <h2 class="text-h4 mt-4 mb-4" style="text-align: center">
-                        Flag Horse: {{ horse.name }}
-                      </h2>
-                          <v-form ref="form" lazy-validation color="#212121">
-                            <v-select
-                              class="mx-6"
-                              v-model="flaggedHorse.select"
-                              :items="items"
-                              label="Which field would you like to suggest a change for?"
-                              required
-                            ></v-select>
+                        <h2
+                          class="text-h4 mt-4 mb-4"
+                          style="text-align: center"
+                        >
+                          Flag Horse: {{ horse.name }}
+                        </h2>
+                        <v-form ref="form" lazy-validation color="#212121">
+                          <v-select
+                            class="mx-6"
+                            v-model="flaggedHorse.select"
+                            :items="items"
+                            label="Which field would you like to suggest a change for?"
+                            required
+                          ></v-select>
 
-                            <v-text-field
-                              class="mx-6"
-                              v-model="flaggedHorse.change"
-                              :counter="10"
-                              label="Suggested Change"
-                              required
-                            ></v-text-field>
-                            <p style="text-align: center">
-                              <v-btn class="mr-14 mb-6" color="#c9e0ec" @click="submitChanges"
-                                >Submit Changes for Review</v-btn
-                              >
-                              <v-btn class="mr-2 mb-6" color="#c9e0ec" @click="dialog = false"
-                                >Close</v-btn
-                              >
-                            </p>
+                          <v-text-field
+                            class="mx-6"
+                            v-model="flaggedHorse.change"
+                            :counter="10"
+                            label="Suggested Change"
+                            required
+                          ></v-text-field>
+                          <p style="text-align: center">
+                            <v-btn
+                              class="mr-14 mb-6"
+                              color="#c9e0ec"
+                              @click="submitChanges"
+                              >Submit Changes for Review</v-btn
+                            >
+                            <v-btn
+                              class="mr-2 mb-6"
+                              color="#c9e0ec"
+                              @click="dialog = false"
+                              >Close</v-btn
+                            >
+                          </p>
                         </v-form>
                       </v-card>
                     </v-dialog>
@@ -198,21 +211,22 @@
           <v-btn class="mt-8" color="white" @click="$router.push('/result')"
             >Go Back</v-btn
           >
+          <br />
+          <v-btn class="mt-2" color="white" @click="downloadPageAsPDF">
+            Download as PDF
+          </v-btn>
         </v-col>
       </v-row>
     </v-card>
 
-    <v-container>
-
-    </v-container>
-
+    <v-container> </v-container>
   </v-main>
-  
 </template>
 
 <script>
 import axios from "axios";
 import api from "../../../api/systemApi";
+import html2pdf from "html2pdf.js";
 
 export default {
   name: "HorseDetail",
@@ -244,7 +258,7 @@ export default {
         "Foal Date",
         "European Opt",
         "Year",
-        "Nominator"
+        "Nominator",
       ],
       dialog: false,
     };
@@ -261,22 +275,22 @@ export default {
       });
   },
   computed: {
-    loggedIn () {
+    loggedIn() {
       // token = localStorage.getItem("user");
       if (this.token) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
-    }
+    },
   },
   methods: {
     displayAlert() {
-      if(!this.token) {
+      if (!this.token) {
         this.mustLogIn = true;
       }
     },
+
     async submitChanges() {
       if (
         this.flaggedHorse.select == this.items[0] ||
@@ -293,7 +307,19 @@ export default {
         this.alert = true;
       }
     },
-  }
+
+    downloadPageAsPDF() {
+      const pageElement = document.querySelector("v-main");
+      const options = {
+        margin: [10, 10, 10, 10],
+        filename: "HorseDetail.pdf",
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: { scale: 2, logging: true },
+        jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
+      };
+      html2pdf().set(options).from(pageElement).save();
+    },
+  },
 };
 </script>
 
