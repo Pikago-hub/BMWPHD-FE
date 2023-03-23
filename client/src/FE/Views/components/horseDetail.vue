@@ -33,181 +33,184 @@
     >
       <v-row justify-center align-center>
         <v-col>
-          <v-card class="mx-auto" max-width="900">
-            <h2 class="text-h4 mt-5" style="text-align: center">
-              Horse: {{ horse.name }}
-            </h2>
-            <v-list dense>
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Sire:</strong> {{ horse.sire1 }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Dam: </strong>{{ horse.dam1 }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+          <div id="pdf-content">
+            <v-card class="mx-auto" max-width="900">
+              <h2 class="text-h4 mt-5" style="text-align: center">
+                Horse: {{ horse.name }}
+              </h2>
+              <v-list dense>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Sire:</strong> {{ horse.sire1 }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Dam: </strong>{{ horse.dam1 }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Dam Sire: </strong> {{ horse.sire2 }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Second Dam: </strong> {{ horse.dam2 }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Dam Sire: </strong> {{ horse.sire2 }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Second Dam: </strong> {{ horse.dam2 }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Maneuver Score: </strong>
-                      {{ horse.maneuver_score }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>LTE: </strong> {{ horse.lte }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Maneuver Score: </strong>
+                        {{ horse.maneuver_score }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>LTE: </strong> {{ horse.lte }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Show: </strong> {{ horse.show }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Horse Class: </strong> {{ horse.horse_class }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Show: </strong> {{ horse.show }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Horse Class: </strong> {{ horse.horse_class }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Level: </strong> {{ horse.level }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>European Opt.: </strong> {{ horse.european_opt }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Level: </strong> {{ horse.level }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>European Opt.: </strong>
+                        {{ horse.european_opt }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Foal Date: </strong> {{ horse.foal_date }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Year: </strong> {{ horse.year }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Foal Date: </strong> {{ horse.foal_date }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Year: </strong> {{ horse.year }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                </v-row>
 
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <strong>Nominator: </strong> {{ horse.nominator }}
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col>
-                  <v-btn @click="displayAlert" color="#c9e0ec">
-                    Flag Horse: {{ horse.name }}
-                    <v-dialog
-                      v-if="loggedIn"
-                      v-model="dialog"
-                      activator="parent"
-                    >
-                      <v-card
-                        class="mx-auto"
-                        width="75%"
-                        color="white"
-                        elevation="3"
-                        style="border-radius: 10px"
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-list-item>
+                      <v-list-item-content>
+                        <strong>Nominator: </strong> {{ horse.nominator }}
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-col>
+                  <v-col>
+                    <v-btn @click="displayAlert" color="#c9e0ec">
+                      Flag Horse: {{ horse.name }}
+                      <v-dialog
+                        v-if="loggedIn"
+                        v-model="dialog"
+                        activator="parent"
                       >
-                        <h2
-                          class="text-h4 mt-4 mb-4"
-                          style="text-align: center"
+                        <v-card
+                          class="mx-auto"
+                          width="75%"
+                          color="white"
+                          elevation="3"
+                          style="border-radius: 10px"
                         >
-                          Flag Horse: {{ horse.name }}
-                        </h2>
-                        <v-form ref="form" lazy-validation color="#212121">
-                          <v-select
-                            class="mx-6"
-                            v-model="flaggedHorse.select"
-                            :items="items"
-                            label="Which field would you like to suggest a change for?"
-                            required
-                          ></v-select>
+                          <h2
+                            class="text-h4 mt-4 mb-4"
+                            style="text-align: center"
+                          >
+                            Flag Horse: {{ horse.name }}
+                          </h2>
+                          <v-form ref="form" lazy-validation color="#212121">
+                            <v-select
+                              class="mx-6"
+                              v-model="flaggedHorse.select"
+                              :items="items"
+                              label="Which field would you like to suggest a change for?"
+                              required
+                            ></v-select>
 
-                          <v-text-field
-                            class="mx-6"
-                            v-model="flaggedHorse.change"
-                            :counter="10"
-                            label="Suggested Change"
-                            required
-                          ></v-text-field>
-                          <p style="text-align: center">
-                            <v-btn
-                              class="mr-14 mb-6"
-                              color="#c9e0ec"
-                              @click="submitChanges"
-                              >Submit Changes for Review</v-btn
-                            >
-                            <v-btn
-                              class="mr-2 mb-6"
-                              color="#c9e0ec"
-                              @click="dialog = false"
-                              >Close</v-btn
-                            >
-                          </p>
-                        </v-form>
-                      </v-card>
-                    </v-dialog>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-list>
-          </v-card>
+                            <v-text-field
+                              class="mx-6"
+                              v-model="flaggedHorse.change"
+                              :counter="10"
+                              label="Suggested Change"
+                              required
+                            ></v-text-field>
+                            <p style="text-align: center">
+                              <v-btn
+                                class="mr-14 mb-6"
+                                color="#c9e0ec"
+                                @click="submitChanges"
+                                >Submit Changes for Review</v-btn
+                              >
+                              <v-btn
+                                class="mr-2 mb-6"
+                                color="#c9e0ec"
+                                @click="dialog = false"
+                                >Close</v-btn
+                              >
+                            </p>
+                          </v-form>
+                        </v-card>
+                      </v-dialog>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-list>
+            </v-card>
+          </div>
           <v-btn class="mt-8" color="white" @click="$router.push('/result')"
             >Go Back</v-btn
           >
@@ -309,8 +312,7 @@ export default {
     },
 
     downloadPageAsPDF() {
-      alert("Downloading Horse Detail as PDF");
-      const pageElement = document.querySelector("v-card");
+      const pageElement = document.querySelector("#pdf-content");
       const options = {
         margin: [10, 10, 10, 10],
         filename: "HorseDetail.pdf",
