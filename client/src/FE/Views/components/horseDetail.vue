@@ -309,7 +309,8 @@ export default {
     },
 
     downloadPageAsPDF() {
-      const pageElement = document.querySelector("v-main");
+      alert("Downloading Horse Detail as PDF");
+      const pageElement = document.querySelector("v-card");
       const options = {
         margin: [10, 10, 10, 10],
         filename: "HorseDetail.pdf",
